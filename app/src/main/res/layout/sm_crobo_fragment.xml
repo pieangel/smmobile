@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+
+    <!-- childFragment -->
+    <FrameLayout
+        android:id="@+id/child_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"></FrameLayout>
+    <!-- childFragment end -->
+
+
+
+    <!--처음화면 visible check-->
+    <LinearLayout
+        android:id="@+id/firstLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="#2C3E54"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!--타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="투자성향 설문 안내"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+        </LinearLayout>
+        <!--타이틀 끝 -->
+
+        <!-- 부가 설명 부분 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#263242"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="지금부터 투자성향을 알아보기 위한 설문을 시작할게요. 자본시장법에 따라 투자성향 확인 후 투자권유 및 계약이 가능합니다."
+                android:textColor="#FFFFFF"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <!-- 부가 설명 부분 끝-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--설문 설명 부분 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="연령대"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="연 소득 규모"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="예상 투자 금액"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="예상 투자 기간"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="위험과 수익의 밸런스"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="손실 감수 수준"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="파생 투자 경험"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+            <!--설문 설명 부분 끝-->
+        </ScrollView>
+
+
+    </LinearLayout>
+    <!--처음 화면 끝 -->
+
+    <!--두번째 화면 visible check -->
+    <LinearLayout
+        android:id="@+id/secondLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:weightSum="10"
+        android:background="#F1F2F4"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!--타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!--클릭이벤트를 여기로 준다. -->
+            <LinearLayout
+                android:id="@+id/backLout"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_arrow_left_black_24dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="45dp"
+                android:gravity="center"
+                android:text="투자성향 설문"
+                android:textColor="#000000"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <!--타이틀 끝-->
+
+        <!--설문 진행 상태 TextView -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp">
+            <TextView
+                android:id="@+id/progressTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="#B2B3B5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textColor="#B2B3B5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7"
+                android:textColor="#B2B3B5"/>
+        </LinearLayout>
+        <!--설문 진행 상태 TextView End-->
+
+        <!--문제 타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:id="@+id/titleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="내 연령대를 선택하세요."
+                android:textSize="20dp" />
+
+        </LinearLayout>
+        <!--문제 타이틀 끝-->
+
+
+
+        <!--문제 내용 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.8"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="1."
+                    android:textSize="14dp"/>
+
+                <TextView
+                    android:id="@+id/firstCt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10대~20대"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="2."
+                    android:textSize="14dp"/>
+
+                <TextView
+                    android:id="@+id/secondCt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30대"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="3."
+                    android:textSize="14dp"/>
+
+                <TextView
+                    android:id="@+id/thirdCt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="40대"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="4."
+                    android:textSize="14dp"/>
+
+                <TextView
+                    android:id="@+id/fourthCt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50대"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="5."
+                    android:textSize="14dp"/>
+
+                <TextView
+                    android:id="@+id/fifthCt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="60대 이상~"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--문제 내용 끝-->
+
+        <!--문제 내용 스크롤 끝-->
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/safety"
+            android:layout_gravity="center"/>
+        <!--시크바 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="bottom">
+
+
+
+            <!--seekBar -->
+            <com.xw.repo.BubbleSeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                app:bsb_bubble_color="#333333"
+                app:bsb_bubble_text_color="#FFFFFF"
+                app:bsb_bubble_text_size="20dp"
+                app:bsb_max="4"
+                app:bsb_min="0"
+                app:bsb_progress="0"
+                app:bsb_second_track_color="#E3E3E3"
+                app:bsb_second_track_size="5dp"
+                app:bsb_section_count="4"
+                app:bsb_section_text_color="#636363"
+                app:bsb_section_text_size="18dp"
+                app:bsb_seek_step_section="true"
+                app:bsb_show_section_mark="true"
+                app:bsb_thumb_color="#01BAD6"
+                app:bsb_thumb_text_color="#01BAD6"
+                app:bsb_thumb_text_size="14dp"
+                app:bsb_touch_to_seek="true"
+                app:bsb_track_color="#E3E3E3"
+                app:bsb_track_size="5dp"
+                app:bsb_always_show_bubble="true"
+                android:visibility="visible"/>
+        </LinearLayout>
+        <!--시크바 -->
+
+    </LinearLayout>
+    <!--두번째 화면 끝 -->
+
+    <!--설문 결과 화면 visible check-->
+    <LinearLayout
+        android:id="@+id/resultLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="#2C3E54"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!--타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!--클릭이벤트를 여기로 준다. -->
+            <LinearLayout
+                android:id="@+id/resultBackLout"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="45dp"
+                android:gravity="center"
+                android:text="투자성향 설문 결과"
+                android:textColor="#FFFFFF"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <!--타이틀 끝-->
+
+        <!-- 부가 설명 부분 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="당신의 투자성향은 "
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공격투자형 "
+                android:textColor="#01BAD8"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입니다."
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+        </LinearLayout>
+        <!-- 부가 설명 부분 끝-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <!--설문 설명 부분 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="공격투자형의 자산투자는 주식형 위주로 투자하고 \n 채권형에는 소액 투자해요."
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <!--설문 설명 부분 끝-->
+        </ScrollView>
+
+        <!--설문 결과 하단 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내 성향과 일치하나요?"
+                android:textSize="14dp"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/resultNTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="아니요, 다릅니다."
+                    android:textColor="#01BAD8"
+                    android:background="@drawable/survay_button"/>
+                <TextView
+                    android:id="@+id/resultYTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="네, 일치합니다."
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/survay_button_reversal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--설문 결과 하단 버튼 -->
+
+    </LinearLayout>
+    <!--설문 결과 화면 끝 -->
+
+    <!--운용레벨 조절화면 visible check-->
+    <LinearLayout
+        android:id="@+id/operationLevelLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="#2C3E54"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!--타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!--클릭이벤트를 여기로 준다. -->
+            <LinearLayout
+                android:id="@+id/operationBackLout"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="45dp"
+                android:gravity="center"
+                android:text="운용레벨 조절하기"
+                android:textColor="#FFFFFF"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <!--타이틀 끝-->
+
+        <!-- 부가 설명 부분 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="당신의 투자성향은 "
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공격투자형 "
+                android:textColor="#01BAD8"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입니다."
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+        </LinearLayout>
+        <!-- 부가 설명 부분 끝-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <!--설문 설명 부분 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
+            </LinearLayout>
+            <!--설문 설명 부분 끝-->
+        </ScrollView>
+
+        <!--설문 결과 하단 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="#DADADA"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:text="운용레벨을 조절해보세요."
+                android:textSize="16sp"
+                android:textColor="#000000" />
+
+            <!--seekBar -->
+            <com.xw.repo.BubbleSeekBar
+                android:id="@+id/operationSeekbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginBottom="20dp"
+                app:bsb_bubble_color="#333333"
+                app:bsb_bubble_text_color="#FFFFFF"
+                app:bsb_bubble_text_size="20dp"
+                app:bsb_max="4"
+                app:bsb_min="0"
+                app:bsb_progress="0"
+                app:bsb_second_track_color="#E3E3E3"
+                app:bsb_second_track_size="5dp"
+                app:bsb_section_count="4"
+                app:bsb_section_text_color="#636363"
+                app:bsb_section_text_size="18dp"
+                app:bsb_seek_step_section="true"
+                app:bsb_show_section_mark="true"
+                app:bsb_thumb_color="#01BAD6"
+                app:bsb_thumb_text_color="#01BAD6"
+                app:bsb_thumb_text_size="14dp"
+                app:bsb_touch_to_seek="true"
+                app:bsb_track_color="#E3E3E3"
+                app:bsb_track_size="5dp"
+                app:bsb_always_show_bubble="true"
+                android:visibility="visible"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="처음부터 다시 할게요."
+                    android:textColor="#01BAD8"
+                    android:background="@drawable/survay_button"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center"
+                    android:text="만족합니다."
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/survay_button_reversal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--설문 결과 하단 버튼 -->
+
+    </LinearLayout>
+    <!--운용레벨 조절화면 끝 -->
+
+    <!--다음 버튼 -->
+    <LinearLayout
+        android:id="@+id/nextLout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/nextTxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#01BAD6"
+            android:gravity="center"
+            android:text="다음"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp" />
+
+        <!--<TextView
+            android:id="@+id/startTxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#01BAD6"
+            android:gravity="center"
+            android:text="시작하기"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp"
+            android:visibility="visible"/>-->
+
+    </LinearLayout>
+    <!--다음 버튼 끝-->
+
+</LinearLayout>
+
+
+
+

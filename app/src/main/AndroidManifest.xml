@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="signalmaster.com.smmobile">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--권한 추가 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
+        <activity android:name="signalmaster.com.smmobile.mock.PraticeChartActivity" android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+        <activity android:name="signalmaster.com.smmobile.ChartSignalActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name="signalmaster.com.smmobile.ChartListActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.popup.PopUpActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.SmSettingScreenActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.annotation.SmJeepyoSwitch" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.symbol.SmSymbolSelector" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.SmIndexSelector" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.ChartChangeActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.LineSelectActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.SmSiseChartActivity"  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.mock.SmMockPopup" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.index.IndexSettingPopup" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.AccountActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.TradeRecordActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.IncomeChartActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.LoginActivity"  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.SignUpActivity"  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.NumberInputActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.OperationLevelDialog" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.mock.IndicatorSettingDialog" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.mock.MACDSettingDialog" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.portfolio.PortfolioDialog" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.PositionListActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.expert.SmYoutubePlayer" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize" android:screenOrientation="unspecified"/>
+        <activity android:name="signalmaster.com.smmobile.LoadingActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:configChanges="keyboardHidden|orientation|screenSize">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name="signalmaster.com.smmobile.MainActivity" android:configChanges="keyboardHidden|orientation|screenSize">
+
+        </activity>
+    </application>
+
+</manifest>

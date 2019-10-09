@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/symbol_selector_style">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="#293148">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="16.5dp"
+            android:text="종목"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="16.5dp"
+            android:textColor="#FFFFFF"
+            android:background="#293148"/>
+
+        <ImageView
+            android:id="@+id/closeImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="12dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_close_gray_24dp"
+            android:background="#293148"/>
+
+    </LinearLayout>
+
+        <Spinner
+            android:id="@+id/symbolSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:layout_margin="10dp"
+
+            android:gravity="center_vertical"
+            android:popupBackground="#1C2335">
+        </Spinner>
+        <!--android:background="#293148"-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0.2"
+            android:background="#293148">
+
+            <EditText
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="0.2"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:textCursorDrawable="@null"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="검색"
+                android:textSize="14dp"
+                android:textColorHint="#858992"/>
+
+        </RelativeLayout>
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0.2"
+            android:inputType="textMultiLine|textNoSuggestions"
+
+            />-->
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/symRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            android:layout_weight="3">
+        </android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/okBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:background="@drawable/symbol_selector_button"
+            android:text="확인"
+            android:textSize="12.5dp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

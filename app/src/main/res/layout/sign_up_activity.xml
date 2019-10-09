@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/symbol_selector_style">
+
+    <!--로그인 상단부 -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="#2B3652">
+
+        <ImageView
+            android:id="@+id/backImg"
+            android:layout_marginLeft="2dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_arrow_left_gray_24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="40dp"
+            android:gravity="center"
+            android:text="회원가입"
+            android:textSize="18dp"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!--로그인 화면 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#1F242A">
+
+        <EditText
+            android:id="@+id/registerEmail"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="151dp"
+            android:inputType="textEmailAddress"
+            android:hint="이메일"
+            android:textColorHint="#8A8B8C"
+            android:textColor="#8A8B8C" />
+
+        <EditText
+            android:id="@+id/registerPwd"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/registerEmail"
+            android:layout_centerHorizontal="true"
+            android:hint="비밀번호"
+            android:inputType="text"
+            android:textColorHint="#8A8B8C"
+            android:textColor="#8A8B8C"
+            />
+
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:text="등록"
+            android:textAllCaps="false"
+            android:layout_below="@+id/registerPwd"
+            android:layout_centerInParent="true"
+            android:gravity="center" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

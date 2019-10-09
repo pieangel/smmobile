@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <!--종목 -->
+            <TextView
+                android:id="@+id/symbolNameTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+            <!--총손익 -->
+            <TextView
+                android:id="@+id/totalPLTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+            <!--수수료 -->
+            <TextView
+                android:id="@+id/feeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+            <!--순손익 -->
+            <TextView
+                android:id="@+id/openPLTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+        </LinearLayout>
+
+
+        <!--<TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25"
+            android:gravity="center"
+            android:text="타이틀"
+            android:textColor="#FFFFFF"
+            android:background="#4F81BD"/>
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="#FFFFFF"
+            android:background="#D0D8E8"/>-->
+
+
+    </LinearLayout>
+
+</LinearLayout>

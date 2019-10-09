@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_trade"
+            android:checked="true"
+            android:icon="@drawable/ic_trending_up_white_24dp"
+            android:title="주문 Trade" />
+        <item
+            android:id="@+id/navigation_item_record"
+            android:icon="@drawable/ic_person_white_24dp"
+            android:title="거래기록 Trade Record" />
+        <item
+            android:id="@+id/navigation_item_account"
+            android:icon="@drawable/ic_account_wallet_white_24dp"
+            android:title="계좌 Account" />
+        <item
+            android:id="@+id/navigation_item_report"
+            android:icon="@drawable/ic_help_white_24dp"
+            android:title="리포트 Trade Report" />
+    </group>
+
+    <!--<item android:title="@string/nav_sub_menu">
+        <menu>
+            <item
+                android:icon="@drawable/ic_emoticon"
+                android:id="@+id/nav_sub_menu_item01"
+                android:title="@string/nav_sub_menu_item01" />
+            <item
+                android:icon="@drawable/ic_emoticon"
+                android:id="@+id/nav_sub_menu_item02"
+                android:title="@string/nav_sub_menu_item02" />
+        </menu>
+    </item>-->
+</menu>

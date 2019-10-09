@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <!--<com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtubeplayer"
+        android:layout_width="150dp"
+        android:layout_height="150dp">
+    </com.google.android.youtube.player.YouTubePlayerView>-->
+
+
+
+    <FrameLayout
+        android:id="@+id/youtube_container"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="3">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_weight="4"
+        android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/mainChartContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/Lout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="10"
+        android:background="#1E1E1E">
+    <FrameLayout
+        android:id="@+id/option_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+    </FrameLayout>
+        <ImageView
+            android:id="@+id/changeChartImg"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/ic_insert_chart_gray_24dp" />
+    </LinearLayout>
+    <!--매수 매도 고정-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="2"
+        android:background="#2C3852"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/buyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/sellBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/radius_green"
+                    android:text="매도"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sellLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@+id/buyLayout"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/buyBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/radius_red"
+                    android:text="매수"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <!--<FrameLayout
+            android:id="@+id/btnContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>-->
+
+    </RelativeLayout>
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="21dp"
+        android:text="종목 채팅"
+        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></ListView>
+    </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="send"/>-->
+
+
+</LinearLayout>

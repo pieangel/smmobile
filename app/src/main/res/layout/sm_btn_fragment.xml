@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000">
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:text="매수"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/radius_green"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+            <Button
+                android:id="@+id/rsvBuyingBtn"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="예약매수"
+                android:textColor="#FFFFFF"
+                android:textSize="10dp"
+                android:background="@drawable/radius_green"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="2dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="0dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:text="매도"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/radius_red"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+            <Button
+                android:id="@+id/rsvSellingBtn"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="예약매도"
+                android:textColor="#FFFFFF"
+                android:textSize="10dp"
+                android:background="@drawable/radius_red"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="2dp"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:text="예탁잔고"
+            android:textSize="7dp"
+            android:textAlignment="center"
+            android:background="@drawable/favorite_button"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:text="미결제"
+            android:textColor="#ffffff"
+            android:textSize="7dp"
+            android:textAlignment="center"
+            android:background="@drawable/radius_meguel" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:text="미체결"
+            android:textSize="7dp"
+            android:textAlignment="center"
+            android:background="@drawable/radius_round_gray"/>
+    </LinearLayout>
+        <!--<LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="예탁잔고"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="미결제"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="미체결"/>
+        </LinearLayout>-->
+</LinearLayout>

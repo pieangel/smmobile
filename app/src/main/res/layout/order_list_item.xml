@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--android:layout_margin="1dp"-->
+
+    <!--<android.support.v7.widget.CardView
+        android:layout_width="90dp"
+        android:layout_height="50dp">-->
+        <!--app:cardMaxElevation="2dp"
+        app:cardElevation="1dp"-->
+        <!--app:cardCornerRadius="4dp"-->
+        <!--app:cardMaxElevation="2dp"
+        app:cardElevation="1dp"-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/orderTitle"
+                android:layout_width="60dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="orderTitle"
+                android:textSize="12sp"
+                android:background="@drawable/stroke_style"/>
+            <TextView
+                android:id="@+id/orderValue"
+                android:layout_width="60dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="orderValue"
+                android:textSize="12sp"
+                android:textColor="#000000"
+                android:background="@drawable/stroke_style_white"/>
+
+        </LinearLayout>
+
+   <!-- </android.support.v7.widget.CardView>-->
+
+</RelativeLayout>

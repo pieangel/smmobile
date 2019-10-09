@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--처음화면 visible check-->
+    <LinearLayout
+        android:id="@+id/firstLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="#2C3E54"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <!--타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="투자성향 설문 안내"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+        </LinearLayout>
+        <!--타이틀 끝 -->
+
+        <!-- 부가 설명 부분 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#263242"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="지금부터 투자성향을 알아보기 위한 설문을 시작할게요. 자본시장법에 따라 투자성향 확인 후 투자권유 및 계약이 가능합니다."
+                android:textColor="#FFFFFF"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <!-- 부가 설명 부분 끝-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--설문 설명 부분 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="연령대"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="연 소득 규모"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="예상 투자 금액"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="예상 투자 기간"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="위험과 수익의 밸런스"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="손실 감수 수준"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="파생 투자 경험"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+            <!--설문 설명 부분 끝-->
+        </ScrollView>
+    </LinearLayout>
+    <!--처음 화면 끝 -->
+
+    <!--다음 버튼 -->
+    <LinearLayout
+        android:id="@+id/nextLout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/nextTxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#01BAD6"
+            android:gravity="center"
+            android:text="시작하기"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp" />
+
+        <!--<TextView
+            android:id="@+id/startTxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#01BAD6"
+            android:gravity="center"
+            android:text="시작하기"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp"
+            android:visibility="visible"/>-->
+
+    </LinearLayout>
+    <!--다음 버튼 끝-->
+
+</LinearLayout>

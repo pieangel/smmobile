@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10">
+
+    <!--설문 결과 화면 visible check-->
+    <LinearLayout
+        android:id="@+id/resultLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="#2C3E54"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <!--타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!--클릭이벤트를 여기로 준다. -->
+            <!--<LinearLayout
+                android:id="@+id/resultBackLout"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+            </LinearLayout>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="투자성향 설문 결과"
+                android:textColor="#FFFFFF"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <!--타이틀 끝-->
+
+        <!-- 부가 설명 부분 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="당신의 투자성향은 "
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/changeType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공격투자형 "
+                android:textColor="#01BAD8"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입니다."
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+        </LinearLayout>
+        <!-- 부가 설명 부분 끝-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <!--설문 설명 부분 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/changeSubText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="공격투자형의 자산투자는 주식형 위주로 투자하고 \n 채권형에는 소액 투자해요."
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/changeImg"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/safety"/>
+
+            </LinearLayout>
+            <!--설문 설명 부분 끝-->
+        </ScrollView>
+
+        <!--설문 결과 하단 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내 성향과 일치하나요?"
+                android:textSize="14dp"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/resultNTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="아니요, 다릅니다."
+                    android:textColor="#01BAD8"
+                    android:background="@drawable/survay_button"/>
+                <TextView
+                    android:id="@+id/resultYTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="네, 일치합니다."
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/survay_button_reversal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--설문 결과 하단 버튼 -->
+
+    </LinearLayout>
+    <!--설문 결과 화면 끝 -->
+
+</LinearLayout>

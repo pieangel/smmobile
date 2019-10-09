@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="480dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/symbol_selector_style">
+
+
+    <LinearLayout
+        android:id="@+id/indexTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="10"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#293148">
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="48dp"
+            android:layout_weight="9"
+            android:layout_marginLeft="18dp"
+            android:text="지표"
+            android:textSize="16dp"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#293148"/>
+        <ImageView
+            android:id="@+id/closeImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_close_gray_24dp"
+            android:background="#293148"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/indexLinear"
+            android:layout_below="@+id/indexTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+            <Button
+                android:id="@+id/newOrderBtn"
+                android:layout_width="155dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginTop="2dp"
+                android:background="#2292FF"
+                android:gravity="center"
+                android:text="목록"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold">
+            </Button>
+            <!--#2292FF 파란색 -->
+            <Button
+                android:id="@+id/addOrderBtn"
+                android:layout_width="155dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginTop="2dp"
+                android:background="#2B3652"
+                android:gravity="center"
+                android:text="추가됨"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold">
+            </Button>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/indexNewRecyclerView"
+        android:layout_below="@+id/indexLinear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:background="#293148">
+    </android.support.v7.widget.RecyclerView>
+
+    <!--empty state -->
+    <LinearLayout
+        android:id="@+id/emptyLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/indexLinear"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ic_page_gray_24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="목록이 비었습니다."
+            android:textSize="18dp"
+            android:textColor="#99B1D2"/>
+    </LinearLayout>
+    <!--empty state end-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/indexAddRecyclerView"
+        android:layout_below="@+id/indexLinear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#293148">
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

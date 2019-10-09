@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_main"
+        android:icon="@drawable/ic_setting_gray_24dp"
+        android:orderInCategory="0"
+        android:title="menu"
+        app:showAsAction="always">
+        <menu>
+
+            <item
+                android:id="@+id/first"
+                android:title="option1" />
+
+            <item
+                android:id="@+id/second"
+                android:title="option2" />
+            <item
+                android:id="@+id/third"
+                android:title="option2" />
+        </menu>
+    </item>
+</menu>

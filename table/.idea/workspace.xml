@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a45aeb1b-8240-48f8-abf5-3d3c23504454" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/autoorder/SheetTemplate1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/Adapter/MainbarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/Adapter/MainbarAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/Adapter/OptionAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/Adapter/OptionAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/BackPressCloseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/BackPressCloseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/ChartListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/ChartListActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/ChartSignalActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/ChartSignalActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/RecyclerViewList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/RecyclerViewList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SiseShowAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SiseShowAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SmMainbarList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SmMainbarList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SmOptionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SmOptionFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SmSiseChartActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/SmSiseChartActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/account/SmAccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/account/SmAccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/annotation/SmOrderView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/annotation/SmOrderView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/autoorder/OrderRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/autoorder/OrderRecyclerViewAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/autoorder/SmAutoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/autoorder/SmAutoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/chart/SmChartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/chart/SmChartFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/crobo/SmCroboFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/crobo/SmCroboFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/data/SmChartData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/data/SmChartData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/data/SmChartDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/data/SmChartDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/favorite/SmFavoriteFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/favorite/SmFavoriteFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/market/SmMarketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/market/SmMarketManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/mock/SmPrChartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/mock/SmPrChartFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/mock/SmSymSelectAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/mock/SmSymSelectAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/network/SmProtocolManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/network/SmProtocolManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/order/SmOrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/order/SmOrderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmAccountPositionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmAccountPositionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmSymbolPositionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmSymbolPositionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmTotalPositionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/position/SmTotalPositionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/sise/SubbarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/sise/SubbarAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/symbol/SmSymbolSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/symbol/SmSymbolSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/TableViewAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/TableViewListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/TableViewModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/holder/CellViewHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/holder/ColumnHeaderViewHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/holder/GenderCellViewHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/holder/MoodCellViewHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/holder/RowHeaderViewHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/model/Cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/model/ColumnHeader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/model/RowHeader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/popup/ColumnHeaderLongPressPopup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/signalmaster/com/smmobile/tableview/popup/RowHeaderLongPressPopup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/radius_yetak.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/mainbar_listitem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/mainbar_listitem.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/order_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/order_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/pr_port_chart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/pr_port_chart.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/sm_auto_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/sm_auto_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/sm_btn_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/sm_btn_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/sm_expert_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/sm_expert_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/sm_favorites_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/sm_favorites_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/sm_sise_chart_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/sm_sise_chart_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/sub_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/sub_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/subbar_listitem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/subbar_listitem.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/symbol_selector_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/symbol_selector_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/table_view_cell_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/table_view_column_header_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/table_view_corner_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/table_view_image_cell_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/table_view_row_header_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../settings.gradle" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a45aeb1b-8240-48f8-abf5-3d3c23504454" name="Default Changelist" comment="" />
+      <created>1565240337619</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565240337619</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" visible="true" weight="0.32995737" />
+      <window_info id="Structure" side_tool="true" />
+      <window_info id="Build Variants" side_tool="true" />
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="Resources Explorer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Build" visible="true" weight="0.32936078" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Gradle" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Palette&#9;" />
+    </layout>
+  </component>
+</project>

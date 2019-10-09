@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:weightSum="10">
+
+    <!--CroboTitle-->
+    <!--<LinearLayout
+        android:id="@+id/indexTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_weight="1.5"
+        android:orientation="horizontal"
+        android:background="#293148">
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="48dp"
+            android:text="         포트폴리오"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#293148"/>
+    </LinearLayout>-->
+    <LinearLayout
+        android:id="@+id/indexLinear"
+        android:layout_below="@+id/indexTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/croboBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#2B3652"
+            android:gravity="center"
+            android:text="C로보 추천 포트폴리오"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold">
+        </Button>
+        <Button
+            android:id="@+id/myBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#2B3652"
+            android:gravity="center"
+            android:text="MY 포트폴리오"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold">
+        </Button>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/croboRecyclerView"
+        android:layout_below="@+id/indexLinear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:visibility="visible"
+        android:background="#293148">
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/myRecyclerView"
+        android:layout_below="@+id/indexLinear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:background="#293148">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/emptyText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textFontWeight="1"
+        android:gravity="center"
+        android:text="포트폴리오가 비어있습니다."
+        android:textAlignment="center"
+        android:textColor="#55FFFF"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+</RelativeLayout>

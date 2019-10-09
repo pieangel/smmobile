@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/orderRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
+    <com.rayject.table.view.TableView
+        android:id="@+id/table_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"/>
+
+    <!--<com.evrencoskun.tableview.TableView
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        app:column_header_height="50dp"
+        app:row_header_width="@dimen/row_header_width"
+        app:shadow_color="#FFFFFF"
+        app:unselected_color="@color/table_view_default_unselected_background_color">
+    </com.evrencoskun.tableview.TableView>-->
+    <!--app:selected_color="@color/colorBlue"app:shadow_color="@color/md_cell_text_color"-->
+    <!--매수 매도 고정-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#2C3852"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/buyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2.5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/sellBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/radius_green"
+                    android:text="매도"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sellLayout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@+id/buyLayout"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/buyBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/radius_red"
+                    android:text="매수"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <!--<FrameLayout
+            android:id="@+id/btnContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>-->
+
+    </RelativeLayout>
+    
+</LinearLayout>

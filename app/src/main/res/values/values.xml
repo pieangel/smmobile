@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="indexSelectArray">
+        <item>이동 평균</item>
+        <item>볼린저 밴드</item>
+        <item>RSI</item>
+        <item>악어</item>
+        <item>멋진 발진기</item>
+        <item>MACD</item>
+        <item>패러볼릭 SAR</item>
+        <item>프랙털</item>
+    </string-array>
+
+    <!-- seekbar -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="seekbar_thumb_width">25dp</dimen>
+</resources>

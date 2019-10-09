@@ -1,0 +1,101 @@
+//******************************************************************************
+// SCICHART® Copyright SciChart Ltd. 2011-2017. All rights reserved.
+//
+// Web: http://www.scichart.com
+// Support: support@scichart.com
+// Sales:   sales@scichart.com
+//
+// SciChartApp.java is part of the SCICHART® Examples. Permission is hereby granted
+// to modify, create derivative works, distribute and publish any part of this source
+// code whether for commercial, private or personal use.
+//
+// The SCICHART® examples are distributed in the hope that they will be useful, but
+// without any warranty. It is provided "AS IS" without warranty of any kind, either
+// expressed or implied.
+//******************************************************************************
+
+package com.scichart.examples;
+
+import android.app.Application;
+import android.util.Log;
+
+//BEGIN_DEMO_APPLICATION
+import com.scichart.examples.demo.helpers.Module;
+import com.scichart.examples.demo.search.ExampleSearchProvider;
+//END_DEMO_APPLICATION
+
+public class SciChartApp extends Application {
+
+    private static SciChartApp sInstance;
+
+    public static SciChartApp getInstance() {
+        return sInstance;
+    }
+
+    //BEGIN_DEMO_APPLICATION
+    private Module module;
+    private ExampleSearchProvider searchProvider;
+    //END_DEMO_APPLICATION
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sInstance = this;
+
+        setUpSciChartLicense();
+    }
+
+    //라이센스 키
+    private void setUpSciChartLicense() {
+        // Set your license code here to license the SciChart Android Examples app
+        // You can get a trial license key from https://www.scichart.com/licensing-scichart-android/
+        // Purchased license keys can be viewed at https://www.scichart.com/profile
+        //
+        // e.g.
+        //
+        try {
+            com.scichart.charting.visuals.SciChartSurface.setRuntimeLicenseKey(
+                    "<LicenseContract>" +
+                            "<Customer>js4278j@naver.com</Customer>" +
+                            "<OrderId>Trial</OrderId>" +
+                            "<LicenseCount>1</LicenseCount>" +
+                            "<IsTrialLicense>true</IsTrialLicense>" +
+                            "<SupportExpires>04/12/2019 00:00:00</SupportExpires>" +
+                            "<ProductCode>SC-ANDROID-2D-ENTERPRISE-SRC</ProductCode>" +
+                            "<KeyCode>dbfe2e7f1696eb0a66eda85109b8632682844ed0cf09460291b2d171a669f18bc3c729312aa25629c787fff19f2d058d9d30a1ae72ff38ea9cd778be96abd1951f961734d9f08c556fbe25dee5d4f299e04be63fca09fd1d31e0dceeb67581a1a39a3149b52559dca205829f7228e222c1b04cb0909cc2c49cd77d218c6c1f3f4afbf95946bb7c67bb205de2b8c7e97925dec0c863c3a49383361fa32cc41a1b68c12b44f650499c5d0b4c</KeyCode>" +
+                            "</LicenseContract>"
+            );
+        } catch (Exception e) {
+            Log.e("SciChart", "Error when setting the license", e);
+        }
+    }
+
+    //BEGIN_DEMO_APPLICATION
+    public Module getModule() {
+        if (module == null) {
+            module = initModule();
+        }
+        return module;
+    }
+
+    public ExampleSearchProvider getSearchProvider(Module module) {
+        if (searchProvider == null) {
+            searchProvider = initSearchProvider(module);
+        }
+        return searchProvider;
+    }
+
+    private Module initModule() {
+        final Module module = new Module(getApplicationContext());
+        module.initialize();
+        return module;
+    }
+
+    private ExampleSearchProvider initSearchProvider(Module module) {
+        if (module != null) {
+            return new ExampleSearchProvider(getApplicationContext(), module.getExamples());
+        }
+        return null;
+    }
+    //END_DEMO_APPLICATION
+}

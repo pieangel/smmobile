@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@drawable/symbol_selector_style"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/indicatorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="지표 이름"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"/>
+
+    <!--ma설정구간 -->
+    <LinearLayout
+        android:id="@+id/maSettingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <!--기간 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="5dp"
+                android:text="기간"
+                android:textColor="#FFFFFF"/>
+            <TextView
+                android:id="@+id/inputNumber"
+                android:layout_width="80dp"
+                android:layout_height="24dp"
+                android:text="5"
+                android:textSize="22dp"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+        <!--기간 끝 -->
+
+        <!--굵기 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="5dp"
+                android:text="굵기"
+                android:textColor="#FFFFFF"/>
+            <Spinner
+                android:id="@+id/typeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:popupBackground="#1C2335" />
+        </LinearLayout>
+        <!--굵기 끝 -->
+
+        <!--색상 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="5dp"
+                android:text="색상"
+                android:textColor="#FFFFFF"/>
+            <Spinner
+                android:id="@+id/colorSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:popupBackground="#1C2335"
+                />
+        </LinearLayout>
+        <!--색상 끝 -->
+
+    </LinearLayout>
+    <!--ma설정구간 끝-->
+
+    <!--macd설정구간 -->
+    <!--<LinearLayout
+        android:id="@+id/macdSettingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        &lt;!&ndash;빠른기간 &ndash;&gt;
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="15dp"
+                android:text="빠른 기간"
+                android:textColor="#FFFFFF"/>
+            <EditText
+                android:id="@+id/fastPeriod"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0123456789"
+                android:text="10"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+        &lt;!&ndash;빠른기간 끝 &ndash;&gt;
+
+        &lt;!&ndash;느린기간 &ndash;&gt;
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="15dp"
+                android:text="느린 기간"
+                android:textColor="#FFFFFF"/>
+            <EditText
+                android:id="@+id/slowPeriod"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0123456789"
+                android:text="25"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+        &lt;!&ndash;느린기간 끝 &ndash;&gt;
+
+        &lt;!&ndash;신호기간 &ndash;&gt;
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="15dp"
+                android:text="신호 기간"
+                android:textColor="#FFFFFF"/>
+            <EditText
+                android:id="@+id/signalPeriod"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0123456789"
+                android:text="9"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+        &lt;!&ndash;신호기간 끝 &ndash;&gt;
+
+    </LinearLayout>-->
+    <!--macd설정구간 끝-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/saveIndicator"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="저장"
+            android:textStyle="bold"
+            android:textColor="#2292FF"
+            android:textSize="18dp"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

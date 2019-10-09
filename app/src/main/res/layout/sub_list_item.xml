@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="62dp"
+    android:layout_weight="1"
+    android:background="#000000">
+
+    <!--<android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="1dp"
+        app:cardCornerRadius="4dp"
+        app:cardMaxElevation="2dp"
+        app:cardElevation="1dp">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="9.5dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="타이틀"
+                android:textSize="13.5dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_below="@+id/title"
+                android:layout_marginTop="7.5dp"
+
+                android:text="내용"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textColor="#c0c0c0"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/cf_close_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="2,898.70"
+                android:textSize="14dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cf_close_ratio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_below="@+id/cf_close_value"
+                android:layout_marginTop="7.5dp"
+                android:text="-7.11(-0.4%)"
+                android:textSize="12dp"
+                android:textAlignment="textEnd"
+                android:textColor="#3880E0"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/chartBtn"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="신호"
+                android:textStyle="bold"
+                android:textSize="8.5dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/radius_green"/>
+            <Button
+                android:id="@+id/signalBtn"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:layout_toRightOf="@+id/chartBtn"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="프리미엄\n신    호"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp"
+                android:background="@drawable/radius_red"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:background="#55FFFFFF"/>
+
+</LinearLayout>

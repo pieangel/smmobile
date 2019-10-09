@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:textSize="15dp"
+    android:gravity="center_vertical"
+    android:textColor="#FFFFFF"
+    style="?android:attr/spinnerItemStyle"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:ellipsize="marquee"
+    android:singleLine="true"
+    android:background="#293148"
+    />
+
+
+
+
+    <!--style="?attr/spinnerDropDownItemStyle"
+    android:textColor="#FFFFFF"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:background="#1C2335"
+    android:ellipsize="marquee"
+    xmlns:android="http://schemas.android.com/apk/res/android"-->

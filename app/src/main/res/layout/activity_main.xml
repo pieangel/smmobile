@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2"
+    android:orientation="vertical"
+    tools:context="signalmaster.com.smmobile.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="#2B3652">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:weightSum="10">
+
+            <RelativeLayout
+                android:id="@+id/MainMenuTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="9"
+                android:orientation="horizontal">
+
+                <!--현재가 -->
+                <LinearLayout
+                    android:id="@+id/siseTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="9dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="현재가"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!--관심 종목-->
+                <LinearLayout
+                    android:id="@+id/favoriteTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="관심 종목"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/addFavoriteBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/favorite_button"
+                        android:gravity="center"
+                        android:text="+관심종목"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <!--모의 매매-->
+                <LinearLayout
+                    android:id="@+id/mockTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:orientation="horizontal"
+                    android:visibility="invisible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+                        <!--android:background="#2B3652"-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+                            <!--android:background="#2B3652"-->
+
+                            <Button
+                                android:id="@+id/symSelectBtn"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="3"
+                                android:background="#242B3D"
+                                android:text="종목선택"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/chartSelectImg"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_weight="1.5"
+                                app:srcCompat="@drawable/ic_multiline_chart_gray_24dp" />
+
+                            <ImageView
+                                android:id="@+id/indexSelectImg"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_weight="1.5"
+                                app:srcCompat="@drawable/ic_jipyo_gray_24dp" />
+
+                            <ImageView
+                                android:id="@+id/lineSelectImg"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_weight="1.5"
+                                app:srcCompat="@drawable/ic_line_gray_24dp" />
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_weight="1.5"
+                                app:srcCompat="@drawable/ic_person_add_gray_24dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--주문 -->
+                <LinearLayout
+                    android:id="@+id/autoOrderTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/orderSymSelectTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="9dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="주문"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!--C로보 -->
+                <LinearLayout
+                    android:id="@+id/croboTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignStart="@+id/expertTitle"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="0dp"
+                    android:gravity="center"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="9dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="C로보"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!--포트폴리오 -->
+                <LinearLayout
+                    android:id="@+id/portTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="9dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="포트폴리오"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!--상품 -->
+                <LinearLayout
+                    android:id="@+id/productionTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="9dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="상품"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!--전문가 클럽 -->
+                <LinearLayout
+                    android:id="@+id/expertTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:weightSum="5"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:visibility="invisible">
+
+                    <Button
+                        android:id="@+id/symExpertSelectBtn"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="2"
+                        android:background="#242B3D"
+                        android:text="종목선택"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="9dp"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:text="전문가 클럽"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/settingImg"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="3"
+                app:srcCompat="@drawable/ic_setting_gray_24dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_weight="3">
+
+        <FrameLayout
+            android:id="@+id/mainListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- 오른쪽 슬라이드 -->
+            <LinearLayout
+                android:id="@+id/slidingPanel"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="#2B3652"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!--<ListView
+                    android:id="@+id/lvNavList_right"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="#2B3652"
+                    android:choiceMode="singleChoice"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:id="@+id/recentTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+                        <!--<ImageView
+                            android:id="@+id/recentBackImg"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_arrow_left_gray_24dp" />-->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="최근 거래"
+                            android:textSize="14dp"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
+
+
+                    <!--오른쪽 옵션 리사이클러뷰 -->
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_weight="9"
+                        android:layout_gravity="center_vertical"
+                        android:choiceMode="singleChoice"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0dp"
+                        android:visibility="visible">
+                    </android.support.v7.widget.RecyclerView>
+
+                    <!--최근 거래 리사이클러뷰 -->
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recentRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_weight="9"
+                        android:layout_gravity="center_vertical"
+                        android:choiceMode="singleChoice"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0dp"
+                        android:visibility="gone">
+                    </android.support.v7.widget.RecyclerView>
+
+                    <LinearLayout
+                        android:id="@+id/feesLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="vertical"
+                        android:weightSum="2"
+                        android:visibility="gone">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="수수료 설정"
+                            android:textColor="#8590AC" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+                            <TextView
+                                android:id="@+id/feesTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="4"
+                                android:background="#FFFFFF"
+                                />
+                            <TextView
+                                android:id="@+id/pushTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="설정"
+                                android:textColor="#FFFFFF"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                    <!--하단 메뉴선택 -->
+                    <LinearLayout
+                        android:id="@+id/bottom_icon_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_below="@+id/recyclerView_right"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/optionListImg"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/ic_menu_gray_24dp"/>
+
+                        <ImageView
+                            android:id="@+id/recentImg"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/ic_swap_gray_24dp"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/ic_flash_on_gray_24dp"/>
+
+                        <!--<ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/ic_person_add_gray_24dp"/>-->
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#272F46"
+            app:headerLayout="@layout/drawer_header"
+            app:itemIconTint="@android:color/white"
+            app:itemTextColor="#8590AC"
+            app:menu="@menu/drawer" />
+
+        <!--<android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            app:headerLayout="@layout/drawer_header"
+            android:background="#2B3652"
+            app:menu="@menu/drawer" />-->
+
+        <!-- 왼쪽 슬라이드 -->
+        <!--<ListView
+            android:id="@+id/lv_activity_main_nav_list"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#BDBDBD"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:visibility="visible"/>-->
+
+
+    </android.support.v4.widget.DrawerLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/SmMainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>

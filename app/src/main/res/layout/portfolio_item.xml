@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:background="@drawable/symbol_selector_style"
+    android:layout_marginBottom="15dp">
+
+    <!--포트폴리오 이름 -->
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/portfolio_teduri">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="P1"
+            android:textSize="16sp"
+            android:textColor="#000000"/>
+    </LinearLayout>
+    <!--포트폴리오 이름 end-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--종목1 -->
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="@drawable/portfolio_teduri">
+
+            <TextView
+                android:id="@+id/clickSymbol1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="선택1"
+                android:textColor="#FFFFFF"
+                android:background="#1389FF"
+                />
+
+            <TextView
+                android:id="@+id/valueSymbol1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:background="@drawable/portfolio_teduri"/>
+
+        </LinearLayout>
+        <!--종목1 end-->
+
+        <!--종목2 -->
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="@drawable/portfolio_teduri">
+
+            <TextView
+                android:id="@+id/clickSymbol2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="선택2"
+                android:textColor="#FFFFFF"
+                android:background="#F0333A"/>
+
+            <TextView
+                android:id="@+id/valueSymbol2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+        <!--종목2 end-->
+
+        <!--종목3 -->
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="@drawable/portfolio_teduri">
+
+            <TextView
+                android:id="@+id/clickSymbol3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="선택3"
+                android:textColor="#FFFFFF"
+                android:background="#169F4F"/>
+
+            <TextView
+                android:id="@+id/valueSymbol3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+        <!--종목3 end -->
+
+        <!--손실 -->
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="@drawable/portfolio_teduri">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="손실"
+                android:textColor="#ffffff"
+                android:background="#C10BE8"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:background="@drawable/portfolio_teduri"/>
+
+        </LinearLayout>
+        <!--손실 end -->
+
+    </LinearLayout>
+
+
+
+
+
+    <!--종목1-->
+    <!--<LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/clickSymbol1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="원유"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:id="@+id/valueSymbol1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>-->
+    <!--종목1 end-->
+
+    <!--종목2-->
+    <!--<LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/clickSymbol2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="골드"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:id="@+id/valueSymbol2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>-->
+    <!--종목2 end-->
+
+    <!--종목3-->
+    <!--<LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/clickSymbol3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="호주달러"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:id="@+id/valueSymbol3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>-->
+    <!--종목3 end-->
+
+    <!--손익-->
+    <!--<LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="손익"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>-->
+    <!--손익 end-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/portfolio_teduri">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="주문"
+            android:textColor="#FFFFFF"
+            android:background="#77A2F9"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/sublist_teduri">
+
+
+
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/sublist_teduri">
+        <!--android:background="#1F242A"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/f_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="타이틀"
+                android:textSize="12.5dp"
+                android:textColor="#ffffff"/>
+
+            <!--<TextView
+                android:id="@+id/data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="데이터"/>-->
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="2,898.70"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textAlignment="textEnd"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/f_content"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="내용"
+                android:textSize="10dp"
+                android:layout_gravity="center"
+                android:textColor="#c0c0c0"/>
+
+            <!--<TextView
+                android:id="@+id/indices"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="상품지수"
+                android:gravity="right"
+                android:padding="10dp"/>-->
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="-7.11(-0.4%)"
+                android:textColor="#0054FF"
+                android:textStyle="bold"
+                android:textAlignment="textEnd"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="2dp"
+        android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_margin="2dp"
+            android:id="@+id/f_chartBtn"
+            android:text="차트"
+            android:textSize="10dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/radius_green"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:id="@+id/f_signalBtn"
+            android:text="신호"
+            android:textColor="#FFFFFF"
+            android:textSize="10dp"
+            android:background="@drawable/radius_red"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

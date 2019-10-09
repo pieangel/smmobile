@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:layout_height="180dp"
+    android:weightSum="10"
+    android:background="#2B3652"
+    android:paddingTop="16dp"
+    android:paddingRight="18dp"
+    android:paddingLeft="18dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/user_image_view"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="13dp">
+
+            <TextView
+                android:id="@+id/nav_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="모의 계좌"
+                android:textColor="#FFFFFF"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/nav_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="$9999,19"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/nav_accountNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="7771-060-531"
+                android:textSize="13dp"
+                android:textColor="#8691AD"/>
+
+        </LinearLayout>
+        
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="실제 계정"
+            android:textSize="15.5dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/header_button_style"/>
+    </LinearLayout>
+
+
+</LinearLayout>

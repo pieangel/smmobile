@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="215dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/symbol_selector_style">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:background="#293148">
+            <TextView
+                android:layout_width="270dp"
+                android:layout_height="48dp"
+                android:layout_weight="9"
+                android:layout_marginLeft="18dp"
+                android:text="그래프 종류"
+                android:textSize="16dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="#293148"/>
+            <ImageView
+                android:id="@+id/closeImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_close_gray_24dp"
+                android:background="#293148"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <!--<View
+                android:layout_width="580dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="#000000"/>-->
+
+            <LinearLayout
+                android:layout_width="310dp"
+                android:layout_height="118dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <!--면적-->
+                <LinearLayout
+                    android:id="@+id/mountainLout"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="7.5dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/radius_black_button">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        app:srcCompat="@drawable/ic_mountain_feature"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="면적"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        />
+                </LinearLayout>
+                <!--선형-->
+                <LinearLayout
+                    android:id="@+id/lineLout"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="7.5dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/radius_black_button">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        app:srcCompat="@drawable/ic_lines_feature"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="선형"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+                <!--원통형-->
+                <LinearLayout
+                    android:id="@+id/candleLout"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="7.5dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/radius_black_button">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        app:srcCompat="@drawable/ic_candles_feature"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="캔들형"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+                <!--막대형-->
+                <LinearLayout
+                    android:id="@+id/ohlcLout"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="7.5dp"
+                    android:layout_marginBottom="7.5dp"
+                    android:layout_marginLeft="7.5dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/radius_black_button">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        app:srcCompat="@drawable/ic_ohlc_series_feature"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OHLC"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--<View
+                android:layout_width="580dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="#000000"/>-->
+        </LinearLayout>
+
+
+
+        <!--<TextView
+            android:id="@+id/saveTxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="저장"
+            android:textColor="#FFFFFF"/>-->
+
+    </LinearLayout>
+
+</RelativeLayout>

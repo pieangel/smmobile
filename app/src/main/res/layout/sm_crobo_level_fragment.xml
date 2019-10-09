@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10">
+
+    <!--운용레벨 조절화면 visible check-->
+    <LinearLayout
+        android:id="@+id/operationLevelLout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="#2C3E54"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <!--타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!--클릭이벤트를 여기로 준다. -->
+            <LinearLayout
+                android:id="@+id/operationBackLout"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="운용레벨 조절하기"
+                android:textColor="#FFFFFF"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <!--타이틀 끝-->
+
+        <!-- 부가 설명 부분 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="당신의 투자성향은 "
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/changeType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공격투자형 "
+                android:textColor="#01BAD8"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입니다."
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+        <!-- 부가 설명 부분 끝-->
+
+        <!--<ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">-->
+
+            <!--설문 설명 부분 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/money"/>
+
+            </LinearLayout>
+            <!--설문 설명 부분 끝-->
+        <!--</ScrollView>-->
+
+        <!--설문 결과 하단 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="#DADADA"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:text="운용레벨을 조절해보세요."
+                android:textSize="16sp"
+                android:textColor="#000000" />
+
+            <!--seekBar -->
+            <com.xw.repo.BubbleSeekBar
+                android:id="@+id/operationSeekbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="5dp"
+                app:bsb_bubble_color="#333333"
+                app:bsb_bubble_text_color="#FFFFFF"
+                app:bsb_bubble_text_size="20dp"
+                app:bsb_max="4"
+                app:bsb_min="0"
+                app:bsb_progress="0"
+                app:bsb_second_track_color="#E3E3E3"
+                app:bsb_second_track_size="5dp"
+                app:bsb_section_count="4"
+                app:bsb_section_text_color="#636363"
+                app:bsb_section_text_size="18dp"
+                app:bsb_seek_step_section="true"
+                app:bsb_show_section_mark="true"
+                app:bsb_thumb_color="#01BAD6"
+                app:bsb_thumb_text_color="#01BAD6"
+                app:bsb_thumb_text_size="14dp"
+                app:bsb_touch_to_seek="true"
+                app:bsb_track_color="#E3E3E3"
+                app:bsb_track_size="5dp"
+                app:bsb_always_show_bubble="true"
+                android:visibility="visible"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/againTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="처음부터 다시 할게요."
+                    android:textColor="#01BAD8"
+                    android:background="@drawable/survay_button"/>
+                <TextView
+                    android:id="@+id/endTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center"
+                    android:text="만족합니다."
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/survay_button_reversal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--설문 결과 하단 버튼 -->
+
+    </LinearLayout>
+    <!--운용레벨 조절화면 끝 -->
+
+</LinearLayout>

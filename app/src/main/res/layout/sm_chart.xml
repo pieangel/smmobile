@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--<Button
+            android:id="@+id/deleteAnnotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/delete_annotation" />
+
+        <Button
+            android:id="@+id/createAnnotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/create_annotation"/>-->
+        <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="@string/annotation_type" />-->
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chart_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--<com.scichart.charting.visuals.SciChartSurface
+            android:id="@+id/chart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>-->
+        <com.scichart.charting.visuals.SciChartSurface
+            android:id="@+id/chart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!--<com.scichart.charting.visuals.SciChartSurface
+            android:id="@+id/addChart1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:layout_weight="1"/>
+        <com.scichart.charting.visuals.SciChartSurface
+            android:id="@+id/addChart2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:layout_weight="1"/>-->
+
+
+        <LinearLayout
+            android:id="@+id/chartLinear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <!--<com.scichart.charting.visuals.SciChartSurface
+                android:id="@+id/addChart1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:layout_weight="2"/>-->
+        </LinearLayout>
+        <!--<com.scichart.charting.visuals.SciChartSurface
+            android:id="@+id/priceChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />-->
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.scichart.charting.visuals.SciChartSurface
+                android:id="@+id/macdChart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:minHeight="100dp"
+                android:layout_weight="1" />
+
+            <com.scichart.charting.visuals.SciChartSurface
+                android:id="@+id/rsiChart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:minHeight="100dp"
+                android:layout_weight="1" />
+
+            <com.scichart.charting.visuals.SciChartSurface
+                android:id="@+id/volumeChart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:minHeight="100dp"
+                android:layout_weight="1" />
+        </LinearLayout>-->
+
+    </LinearLayout>
+
+
+</LinearLayout>

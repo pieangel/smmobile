@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 타이틀바 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="차트 설정"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:background="#808080"
+            android:layout_width="match_parent"
+            android:layout_height="43dp" />
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--차트 스타일 바꾸기-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginBottom="3dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="차트 스타일 바꾸기"/>
+            <Spinner
+                android:id="@+id/chartTypeSpinner"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"></Spinner>
+
+        </LinearLayout>
+
+        <!--y축 위치 왼쪽으로 표시-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+        <TextView
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_marginBottom="3dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Y축 위치"/>
+            <Switch
+                android:id="@+id/ycukSwitch"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--y축 레이블 색상-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/lblColor"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginBottom="3dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Y축 레이블 색상"/>
+
+        </LinearLayout>
+
+        <!--y축 선 굵기-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginBottom="3dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Y축 선 굵게" />
+            <Switch
+                android:id="@+id/boldSwitch"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+        <!--y축 투명-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginBottom="3dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Y축 선 투명"/>
+            <Switch
+                android:id="@+id/tmSwitch"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Notice -->
+
+    <View
+        android:background="#66bdbdbd"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <!-- 닫기 버튼 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="취소"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:padding="16dp"
+            android:gravity="center"
+            android:background="@drawable/radius_green"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:onClick="Close"/>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="확인"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:padding="16dp"
+            android:gravity="center"
+            android:background="@drawable/radius_green"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:onClick="Submit"/>
+    </LinearLayout>
+    <!--// 닫기 버튼 -->
+</LinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_weight="1"
+    android:background="#2B3652">
+    <TextView
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:id="@+id/symbolName"
+        android:layout_width="125dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="종목명"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"/>
+
+    <ImageView
+        android:id="@+id/arrowImg"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_arrow_down_blue_24dp"/>
+    <TextView
+        android:id="@+id/textCloseRatioFirst"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:text="0.0"
+        android:gravity="center_vertical"
+        android:textColor="#FFFFFF"
+        android:textSize="14dp"/>
+
+    <TextView
+        android:id="@+id/textCloseRatioSecond"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="0"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:textColor="#2BCBA7"/>
+
+
+
+</LinearLayout>

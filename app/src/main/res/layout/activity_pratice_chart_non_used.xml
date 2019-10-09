@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="signalmaster.com.smmobile.mock.PraticeChartActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true">
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/fragment_container">
+    <LinearLayout
+        android:id="@+id/Lout1"
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#25304C"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/fragment_container">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/radius_green"
+            android:text="투자하기       $1"
+            android:textColor="#CCFFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/radius_green"
+            android:text="배율       x150"
+            android:textColor="#CCFFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="총합:           $150"
+            android:textColor="#BBFFFFFF"
+            android:textSize="12dp"
+            android:textAlignment="center"
+            android:background="#151A2D"
+            android:gravity="center"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/radius_green"
+            android:text="가격       시장"
+
+            android:textColor="#CCFFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/radiusgreen"
+            android:drawableLeft="@drawable/ic_call_made_white_24dp"
+            android:drawablePadding="10dp"
+            android:paddingLeft="30dp"
+            android:text="구매"
+            android:textColor="#CCFFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="스프레드:           1.1668"
+            android:textColor="#BBFFFFFF"
+            android:textSize="12dp"
+            android:textAlignment="center"
+            android:background="#151A2D"
+            android:gravity="center"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/radiusred"
+            android:drawableLeft="@drawable/ic_call_received_white_24dp"
+            android:drawablePadding="10dp"
+            android:paddingLeft="30dp"
+            android:text="판매"
+            android:textColor="#CCFFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="25 4월 16:44:40"
+            android:textColor="#BBFFFFFF"
+            android:textSize="12dp"
+            android:textAlignment="center"
+            android:background="#151A2D"
+            android:layout_marginTop="5dp"
+            android:gravity="center"/>
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

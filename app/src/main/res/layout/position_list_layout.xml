@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 잔고 전체 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+        <!-- 잔고 타이틀 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#293148"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="220dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_weight="9"
+                    android:background="#293148"
+                    android:gravity="center_vertical"
+                    android:text="잔고"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/closeImg"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:background="#293148"
+                    app:srcCompat="@drawable/ic_close_gray_24dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 잔고 타이틀 end-->
+
+
+        <!--잔고 내용 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="5"
+            android:orientation="vertical">
+
+            <!--종목 구분 평균단가 수량 순손익-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:id="@+id/content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="종목"
+                    android:textColor="#FFFFFF"
+                    android:background="#4F81BD" />
+
+                <TextView
+                    android:id="@+id/content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="구분"
+                    android:textColor="#FFFFFF"
+                    android:background="#4F81BD" />
+
+                <TextView
+                    android:id="@+id/content3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="평균\단가"
+                    android:textColor="#FFFFFF"
+                    android:background="#4F81BD" />
+
+                <TextView
+                    android:id="@+id/content4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="수량"
+                    android:textColor="#FFFFFF"
+                    android:background="#4F81BD" />
+
+                <TextView
+                    android:id="@+id/content5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="순손익"
+                    android:textColor="#FFFFFF"
+                    android:background="#4F81BD" />
+            </LinearLayout>
+            <!--종목 구분 평균단가 수량 순손익 end-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/balanceRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <!--잔고 내용 끝 -->
+
+    </LinearLayout>
+    <!-- 잔고 전체 끝-->
+
+</LinearLayout>
