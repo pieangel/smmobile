@@ -652,7 +652,20 @@ public class SmProtocolManager implements Serializable {
             curCat.addSymbol(symbol);
             SmSymbolManager symMgr = SmSymbolManager.getInstance();
             symMgr.addSymbol(symbol);
+
+            if (market_name.compareTo("국내시장") == 0) {
+                symbol.seriesNmKr = name_kr;
+                symbol.seriesNm = name_en;
+                symbol.marketCode = category_code;
+                symbol.decimal = decimal;
+                symbol.contractSize = contract_unit;
+                symbol.seungsu = seungsu;
+                symbol.tickSize = tick_size;
+                symbol.tickValue = tick_value;
+            }
+
             if (symMgr.getSymbolCount() == total_symbol_count) {
+                SmMarketManager marketManager = SmMarketManager.getInstance();
                 Log.d("TAG", "Received all symbols:  -> " + name_kr + market_name);
                 appState = SmGlobal.SmAppState.SymbolListDownloaded;
             }
@@ -898,6 +911,9 @@ public class SmProtocolManager implements Serializable {
             int acc_volume = object.getInt("acc_volume");
             if (close == 0.0)
                 return;
+            if (symbol_code.compareTo("105PA000") == 0) {
+                high = 40;
+            }
             SmSymbolManager symMgr = SmSymbolManager.getInstance();
             SmSymbol sym = symMgr.findSymbol(symbol_code);
             if (sym != null) {

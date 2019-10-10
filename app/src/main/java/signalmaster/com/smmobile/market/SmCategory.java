@@ -1,8 +1,12 @@
 package signalmaster.com.smmobile.market;
 
 import java.util.ArrayList;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import signalmaster.com.smmobile.symbol.SmSymbol;
+
+import static java.lang.Character.isDigit;
 
 public class SmCategory {
 
@@ -33,14 +37,22 @@ public class SmCategory {
 
     public SmSymbol addSymbol(SmSymbol sym) {
         _symbolList.add(sym);
+        addToYearMonth(sym.code, sym);
         return sym;
     }
 
     public SmSymbol getRecentSymbol() {
-        if (_symbolList.size() == 0)
+        if (yearMonthSortedMap.size() == 0)
             return null;
-        else
-            return _symbolList.get(0);
+        else {
+           String firstKey = yearMonthSortedMap.firstKey();
+           SmProductYearMonth ym = yearMonthSortedMap.get(firstKey);
+           ArrayList<SmSymbol> symbolArrayList = ym.symbolList;
+           if (symbolArrayList.size() == 0)
+               return null;
+           else
+               return symbolArrayList.get(0);
+        }
     }
 
     public SmCategory() {
@@ -56,5 +68,44 @@ public class SmCategory {
             i++;
         }
         return -1;
+    }
+
+    SortedMap<String, SmProductYearMonth> yearMonthSortedMap = new TreeMap<>();
+    void addToYearMonth(String symbol_code, SmSymbol symbol) {
+        if (symbol == null)
+            return;
+
+        if (isDigit(symbol_code.charAt(2))) { // 국내 상풍
+            String product_code = symbol_code.substring(0, 3);
+            String year_month = symbol_code.substring(3, 5);
+            SmProductYearMonth ym = null;
+            if (yearMonthSortedMap.containsKey(year_month)) {
+                ym = yearMonthSortedMap.get(year_month);
+            }
+            else {
+                ym = new SmProductYearMonth();
+                ym.productCode = product_code;
+                ym.yearMonthCode = year_month;
+                yearMonthSortedMap.put(year_month, ym);
+            }
+            ym.symbolList.add(symbol);
+        }
+	else { // 해외 상품
+            String product_code = symbol_code.substring(0, 2);
+            String year = symbol_code.substring(symbol_code.length() - 2, symbol_code.length());
+            String month = symbol_code.substring(symbol_code.length() - 3, symbol_code.length() - 2);
+            String year_month = year + month;
+            SmProductYearMonth ym = null;
+            if (yearMonthSortedMap.containsKey(year_month)) {
+                ym = yearMonthSortedMap.get(year_month);
+            }
+            else {
+                ym = new SmProductYearMonth();
+                ym.productCode = product_code;
+                ym.yearMonthCode = year_month;
+                yearMonthSortedMap.put(year_month, ym);
+            }
+            ym.symbolList.add(symbol);
+        }
     }
 }

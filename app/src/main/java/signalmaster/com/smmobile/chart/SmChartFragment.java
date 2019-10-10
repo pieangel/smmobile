@@ -2085,6 +2085,7 @@ public class SmChartFragment extends Fragment {
         // 레이블을 갱신해 준다.
         ICategoryLabelProvider categoryLabelProvider = (ICategoryLabelProvider)xAxis.getLabelProvider();
         categoryLabelProvider.update();
+        xAxis.invalidateElement();
 
         // 주기 데이터가 아닐때만 줌을 맞춰 준다.
         if (!dataItem.periodic)

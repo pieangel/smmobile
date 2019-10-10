@@ -160,6 +160,12 @@ public class SmSymbolSelector extends AppCompatActivity {
                     _symSelectRecyclerView.setAdapter(_symSelectAdapter);
                     mark_name = "통화";
                 }
+                else if (symbolSpinner.getSelectedItemPosition() == 7){
+                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("국내시장");
+                    _symSelectAdapter = new SmSymSelectAdapter(symList);
+                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
+                    mark_name = "국내시장";
+                }
 
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
