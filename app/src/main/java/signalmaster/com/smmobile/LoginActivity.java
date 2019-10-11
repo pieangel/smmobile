@@ -10,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -40,6 +41,11 @@ public class LoginActivity extends AppCompatActivity {
 
     NavigationView navigationView;
 
+    LoginActivity self = this;
+
+    EditText idText;
+    EditText pwdText;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,9 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         progressTxt.setVisibility(View.GONE);
 
+        idText = (EditText)findViewById(R.id.emailInput);
+        pwdText = (EditText)findViewById(R.id.passwordInput);
+
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SmArgManager.getInstance().registerToMap("sign_up", "login_activity", self);
                 Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
                 startActivity(intent);
             }
@@ -73,6 +83,9 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user_id = idText.getText().toString();
+                user_pwd = pwdText.getText().toString();
+                SmUserManager.getInstance().addUserInfo(user_id, user_pwd);
                 SmProtocolManager.getInstance().setAppState(SmGlobal.SmAppState.MainScreenLoaded);
                 progressBar.setVisibility(View.VISIBLE);
                 progressTxt.setVisibility(View.VISIBLE);
@@ -80,8 +93,18 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-
+    public void onRegisteredUser(final String user_id, final String pwd) {
+        this.user_id = user_id;
+        this.user_pwd = pwd;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                idText.setText(user_id);
+                pwdText.setText(pwd);
+            }
+        });
     }
 
     Timer timer;
@@ -90,10 +113,9 @@ public class LoginActivity extends AppCompatActivity {
     //we are going to use a handler to be able to run in our TimerTask
     final Handler handler = new Handler();
 
-    private String user_id = "pieangel@naver.com";
+    private String user_id = "";
 
-
-    private String user_pwd = "orion1";
+    private String user_pwd = "";
 
     public void initializeTimerTask() {
 

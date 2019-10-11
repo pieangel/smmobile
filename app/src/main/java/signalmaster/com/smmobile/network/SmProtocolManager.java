@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import signalmaster.com.smmobile.LoginActivity;
+import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.account.SmAccount;
 import signalmaster.com.smmobile.account.SmAccountManager;
 import signalmaster.com.smmobile.chart.SmChartType;
@@ -268,10 +270,31 @@ public class SmProtocolManager implements Serializable {
                 case res_order_settled:
                     onResOrderSettled(jsonObj);
                     break;
+                case res_register_user:
+                    onRegisterUser(jsonObj);
+                    break;
             }
         }
         catch (JSONException e) {
             Log.d("TAG", "onMessage: Error -> " + e.getMessage());
+        }
+    }
+
+    private void onRegisterUser(JSONObject object) {
+        if (object == null)
+            return;
+        try {
+            String result_msg = object.getString("message");
+            String user_id = object.getString("user_id");
+            String password = object.getString("password");
+            Log.d("TAG", "onResRegisterUser:  -> " + result_msg + user_id);
+            LoginActivity loginActivity = (LoginActivity)SmArgManager.getInstance().getVal("sign_up", "login_activity");
+            if (loginActivity != null) {
+                loginActivity.onRegisteredUser(user_id, password);
+            }
+        }
+        catch (JSONException e) {
+            Log.d("TAG", "onResRegisterUser Exception:  -> " + e.getMessage());
         }
     }
 
