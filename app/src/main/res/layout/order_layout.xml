@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="5">
+            <!--종목 -->
+            <TextView
+                android:id="@+id/order_symbol_code_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+            <!--구분 -->
+            <TextView
+                android:id="@+id/order_position_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+            <!--주문가격 -->
+            <TextView
+                android:id="@+id/order_price_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+            <!--수량 -->
+            <TextView
+                android:id="@+id/order_amount_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+            <!--주문상태 -->
+            <TextView
+                android:id="@+id/order_state_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#000000"
+                android:background="@drawable/right_option_item_style"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

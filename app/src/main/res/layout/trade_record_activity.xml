@@ -20,7 +20,7 @@
             android:layout_weight="4"
             android:background="#293148"
             android:gravity="center_vertical"
-            android:text="체결내역"
+            android:text="주문내역"
             android:textColor="#FFFFFF"
             android:textSize="16dp"
             android:textStyle="bold" />
@@ -85,7 +85,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="체결\가격"
+                    android:text="주문\가격"
                     android:textColor="#FFFFFF"
                     android:background="#4F81BD"/>
                 <TextView
@@ -94,7 +94,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="체결\수량"
+                    android:text="주문\수량"
                     android:textColor="#FFFFFF"
                     android:background="#4F81BD"/>
                 <TextView
@@ -103,7 +103,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="체결\시각"
+                    android:text="주문\상태"
                     android:textColor="#FFFFFF"
                     android:background="#4F81BD"/>
             </LinearLayout>

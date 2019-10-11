@@ -1,4 +1,4 @@
-package signalmaster.com.smmobile;
+package signalmaster.com.smmobile.OrderUI;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import signalmaster.com.smmobile.R;
+import signalmaster.com.smmobile.RightOptionAdapter;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.position.SmTotalPositionManager;
 
@@ -44,7 +46,7 @@ public class PositionListActivity extends AppCompatActivity {
         //잔고
         balanceRecyclerView = findViewById(R.id.balanceRecyclerView);
         balanceRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        rightOptionAdapter = new RightOptionAdapter();
+        rightOptionAdapter = new RightOptionAdapter(smTotalPositionManager.getPositionList());
         balanceRecyclerView.setAdapter(rightOptionAdapter);
 
         /*rightOptionAdapter.setOnItemClickListener(new RightOptionAdapter.OnItemClickListener() {

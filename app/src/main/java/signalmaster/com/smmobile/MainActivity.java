@@ -1,22 +1,14 @@
 package signalmaster.com.smmobile;
 
 import android.app.ActivityManager;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Color;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityManagerCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,17 +24,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,44 +47,32 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import signalmaster.com.smmobile.Adapter.MainbarAdapter;
+import signalmaster.com.smmobile.OrderUI.PositionListActivity;
+import signalmaster.com.smmobile.OrderUI.TradeRecordActivity;
 import signalmaster.com.smmobile.Util.SmArgManager;
-import signalmaster.com.smmobile.Util.SmLayoutManager;
-import signalmaster.com.smmobile.account.SmAccount;
-import signalmaster.com.smmobile.account.SmAccountManager;
-import signalmaster.com.smmobile.chart.SmChartDataRequest;
-import signalmaster.com.smmobile.chart.SmChartFragment;
-import signalmaster.com.smmobile.chart.SmChartType;
 import signalmaster.com.smmobile.crobo.SmCroboFragment;
 import signalmaster.com.smmobile.crobo.SmCroboLevelFragment;
 import signalmaster.com.smmobile.crobo.SmCroboQuestionFragment;
-import signalmaster.com.smmobile.crobo.SmCroboResultFragment;
-import signalmaster.com.smmobile.crobo.SmCroboStartFragment;
-import signalmaster.com.smmobile.data.SmChartDataManager;
 import signalmaster.com.smmobile.expert.SmExpertFragment;
-import signalmaster.com.smmobile.expert.VerticalStackChartFragment;
 import signalmaster.com.smmobile.favorite.SmFavoriteFragment;
 import signalmaster.com.smmobile.fund.SmFundFragment;
-import signalmaster.com.smmobile.global.SmConst;
 import signalmaster.com.smmobile.global.SmGlobal;
 import signalmaster.com.smmobile.market.SmCategory;
 import signalmaster.com.smmobile.market.SmMarket;
 import signalmaster.com.smmobile.market.SmMarketManager;
 import signalmaster.com.smmobile.market.SmMarketReader;
-import signalmaster.com.smmobile.mock.PrChartFragmentNOTUSE;
-import signalmaster.com.smmobile.mock.SmMockPopup;
 import signalmaster.com.smmobile.mock.SmPrChartFragment;
 import signalmaster.com.smmobile.network.SmProtocolManager;
 import signalmaster.com.smmobile.network.SmServiceManager;
 import signalmaster.com.smmobile.network.SmSocketHandler;
+import signalmaster.com.smmobile.order.SmTotalOrderManager;
 import signalmaster.com.smmobile.popup.NumberPickerDialog;
-import signalmaster.com.smmobile.portfolio.PortfolioDialog;
 import signalmaster.com.smmobile.portfolio.SmPortfolioFragment;
 import signalmaster.com.smmobile.sise.SubListAdapter;
 import signalmaster.com.smmobile.sise.SubbarAdapter;
 import signalmaster.com.smmobile.autoorder.SmAutoFragment;
 import signalmaster.com.smmobile.sise.SmCurrentFragment;
 import signalmaster.com.smmobile.symbol.SmSymbol;
-import signalmaster.com.smmobile.symbol.SmSymbolSelector;
 
 
 public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
@@ -1823,6 +1799,8 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
                                 Intent intent1 = new Intent(MainActivity.this, TradeRecordActivity.class);
                                 startActivity(intent1);
 
+                                SmTotalOrderManager.getInstance().requestOrderList();
+
                                 slidingPanel.startAnimation(translateRightAnim);
                                 slidingPanel.setVisibility(View.GONE);
 
@@ -1837,13 +1815,13 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
 
                             case 4:
                                 //포지션 목록
-                                Intent intent3 = new Intent(MainActivity.this,PositionListActivity.class);
+                                Intent intent3 = new Intent(MainActivity.this, PositionListActivity.class);
                                 SmArgManager smArgManager = SmArgManager.getInstance();
                                 SmPrChartFragment fragment = (SmPrChartFragment)fragmentHashMap.get(2);
                                 smArgManager.registerToMap("positionList","prFragment",fragment);
                                 smArgManager.registerToMap("positionList","mockTxt",symSelectBtn);
                                 startActivity(intent3);
-
+                                SmTotalOrderManager.getInstance().requestPositionList();
                                 slidingPanel.startAnimation(translateRightAnim);
                                 slidingPanel.setVisibility(View.GONE);
 
@@ -1893,6 +1871,8 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
                                 Intent intent1 = new Intent(MainActivity.this, TradeRecordActivity.class);
                                 startActivity(intent1);
 
+                                SmTotalOrderManager.getInstance().requestOrderList();
+
                                 slidingPanel.startAnimation(translateRightAnim);
                                 slidingPanel.setVisibility(View.GONE);
 
@@ -1914,6 +1894,8 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
                                 smArgManager.registerToMap("positionList","auto_fragment",fragment);
                                 smArgManager.registerToMap("positionList","orderTxt",orderSymSelectTxt);
                                 startActivity(intent3);
+
+                                SmTotalOrderManager.getInstance().requestPositionList();
 
                                 slidingPanel.startAnimation(translateRightAnim);
                                 slidingPanel.setVisibility(View.GONE);

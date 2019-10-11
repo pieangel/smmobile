@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -51,18 +53,25 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
-        progressTxt = (TextView)findViewById(R.id.progressTxt);
+        progressBar = findViewById(R.id.progressBar);
+        progressTxt = findViewById(R.id.progressTxt);
 
-        backImg = (ImageView)findViewById(R.id.backImg);
-        signUpBtn = (Button)findViewById(R.id.signUpBtn);
-        loginBtn = (Button)findViewById(R.id.loginBtn);
+        backImg = findViewById(R.id.backImg);
+        signUpBtn = findViewById(R.id.signUpBtn);
+        loginBtn = findViewById(R.id.loginBtn);
 
         progressBar.setVisibility(View.GONE);
         progressTxt.setVisibility(View.GONE);
 
-        idText = (EditText)findViewById(R.id.emailInput);
-        pwdText = (EditText)findViewById(R.id.passwordInput);
+        idText = findViewById(R.id.emailInput);
+        pwdText = findViewById(R.id.passwordInput);
+
+        SharedPreferences s_pref=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        this.user_id = s_pref.getString("user_id", "");
+        this.user_pwd = s_pref.getString("user_password", "");
+        idText.setText(this.user_id);
+        pwdText.setText(this.user_pwd);
+
 
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 user_id = idText.getText().toString();
                 user_pwd = pwdText.getText().toString();
+                SharedPreferences s_pref= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor edit=s_pref.edit();
+                edit.putString("user_id", user_id);
+                edit.putString("user_password", user_pwd);
+                edit.commit();
                 SmUserManager.getInstance().addUserInfo(user_id, user_pwd);
                 SmProtocolManager.getInstance().setAppState(SmGlobal.SmAppState.MainScreenLoaded);
                 progressBar.setVisibility(View.VISIBLE);
@@ -96,6 +110,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onRegisteredUser(final String user_id, final String pwd) {
+        SharedPreferences s_pref= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor edit=s_pref.edit();
+        edit.putString("user_id", user_id);
+        edit.putString("user_password", user_pwd);
+        edit.commit();
+
         this.user_id = user_id;
         this.user_pwd = pwd;
         runOnUiThread(new Runnable() {
@@ -127,12 +147,12 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         //get the current timeStamp
                         Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MMMM:yyyy HH:mm:ss a");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MMMM:yyyy HH:mm:ss a", Locale.KOREA);
                         final String strDate = simpleDateFormat.format(calendar.getTime());
 
                         //show the toast
                         int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(getApplicationContext(), strDate, duration);
+                        //Toast toast = Toast.makeText(getApplicationContext(), strDate, duration);
                         //toast.show();
 
                         SmProtocolManager protocolManager = SmProtocolManager.getInstance();
@@ -245,9 +265,9 @@ public class LoginActivity extends AppCompatActivity {
             ArrayList<SmAccount> acList = smAccountManager.getAccountList();
 
             View nav_header_view = navigationView.getHeaderView(0);
-            TextView nav_email = (TextView)nav_header_view.findViewById(R.id.nav_email);
-            TextView nav_total = (TextView)nav_header_view.findViewById(R.id.nav_total);
-            TextView nav_accountNo = (TextView)nav_header_view.findViewById(R.id.nav_accountNo);
+            TextView nav_email = nav_header_view.findViewById(R.id.nav_email);
+            TextView nav_total = nav_header_view.findViewById(R.id.nav_total);
+            TextView nav_accountNo = nav_header_view.findViewById(R.id.nav_accountNo);
 
             nav_email.setText(user_id);
             if(acList.size() > 0) {

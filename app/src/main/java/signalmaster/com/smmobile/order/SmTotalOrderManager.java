@@ -1,12 +1,21 @@
 package signalmaster.com.smmobile.order;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import signalmaster.com.smmobile.account.SmAccount;
+import signalmaster.com.smmobile.account.SmAccountManager;
 import signalmaster.com.smmobile.market.SmMarketManager;
+import signalmaster.com.smmobile.network.SmServiceManager;
+import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.symbol.SmSymbol;
+import signalmaster.com.smmobile.userinfo.SmUser;
+import signalmaster.com.smmobile.userinfo.SmUserManager;
 
 public class SmTotalOrderManager extends  SmOrderManager implements Serializable {
     private static volatile SmTotalOrderManager sSoleInstance;
@@ -104,6 +113,28 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
         }
         return orderList;
     }
+
+    public ArrayList<SmOrder> getAcceptedOrderList(String account_no, String symbol_code) {
+        ArrayList<SmOrder> orderList = new ArrayList<>();
+        for (Map.Entry mapElement : acceptedOrderMap.entrySet()) {
+            SmOrder order = (SmOrder)mapElement.getValue();
+            if (order.accountNo.compareTo(account_no) == 0 &&
+                    order.symbolCode.compareTo(symbol_code) == 0) {
+                orderList.add(order);
+            }
+        }
+        return orderList;
+    }
+
+    public ArrayList<SmOrder> getAcceptedOrderList() {
+        ArrayList<SmOrder> orderList = new ArrayList<>();
+        for (Map.Entry mapElement : acceptedOrderMap.entrySet()) {
+            SmOrder order = (SmOrder)mapElement.getValue();
+                orderList.add(order);
+        }
+        return orderList;
+    }
+
     public void initSymbol() {
         SmMarketManager marketManager = SmMarketManager.getInstance();
         final SmSymbol symbol = marketManager.getDefaultSymbol();
@@ -118,5 +149,28 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
 
     public void setOrderSymbol(SmSymbol symbol) {
         this.orderSymbol = symbol;
+    }
+
+    public void requestPositionList() {
+        SmUser user = SmUserManager.getInstance().getDefaultUser();
+        SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
+        SmServiceManager.getInstance().requestPositionList(user.id, account.accountNo);
+    }
+
+    public void requestOrderList() {
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        String formattedDate = df.format(c);
+        SmUser user = SmUserManager.getInstance().getDefaultUser();
+        SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
+        SmServiceManager.getInstance().requestOrderList(formattedDate, user.id, account.accountNo);
+    }
+
+    public ArrayList<SmOrder> getOrderList() {
+        ArrayList<SmOrder> orders = new ArrayList<>();
+        for(SmOrder ele : totalOrderMap.values()) {
+            orders.add(ele);
+        }
+        return orders;
     }
 }

@@ -1,4 +1,4 @@
-package signalmaster.com.smmobile;
+package signalmaster.com.smmobile.OrderUI;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,11 +12,19 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import signalmaster.com.smmobile.R;
+import signalmaster.com.smmobile.RecyclerViewList;
+import signalmaster.com.smmobile.RightOptionAdapter;
+import signalmaster.com.smmobile.account.SmAccount;
+import signalmaster.com.smmobile.account.SmAccountManager;
+import signalmaster.com.smmobile.order.SmTotalOrderManager;
+
 public class TradeRecordActivity extends AppCompatActivity {
 
     ImageView closeImg;
     RecyclerView conRecyclerView,outStandingRecyclerView;
-    RightOptionAdapter rightOptionAdapter = new RightOptionAdapter();
+    OrderAdapter orderAdapter = new OrderAdapter();
+    OrderAdapter acceptedAdapter = new OrderAdapter();
 
     RecyclerViewList recyclerViewList = new RecyclerViewList();
     ArrayList<String> conclusionList = recyclerViewList.getConclusionList();
@@ -27,9 +35,10 @@ public class TradeRecordActivity extends AppCompatActivity {
 
     private ArrayList<String> accountList = new ArrayList<>();
     private void account(){
-        accountList.add("계좌1");
-        accountList.add("계좌2");
-        accountList.add("계좌3");
+        ArrayList<SmAccount> accountArrayList =  SmAccountManager.getInstance().getAccountList();
+        for(SmAccount item : accountArrayList) {
+            accountList.add(item.accountNo);
+        }
     }
 
     @Override
@@ -51,14 +60,14 @@ public class TradeRecordActivity extends AppCompatActivity {
         //체결내역
         conRecyclerView = findViewById(R.id.conRecyclerView);
         conRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        rightOptionAdapter = new RightOptionAdapter();
-        conRecyclerView.setAdapter(rightOptionAdapter);
+        orderAdapter = new OrderAdapter(SmTotalOrderManager.getInstance().getOrderList());
+        conRecyclerView.setAdapter(orderAdapter);
 
         //미결제
         outStandingRecyclerView = findViewById(R.id.outStandingRecyclerView);
         outStandingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        rightOptionAdapter = new RightOptionAdapter();
-        outStandingRecyclerView.setAdapter(rightOptionAdapter);
+        acceptedAdapter = new OrderAdapter(SmTotalOrderManager.getInstance().getAcceptedOrderList());
+        outStandingRecyclerView.setAdapter(acceptedAdapter);
 
         accountSpinner = (Spinner)findViewById(R.id.accountSpinner);
         adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.account_selector_item,accountList);

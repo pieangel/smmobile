@@ -29,7 +29,7 @@
         <activity android:name="signalmaster.com.smmobile.mock.SmMockPopup" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.index.IndexSettingPopup" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.AccountActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name="signalmaster.com.smmobile.TradeRecordActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.OrderUI.TradeRecordActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.IncomeChartActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.LoginActivity"  android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.SignUpActivity"  android:configChanges="keyboardHidden|orientation|screenSize"/>
@@ -38,7 +38,7 @@
         <activity android:name="signalmaster.com.smmobile.mock.IndicatorSettingDialog" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.mock.MACDSettingDialog" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.portfolio.PortfolioDialog" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name="signalmaster.com.smmobile.PositionListActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.OrderUI.PositionListActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.expert.SmYoutubePlayer" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize" android:screenOrientation="unspecified"/>
         <activity android:name="signalmaster.com.smmobile.LoadingActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:configChanges="keyboardHidden|orientation|screenSize">
         <intent-filter>

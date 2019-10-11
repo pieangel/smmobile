@@ -170,7 +170,7 @@ enum SmProtocol {
     req_cycle_data_resend_onebyone,
     // 주문이 청산되었음을 보낸다.
     res_order_settled
-};
+}
 
 public class SmProtocolManager implements Serializable {
 
@@ -475,7 +475,7 @@ public class SmProtocolManager implements Serializable {
         }
     }
 
-    int positon_count = 0;
+    private int positon_count = 0;
     private void onResPositionList(JSONObject object) {
         if (object == null)
             return;
@@ -544,6 +544,8 @@ public class SmProtocolManager implements Serializable {
             int cycle = object.getInt("cycle");
             int chart_type = object.getInt("chart_type");
             SmChartType chartType = SmChartType.fromInt(chart_type);
+            if (chartType == null)
+                return;
             // 최신데이터가 가정 먼저들어온다.
             String data_key = object.getString("data_key");
             SmChartData chart_data = SmChartDataManager.getInstance().findChartData(data_key);
@@ -559,12 +561,12 @@ public class SmProtocolManager implements Serializable {
             int v = object.getInt("v");
             if (c == 0 || l == 0 || h == 0 || o == 0)
                 return;
-            double vh = 0.0, vl = 0.0, vo = 0.0, vc = 0.0;
+            double vh, vl, vo , vc;
             double div = Math.pow(10, sym.decimal);
-            vh = (double)(h / div);
-            vl = (double)(l / div);
-            vo = (double)(o / div);
-            vc = (double)(c / div);
+            vh = (h / div);
+            vl = (l / div);
+            vo = (o / div);
+            vc = (c / div);
             Log.d("TAG", "OnResChartData" + "  code" + symbol_code + " : " + date_time + " : " + h + " : " + l + " : " + o + " : " + c);
             boolean included = chart_data.isIncluded(date_time);
             if (included) {
@@ -793,23 +795,21 @@ public class SmProtocolManager implements Serializable {
                 int o = item.getInt("open");
                 int c = item.getInt("close");
                 int v = item.getInt("volume");
-                if (c == 0 || l == 0 || h == 0 || o == 0)
-                    continue;
 
                 boolean included = chart_data.isIncluded(date_time);
-                if (included) {
+                if (c == 0 || l == 0 || h == 0 || o == 0 ||included) {
                     continue;
                 }
                 else {
                     // 종가를 갱신해 준다.
                     sym.quote.C = c;
                     // 값을 변환해 차트에 추가해 준다.
-                    double vh = 0.0, vl = 0.0, vo = 0.0, vc = 0.0;
+                    double vh, vl, vo, vc;
                     double div = Math.pow(10, sym.decimal);
-                    vh = (double)(h / div);
-                    vl = (double)(l / div);
-                    vo = (double)(o / div);
-                    vc = (double)(c / div);
+                    vh = (h / div);
+                    vl = (l / div);
+                    vo = (o / div);
+                    vc = (c / div);
                     SmChartDataItem price = chart_data.add(date_time, vo, vh, vl, vc, v);
                     if (price == null)
                         continue;
@@ -950,7 +950,7 @@ public class SmProtocolManager implements Serializable {
                 sym.quote.accVolume = acc_volume;
                 double vc = 0.0;
                 double div = Math.pow(10, sym.decimal);
-                vc = (double)(close / div);
+                vc = (close / div);
 
                 Log.d("TAG", "OnResRealtimeSise" + "  code" + symbol_code + " : " + vc);
 
@@ -1055,7 +1055,7 @@ public class SmProtocolManager implements Serializable {
             int v = object.getInt("v");
             if (c == 0 || l == 0 || h == 0 || o == 0)
                 return;
-            double vh = 0.0, vl = 0.0, vo = 0.0, vc = 0.0;
+            double vh, vl, vo, vc;
             double div = Math.pow(10, sym.decimal);
             vh = (h / div);
             vl = (l / div);
