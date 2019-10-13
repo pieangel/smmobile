@@ -153,7 +153,12 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
 
     public void requestPositionList() {
         SmUser user = SmUserManager.getInstance().getDefaultUser();
+        if (user == null)
+            return;
         SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
+        if (account == null)
+            return;
+
         SmServiceManager.getInstance().requestPositionList(user.id, account.accountNo);
     }
 
@@ -162,7 +167,11 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
         String formattedDate = df.format(c);
         SmUser user = SmUserManager.getInstance().getDefaultUser();
+        if (user == null)
+            return;
         SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
+        if (account == null)
+            return;
         SmServiceManager.getInstance().requestOrderList(formattedDate, user.id, account.accountNo);
     }
 

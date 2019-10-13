@@ -319,14 +319,13 @@ public class SmProtocolManager implements Serializable {
                 double trade_profit_loss = item.getDouble("trade_profit_loss");
                 double open_profit_loss = item.getDouble("open_profit_loss");
                 Log.d("TAG", "account_no:  -> " + account_no);
-                SmAccount account = new SmAccount();
+                SmAccount account = SmAccountManager.getInstance().findAddAccount(account_no);
                 account.accountNo = account_no;
                 account.accountName = account_name;
                 account.password = password;
                 account.inital_balance = initial_balance;
                 account.trade_pl = trade_profit_loss;
                 account.open_pl = open_profit_loss;
-                SmAccountManager.getInstance().addAccount(account);
                 account_count++;
                 if (account_count == total_account_count) {
                     appState = SmGlobal.SmAppState.AccountListDownloaded;

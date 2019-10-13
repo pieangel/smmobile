@@ -40,7 +40,7 @@ public class SmTotalPositionManager implements Serializable {
     public ArrayList<SmPosition> getPositionList() {
         ArrayList<SmPosition> positions = new ArrayList<>();
         for(SmPosition ele : positionHashMap.values()) {
-            if (ele.openQty > 0)
+            if (ele.openQty != 0)
                 positions.add(ele);
         }
         return positions;

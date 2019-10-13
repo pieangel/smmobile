@@ -70,6 +70,18 @@ public class SmAccountManager implements Serializable {
         accountHashMap.put(account.accountNo, account);
     }
 
+    public SmAccount findAddAccount(String account_no) {
+        if (accountHashMap.containsKey(account_no)) {
+            return accountHashMap.get(account_no);
+        }
+
+        SmAccount account = new SmAccount();
+        account.accountNo = account_no;
+        defaultAccount = account;
+        accountHashMap.put(account_no, account);
+        return account;
+    }
+
     private SmAccount defaultAccount = null;
 
     public SmAccount getDefaultAccount() {
