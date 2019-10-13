@@ -303,6 +303,7 @@ public class SmProtocolManager implements Serializable {
         if (object == null)
             return;
         try {
+            account_count = 0;
             SmAccountManager.getInstance().clearAccountList();
             int total_account_count = object.getInt("total_account_count");
             if (total_account_count == 0) {
