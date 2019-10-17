@@ -1,77 +1,45 @@
 package signalmaster.com.smmobile.mock;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.scichart.charting.model.dataSeries.IXyDataSeries;
-import com.scichart.charting.model.dataSeries.XyDataSeries;
-import com.scichart.charting.visuals.SciChartSurface;
-import com.scichart.charting.visuals.axes.AutoRange;
-import com.scichart.charting.visuals.axes.IAxis;
-import com.scichart.charting.visuals.axes.NumericAxis;
-import com.scichart.charting.visuals.renderableSeries.BaseMountainRenderableSeries;
-import com.scichart.charting.visuals.renderableSeries.FastMountainRenderableSeries;
-import com.scichart.charting.visuals.renderableSeries.IRenderableSeries;
 import com.scichart.core.common.Action1;
-import com.scichart.core.framework.UpdateSuspender;
-import com.scichart.data.model.ISciList;
-import com.scichart.extensions.builders.SciChartBuilder;
 
 import java.io.Serializable;
+import java.util.Currency;
+import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import signalmaster.com.smmobile.ChartChangeActivity;
 import signalmaster.com.smmobile.LineSelectActivity;
-import signalmaster.com.smmobile.LoginActivity;
-import signalmaster.com.smmobile.MainActivity;
+import signalmaster.com.smmobile.login.LoginActivity;
 import signalmaster.com.smmobile.R;
 import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.SmIndexSelector;
-import signalmaster.com.smmobile.Util.SmArgument;
 import signalmaster.com.smmobile.Util.SmLayoutManager;
 import signalmaster.com.smmobile.account.SmAccount;
 import signalmaster.com.smmobile.account.SmAccountManager;
-import signalmaster.com.smmobile.annotation.SmCurrentValueView;
 import signalmaster.com.smmobile.autoorder.SmAutoFragment;
 import signalmaster.com.smmobile.chart.SmChartType;
 import signalmaster.com.smmobile.chart.SmSeriesType;
-import signalmaster.com.smmobile.data.PriceBar;
 import signalmaster.com.smmobile.data.SmChartData;
 import signalmaster.com.smmobile.data.SmChartDataItem;
 import signalmaster.com.smmobile.data.SmChartDataManager;
 import signalmaster.com.smmobile.data.SmChartDataService;
-import signalmaster.com.smmobile.fund.SmFundFragment;
 import signalmaster.com.smmobile.market.SmMarketManager;
 import signalmaster.com.smmobile.network.SmServiceManager;
 import signalmaster.com.smmobile.order.SmFilledCondition;
@@ -80,6 +48,7 @@ import signalmaster.com.smmobile.order.SmOrderReqNoGenerator;
 import signalmaster.com.smmobile.order.SmOrderRequest;
 import signalmaster.com.smmobile.order.SmOrderType;
 import signalmaster.com.smmobile.order.SmPriceType;
+import signalmaster.com.smmobile.order.SmTotalOrderManager;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.position.SmPositionType;
 import signalmaster.com.smmobile.position.SmTotalPositionManager;
@@ -93,6 +62,7 @@ import signalmaster.com.smmobile.ui.SmListenerManger;
 import signalmaster.com.smmobile.userinfo.SmUserManager;
 
 import static com.scichart.core.utility.Dispatcher.runOnUiThread;
+import static java.lang.Character.isDigit;
 
 public class SmPrChartFragment extends Fragment implements Serializable {
 
@@ -153,8 +123,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
         super.onCreate(savedInstanceState);
 
         if(savedInstanceState == null){
-            SmMarketManager marketManager = SmMarketManager.getInstance();
-            SmSymbol symbol = marketManager.getDefaultSymbol();
+            SmSymbol symbol = SmTotalOrderManager.getInstance().getOrderSymbol(getContext());
             smChartFragment = SmChartFragment.newInstance("mock_main");
             _leftChartFragment = SmChartFragment.newInstance("mock_left");
             _rightChartFragment = SmChartFragment.newInstance("mock_right");
@@ -373,7 +342,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
                 request.symbolCode = symbol.code;
                 request.filledCondition = SmFilledCondition.Fas;
                 request.fundName = "fund1";
-                request.orderAmount = 1;
+                request.orderAmount = SmTotalOrderManager.defaultOrderAmount;
                 request.orderPrice = symbol.quote.C;
                 request.oriOrderNo = 0;
                 request.password = "1234";
@@ -409,7 +378,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
                 request.symbolCode = symbol.code;
                 request.filledCondition = SmFilledCondition.Fas;
                 request.fundName = "fund1";
-                request.orderAmount = 1;
+                request.orderAmount = SmTotalOrderManager.defaultOrderAmount;
                 request.orderPrice = symbol.quote.C;
                 request.oriOrderNo = 0;
                 request.password = "1234";
@@ -607,9 +576,12 @@ public class SmPrChartFragment extends Fragment implements Serializable {
         if (symbol == null)
             return;
         symbolCode = symbol.code;
-        smChartFragment.onSymbolChanged(symbolCode);
-        _leftChartFragment.onSymbolChanged(symbolCode);
-        _rightChartFragment.onSymbolChanged(symbolCode);
+        if (smChartFragment != null)
+            smChartFragment.onSymbolChanged(symbolCode);
+        if (_leftChartFragment != null)
+            _leftChartFragment.onSymbolChanged(symbolCode);
+        if (_rightChartFragment != null)
+            _rightChartFragment.onSymbolChanged(symbolCode);
 
         SmArgManager argManager = SmArgManager.getInstance();
         TextView textView = (TextView) argManager.getVal("mock_symbol_select", "clicked_button");
@@ -684,7 +656,16 @@ public class SmPrChartFragment extends Fragment implements Serializable {
             position_profit.setTextColor(Color.RED);
         else
             position_profit.setTextColor(Color.WHITE);
-        position_profit.setText(String.format("$%,.0f",total_profit));
+        String symbol_code = position.symbolCode;
+        char second = symbol_code.charAt(1);
+        String  sign;
+        if (isDigit(second)) {
+            sign = Currency.getInstance(Locale.KOREA).getSymbol();
+        } else {
+            sign = Currency.getInstance(Locale.US).getSymbol();
+        }
+        String format = sign + "%,.0f";
+        position_profit.setText(String.format(format, total_profit));
     }
 
     @NonNull

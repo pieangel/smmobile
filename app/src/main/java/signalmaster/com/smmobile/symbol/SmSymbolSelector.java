@@ -113,60 +113,14 @@ public class SmSymbolSelector extends AppCompatActivity {
 
                 SharedPreferences selectPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 String transSelect = selectPrefs.getString("selectObject","0");
-
                 String mark_name = "";
-                if(symbolSpinner.getSelectedItemPosition() == 0){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("금리");
+                SmMarket market = smMarketManager.getMarketByIndex(position);
+                if (market != null) {
+                    mark_name = market.name;
+                    ArrayList<SmSymbol> symList = market.getRecentSymbolListFromCategory();
                     _symSelectAdapter = new SmSymSelectAdapter(symList);
                     _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-
-                    mark_name = "금리";
                 }
-                else if (symbolSpinner.getSelectedItemPosition() == 1){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("금속");
-                    _symSelectAdapter = new SmSymSelectAdapter(symList);
-                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-
-                    mark_name = "금속";
-                }
-                else if (symbolSpinner.getSelectedItemPosition() == 2){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("농산물");
-                    _symSelectAdapter = new SmSymSelectAdapter(symList);
-                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-
-                    mark_name = "농산물";
-                }
-                else if (symbolSpinner.getSelectedItemPosition() == 3){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("에너지");
-                    _symSelectAdapter = new SmSymSelectAdapter(symList);
-                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-                    mark_name = "에너지";
-                }
-                else if (symbolSpinner.getSelectedItemPosition() == 4){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("지수");
-                    _symSelectAdapter = new SmSymSelectAdapter(symList);
-                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-                    mark_name = "지수";
-                }
-                else if (symbolSpinner.getSelectedItemPosition() == 5){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("축산물");
-                    _symSelectAdapter = new SmSymSelectAdapter(symList);
-                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-                    mark_name = "축산물";
-                }
-                else if (symbolSpinner.getSelectedItemPosition() == 6){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("통화");
-                    _symSelectAdapter = new SmSymSelectAdapter(symList);
-                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-                    mark_name = "통화";
-                }
-                else if (symbolSpinner.getSelectedItemPosition() == 7){
-                    ArrayList<SmSymbol> symList = smMarketManager.GetSymbolListByMarket("국내시장");
-                    _symSelectAdapter = new SmSymSelectAdapter(symList);
-                    _symSelectRecyclerView.setAdapter(_symSelectAdapter);
-                    mark_name = "국내시장";
-                }
-
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 _symSelectRecyclerView.setLayoutManager(layoutManager);
@@ -223,6 +177,7 @@ public class SmSymbolSelector extends AppCompatActivity {
                 if (prChartFragment != null) {
                     prChartFragment.onChangeSymbol(_symSelectAdapter.getSelectSymbol());
                     SmTotalOrderManager.getInstance().setOrderSymbol(_symSelectAdapter.getSelectSymbol());
+                    saveOrderSymbol(_symSelectAdapter.getSelectSymbol());
                     finish();
                 }
 
@@ -264,6 +219,7 @@ public class SmSymbolSelector extends AppCompatActivity {
                 if (order_fragment != null) {
                     order_fragment.onAutoSymbolChanged(_symSelectAdapter.getSelectSymbol());
                     SmTotalOrderManager.getInstance().setOrderSymbol(_symSelectAdapter.getSelectSymbol());
+                    saveOrderSymbol(_symSelectAdapter.getSelectSymbol());
                     finish();
                 }
                 /*SmAutoFragment order_fragment = (SmAutoFragment) argManager.getVal("symbol_selector_popup", "auto_fragment");
@@ -363,4 +319,14 @@ public class SmSymbolSelector extends AppCompatActivity {
         finish();
 
     }*/
+
+    void saveOrderSymbol(SmSymbol symbol) {
+        if (symbol == null)
+            return;
+
+        SharedPreferences sharedPreferences = getSharedPreferences("order_info",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("symbol_code", symbol.code);
+        editor.apply();
+    }
 }

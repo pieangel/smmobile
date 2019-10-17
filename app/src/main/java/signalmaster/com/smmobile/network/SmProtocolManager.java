@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import signalmaster.com.smmobile.LoginActivity;
+import signalmaster.com.smmobile.login.LoginActivity;
 import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.account.SmAccount;
 import signalmaster.com.smmobile.account.SmAccountManager;
@@ -169,7 +169,21 @@ enum SmProtocol {
     // 주기 데이터를 하나씩 보낸다.
     req_cycle_data_resend_onebyone,
     // 주문이 청산되었음을 보낸다.
-    res_order_settled
+    res_order_settled,
+    // 계좌 수수료 요청
+    req_account_fee,
+    // 계좌 수수료 응답
+    res_account_fee,
+    // 심볼 수수료 요청
+    req_symbol_fee,
+    // 심볼 수수료 응답
+    res_symbol_fee,
+    // 거래 발생에 따른 수수료 전송
+    res_trade_fee,
+    // 모의 계좌 초기화 요청
+    req_reset_account,
+    // 모의 계좌 초기화 응답
+    res_reset_account
 }
 
 public class SmProtocolManager implements Serializable {
@@ -319,6 +333,8 @@ public class SmProtocolManager implements Serializable {
                 double initial_balance = item.getDouble("initial_balance");
                 double trade_profit_loss = item.getDouble("trade_profit_loss");
                 double open_profit_loss = item.getDouble("open_profit_loss");
+                double fee = item.getDouble("fee");
+                double total_trade_pl = item.getDouble("total_trade_pl");
                 Log.d("TAG", "account_no:  -> " + account_no);
                 SmAccount account = SmAccountManager.getInstance().findAddAccount(account_no);
                 account.accountNo = account_no;
@@ -327,6 +343,8 @@ public class SmProtocolManager implements Serializable {
                 account.inital_balance = initial_balance;
                 account.trade_pl = trade_profit_loss;
                 account.open_pl = open_profit_loss;
+                account.fee = fee;
+                account.total_trade_pl = total_trade_pl;
                 account_count++;
                 if (account_count == total_account_count) {
                     appState = SmGlobal.SmAppState.AccountListDownloaded;
@@ -440,6 +458,7 @@ public class SmProtocolManager implements Serializable {
             int total_order_count = object.getInt("total_order_count");
             if (total_order_count == 0)
                 return;
+            SmTotalOrderManager.getInstance().clearOrders();
             JSONArray data_array = (JSONArray) object.get("order");
             for (int i=0; i < data_array.length(); i++) {
                 JSONObject item = data_array.getJSONObject(i);
@@ -567,6 +586,10 @@ public class SmProtocolManager implements Serializable {
             vl = (l / div);
             vo = (o / div);
             vc = (c / div);
+
+            // 여기서 종가를 업데이트 해준다.
+            sym.quote.C = c;
+
             Log.d("TAG", "OnResChartData" + "  code" + symbol_code + " : " + date_time + " : " + h + " : " + l + " : " + o + " : " + c);
             boolean included = chart_data.isIncluded(date_time);
             if (included) {
@@ -1359,6 +1382,10 @@ public class SmProtocolManager implements Serializable {
             double avg_price = object.getDouble("avg_price");
             double cur_price = object.getDouble("cur_price");
             double open_pl = object.getDouble("open_pl");
+            double account_fee = object.getDouble("account_fee");
+            double account_trade_pl = object.getDouble("account_trade_pl");
+            double account_total_trade_pl = object.getDouble("account_total_trade_pl");
+
             SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
             SmPosition position = totalPositionManager.findAddPosition(account_no, symbol_code);
             position.fundName = fund_name;
@@ -1369,6 +1396,13 @@ public class SmProtocolManager implements Serializable {
             position.avgPrice = avg_price;
             position.curPrice = cur_price;
             position.openPL = open_pl;
+
+            SmAccount account = SmAccountManager.getInstance().findAccount(account_no);
+            if (account != null) {
+                account.fee = account_fee;
+                account.trade_pl = account_trade_pl;
+                account.total_trade_pl = account_total_trade_pl;
+            }
 
             SmChartDataService chartDataService = SmChartDataService.getInstance();
             chartDataService.onUpdatePosition(position);

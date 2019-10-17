@@ -51,6 +51,16 @@ public class SmMarketManager implements Serializable {
         return list;
     }
 
+    public ArrayList<SmSymbol> GetSymbolListByIndex(int index) {
+        ArrayList<SmSymbol> list = null;
+        SmMarket mrkt = getMarketByIndex(index);
+        if (mrkt != null) {
+            list = mrkt.getRecentSymbolListFromCategory();
+        }
+
+        return list;
+    }
+
     public int getMarketIndex(String marketType) {
         if (_marketIndexMap.containsKey(marketType)) {
             return _marketIndexMap.get(marketType);
@@ -191,6 +201,12 @@ public class SmMarketManager implements Serializable {
             favoriteList.add(0,symbol);
         }
         //favoriteList.add(0,symbol);
+    }
+
+    public SmMarket getMarketByIndex(int position) {
+        if (position < 0 || position >= _marketList.size())
+            return null;
+        return _marketList.get(position);
     }
 
     public void removeFavoriteList(String symbolCode) {

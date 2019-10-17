@@ -1,8 +1,7 @@
-package signalmaster.com.smmobile;
+package signalmaster.com.smmobile.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -24,11 +23,11 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import signalmaster.com.smmobile.R;
 import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.account.SmAccount;
 import signalmaster.com.smmobile.account.SmAccountManager;
 import signalmaster.com.smmobile.global.SmGlobal;
-import signalmaster.com.smmobile.market.SmMarketManager;
 import signalmaster.com.smmobile.network.SmProtocolManager;
 import signalmaster.com.smmobile.network.SmServiceManager;
 import signalmaster.com.smmobile.userinfo.SmUserManager;
@@ -66,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         idText = findViewById(R.id.emailInput);
         pwdText = findViewById(R.id.passwordInput);
 
-        SharedPreferences s_pref=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences s_pref= getSharedPreferences("log_in",MODE_PRIVATE);;
         this.user_id = s_pref.getString("user_id", "");
         this.user_pwd = s_pref.getString("user_password", "");
         idText.setText(this.user_id);
@@ -84,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SmArgManager.getInstance().registerToMap("sign_up", "login_activity", self);
-                Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -94,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 user_id = idText.getText().toString();
                 user_pwd = pwdText.getText().toString();
-                SharedPreferences s_pref= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences s_pref= getSharedPreferences("log_in", MODE_PRIVATE);
                 SharedPreferences.Editor edit=s_pref.edit();
                 edit.putString("user_id", user_id);
                 edit.putString("user_password", user_pwd);

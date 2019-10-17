@@ -1,5 +1,9 @@
 package signalmaster.com.smmobile.order;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +18,7 @@ import signalmaster.com.smmobile.market.SmMarketManager;
 import signalmaster.com.smmobile.network.SmServiceManager;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.symbol.SmSymbol;
+import signalmaster.com.smmobile.symbol.SmSymbolManager;
 import signalmaster.com.smmobile.userinfo.SmUser;
 import signalmaster.com.smmobile.userinfo.SmUserManager;
 
@@ -135,15 +140,19 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
         return orderList;
     }
 
-    public void initSymbol() {
-        SmMarketManager marketManager = SmMarketManager.getInstance();
-        final SmSymbol symbol = marketManager.getDefaultSymbol();
-        setOrderSymbol(symbol);
-    }
-
     private SmSymbol orderSymbol = null;
 
-    public SmSymbol getOrderSymbol() {
+    public SmSymbol getOrderSymbol(Context context) {
+        SharedPreferences s_pref= context.getSharedPreferences("order_info", Context.MODE_PRIVATE);
+        String  symbol_code = s_pref.getString("symbol_code", "");
+        if (symbol_code == null) {
+            orderSymbol = SmMarketManager.getInstance().getDefaultSymbol();
+        } else {
+            orderSymbol = SmSymbolManager.getInstance().findSymbol(symbol_code);
+            if (orderSymbol == null) {
+                orderSymbol = SmMarketManager.getInstance().getDefaultSymbol();
+            }
+        }
         return orderSymbol;
     }
 
@@ -182,4 +191,6 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
         }
         return orders;
     }
+
+    public static int defaultOrderAmount = 1;
 }

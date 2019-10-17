@@ -46,6 +46,8 @@ public class SmTotalPositionManager implements Serializable {
         return positions;
     }
 
+    public int DefaultOrderNum = 1;
+
     private HashMap<String, SmPosition> positionHashMap = new HashMap<>();
 
     private HashMap<String, SmAccountPositionManager> accountPositionManagerHashMap = new HashMap<>();

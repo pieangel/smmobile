@@ -25,4 +25,6 @@ public class SmAccount {
     //수수료
     public double total_fee;
     public String password;
+    public double fee;
+    public double total_trade_pl;
 }

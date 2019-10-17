@@ -1,11 +1,14 @@
 package signalmaster.com.smmobile.order;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class SmOrderManager {
-    protected HashMap<Integer, SmOrder> totalOrderMap = new HashMap<>();
+    protected SortedMap<Integer, SmOrder> totalOrderMap = new TreeMap<Integer, SmOrder>(Collections.reverseOrder());
 
-    public HashMap<Integer, SmOrder> getTotalOrderMap() {
+    public SortedMap<Integer, SmOrder> getTotalOrderMap() {
         return totalOrderMap;
     }
 
@@ -68,6 +71,10 @@ public class SmOrderManager {
             // 청산된 주문에 추가한다.
             settledOrderMap.put(order.orderNo, order);
         }
+    }
+
+    public void clearOrders() {
+        totalOrderMap.clear();
     }
 
     public void addAcceptedOrder(SmOrder order) {

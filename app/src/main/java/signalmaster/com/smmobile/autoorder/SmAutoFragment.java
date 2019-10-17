@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import com.rayject.table.model.DefaultCellData;
 import com.rayject.table.model.ICellData;
 import com.rayject.table.model.ISheetData;
 import com.rayject.table.model.RichText;
@@ -25,15 +24,13 @@ import com.scichart.core.common.Action1;
 
 import java.util.ArrayList;
 
-import signalmaster.com.smmobile.LoginActivity;
-import signalmaster.com.smmobile.MainActivity;
+import signalmaster.com.smmobile.login.LoginActivity;
 import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.account.SmAccount;
 import signalmaster.com.smmobile.account.SmAccountManager;
 import signalmaster.com.smmobile.data.SmChartDataService;
 import signalmaster.com.smmobile.market.SmMarketManager;
 import signalmaster.com.smmobile.mock.SmPrChartFragment;
-import signalmaster.com.smmobile.network.SmProtocolManager;
 import signalmaster.com.smmobile.network.SmServiceManager;
 import signalmaster.com.smmobile.order.SmFilledCondition;
 import signalmaster.com.smmobile.order.SmOrder;
@@ -41,6 +38,7 @@ import signalmaster.com.smmobile.order.SmOrderReqNoGenerator;
 import signalmaster.com.smmobile.order.SmOrderRequest;
 import signalmaster.com.smmobile.order.SmOrderType;
 import signalmaster.com.smmobile.order.SmPriceType;
+import signalmaster.com.smmobile.order.SmTotalOrderManager;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.position.SmPositionType;
 import signalmaster.com.smmobile.position.SmTotalPositionManager;
@@ -130,8 +128,7 @@ public class SmAutoFragment extends Fragment {
         configure.setEnableSelection(false);
         mTableView.setConfigure(configure);
 
-        SmMarketManager marketManager = SmMarketManager.getInstance();
-        final SmSymbol symbol = marketManager.getDefaultSymbol();
+        SmSymbol symbol = SmTotalOrderManager.getInstance().getOrderSymbol(getContext());
         symbolCode = symbol.code;
 
         SmChartDataService chartDataService = SmChartDataService.getInstance();
@@ -163,7 +160,7 @@ public class SmAutoFragment extends Fragment {
                 request.symbolCode = symbol1.code;
                 request.filledCondition = SmFilledCondition.Fas;
                 request.fundName = "fund1";
-                request.orderAmount = 1;
+                request.orderAmount = SmTotalOrderManager.defaultOrderAmount;
                 request.orderPrice = symbol1.quote.C;
                 request.oriOrderNo = 0;
                 request.password = "1234";
@@ -200,7 +197,7 @@ public class SmAutoFragment extends Fragment {
                 request.symbolCode = symbol1.code;
                 request.filledCondition = SmFilledCondition.Fas;
                 request.fundName = "fund1";
-                request.orderAmount = 1;
+                request.orderAmount = SmTotalOrderManager.defaultOrderAmount;
                 request.orderPrice = symbol1.quote.C;
                 request.oriOrderNo = 0;
                 request.password = "1234";
@@ -283,6 +280,27 @@ public class SmAutoFragment extends Fragment {
             updateSise(sym);
             updateHoga(sym);
         }
+    }
+
+    public void setSymbol(SmSymbol symbol) {
+        if (symbol == null)
+            return;
+        symbolCode = symbol.code;
+        //orderTitleValue.set(0, symbolCode);
+        SmArgManager argManager = SmArgManager.getInstance();
+        TextView txt = (TextView)argManager.getVal("mock_symbol_select","clicked_button");
+        if(txt != null)
+            txt.setText(symbol.seriesNmKr);
+
+        TextView positionTxt = (TextView)argManager.getVal("positionList","orderTxt");
+        if(positionTxt != null)
+            positionTxt.setText(symbol.seriesNmKr);
+
+        SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
+        SmPosition position = totalPositionManager.getDefaultPositon(symbolCode);
+        updatePosition(position);
+        updateSise(symbol);
+        updateHoga(symbol);
     }
 
     //포지션 목록
@@ -417,6 +435,9 @@ public class SmAutoFragment extends Fragment {
     }*/
 
     private void clearPositionInfo() {
+        if (mTableView == null)
+            return;
+
         ISheetData sheet = mTableView.getSheet();
         for(int i=0;i<colCount;i++) {
             ICellData cell = sheet.getCellData(1,i);
@@ -430,7 +451,7 @@ public class SmAutoFragment extends Fragment {
     }
 
     public void updateSise(SmSymbol symbol) {
-        if (symbol == null) {
+        if (symbol == null || mTableView == null) {
             clearSiseInfo();
             return;
         }
@@ -474,6 +495,8 @@ public class SmAutoFragment extends Fragment {
     }
 
     private void clearSiseInfo() {
+        if (mTableView == null)
+            return;
         ISheetData sheet = mTableView.getSheet();
         for(int i=3;i<7;i++) {
             ICellData cell = sheet.getCellData(i, 4);
@@ -495,7 +518,7 @@ public class SmAutoFragment extends Fragment {
         if (position.symbolCode.compareTo(this.symbolCode) != 0)
             return;
 
-        ISheetData sheet = mTableView.getSheet();
+
 
         String type = null;
 
@@ -521,6 +544,10 @@ public class SmAutoFragment extends Fragment {
 
         orderTitleList.add(String.format("%,.2f", position.openPL));
 
+        if (mTableView == null)
+            return;
+
+        ISheetData sheet = mTableView.getSheet();
         for(int i=0;i<colCount;i++) {
             ICellData cell = sheet.getCellData(1,i);
             sheet.getCellStyleManager().getCellStyle(0);
@@ -533,7 +560,7 @@ public class SmAutoFragment extends Fragment {
     }
 
     public void updateHoga(SmSymbol symbol) {
-        if (symbol == null)
+        if (symbol == null || mTableView == null)
             return;
 
         ArrayList<ArrayList<Object>> buyLineList = new ArrayList<>();

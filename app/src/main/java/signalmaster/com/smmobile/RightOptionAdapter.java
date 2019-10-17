@@ -117,7 +117,9 @@ public class RightOptionAdapter extends RecyclerView.Adapter<RightOptionAdapter.
         String positionType = positionHashMap.get(position).positionType.toString();
         String avgPrice = String.format(Locale.getDefault(),"%.2f",positionHashMap.get(position).avgPrice);
         String openQty = Integer.toString(positionHashMap.get(position).openQty);
-        String openPL = String.format(Locale.getDefault(),"%.2f",positionHashMap.get(position).openPL);
+        String openPL = String.format(Locale.getDefault(),"%.0f",positionHashMap.get(position).openPL);
+        double pure_profit_loss = positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL - positionHashMap.get(position).fee;
+        String purePL = String.format(Locale.getDefault(),"%.0f",pure_profit_loss);
 
         //수량
         if(positionHashMap.get(position).openQty > 0){
@@ -127,9 +129,9 @@ public class RightOptionAdapter extends RecyclerView.Adapter<RightOptionAdapter.
         }
 
         //순손익
-        if(positionHashMap.get(position).openPL > 0){
+        if(pure_profit_loss > 0){
             holder.openPLTxt.setTextColor(Color.parseColor("#46962B"));
-        }  else if(positionHashMap.get(position).openPL == 0){
+        }  else if(pure_profit_loss == 0){
             holder.openPLTxt.setTextColor(Color.parseColor("#000000"));
         } else {
             holder.openPLTxt.setTextColor(Color.parseColor("#B14333"));
@@ -151,7 +153,7 @@ public class RightOptionAdapter extends RecyclerView.Adapter<RightOptionAdapter.
         holder.positionTypeTxt.setText(positionType);
         holder.avgPriceTxt.setText(avgPrice);
         holder.openQtyTxt.setText(openQty);
-        holder.openPLTxt.setText(openPL);
+        holder.openPLTxt.setText(purePL);
 
         holder.symbolNameTxt.setOnClickListener(new View.OnClickListener() {
             @Override

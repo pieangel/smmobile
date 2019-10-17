@@ -57,6 +57,7 @@ import signalmaster.com.smmobile.expert.SmExpertFragment;
 import signalmaster.com.smmobile.favorite.SmFavoriteFragment;
 import signalmaster.com.smmobile.fund.SmFundFragment;
 import signalmaster.com.smmobile.global.SmGlobal;
+import signalmaster.com.smmobile.login.LoginActivity;
 import signalmaster.com.smmobile.market.SmCategory;
 import signalmaster.com.smmobile.market.SmMarket;
 import signalmaster.com.smmobile.market.SmMarketManager;
@@ -757,9 +758,18 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (smPrChartFragment.isAdded()) {
             ft.show(smPrChartFragment);
-            //smPrChartFragment.showChartFragment();
+            // 여기서 저장된 심볼로 바꾸어 준다.
+            SmSymbol smSymbol = SmTotalOrderManager.getInstance().getOrderSymbol(getApplicationContext());
+            symSelectBtn = (Button) findViewById(R.id.symSelectBtn);
+            symSelectBtn.setText(smSymbol.seriesNmKr);
+            smPrChartFragment.onChangeSymbol(smSymbol);
         } else {
             ft.add(R.id.mainListContainer, smPrChartFragment);
+            // 여기서 저장된 심볼로 바꾸어 준다.
+            SmSymbol smSymbol = SmTotalOrderManager.getInstance().getOrderSymbol(getApplicationContext());
+            symSelectBtn = (Button) findViewById(R.id.symSelectBtn);
+            symSelectBtn.setText(smSymbol.seriesNmKr);
+            smPrChartFragment.onChangeSymbol(smSymbol);
         }
         if (smCurrentFragment.isAdded()) {
             ft.hide(smCurrentFragment);
@@ -789,8 +799,18 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (smAutoFragment.isAdded()) {
             ft.show(smAutoFragment);
+            // 여기서 심볼을 바꾸어 준다.
+            SmSymbol smSymbol = SmTotalOrderManager.getInstance().getOrderSymbol(getApplicationContext());
+            orderSymSelectTxt = (TextView) findViewById(R.id.orderSymSelectTxt);
+            orderSymSelectTxt.setText(smSymbol.seriesNmKr);
+            smAutoFragment.setSymbol(smSymbol);
         } else {
             ft.add(R.id.mainListContainer, smAutoFragment);
+            // 여기서 심볼을 바꾸어 준다.
+            SmSymbol smSymbol = SmTotalOrderManager.getInstance().getOrderSymbol(getApplicationContext());
+            orderSymSelectTxt = (TextView) findViewById(R.id.orderSymSelectTxt);
+            orderSymSelectTxt.setText(smSymbol.seriesNmKr);
+            smAutoFragment.setSymbol(smSymbol);
         }
         if (smCurrentFragment.isAdded()) {
             ft.hide(smCurrentFragment);
@@ -1090,7 +1110,7 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         fragmentTransaction.replace(R.id.mainListContainer, smCurrentFragment);
         //fragmentTransaction.replace(R.id.SmSubMenu,smSubbarFragment);
         fragmentTransaction.commit();*/
-        SmSymbol smSymbol = smMarketManager.getDefaultSymbol();
+        SmSymbol smSymbol = SmTotalOrderManager.getInstance().getOrderSymbol(getApplicationContext());
         symSelectBtn = (Button) findViewById(R.id.symSelectBtn);
         symSelectBtn.setText(smSymbol.seriesNmKr);
         symSelectBtn.setOnClickListener(new View.OnClickListener() {
@@ -1178,6 +1198,17 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         });
 
         feesTxt = (TextView) findViewById(R.id.feesTxt);
+
+        SharedPreferences s_pref= context.getSharedPreferences("order_info", Context.MODE_PRIVATE);
+        String  order_count = s_pref.getString("order_count", "");
+        // 주문 갯수를 로드한다.
+        if (order_count != null && order_count.length() > 0) {
+            SmTotalOrderManager.defaultOrderAmount = Integer.parseInt(order_count);
+        } else {
+            order_count = "1";
+        }
+        feesTxt.setText(order_count);
+
         feesTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1198,7 +1229,13 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         pushTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, pushTxt.getText() + "버튼 입니다.", Toast.LENGTH_LONG).show();
+                int order_count = Integer.parseInt(feesTxt.getText().toString());
+                SmTotalOrderManager.getInstance().defaultOrderAmount = order_count;
+                SharedPreferences s_pref= getSharedPreferences("order_info", MODE_PRIVATE);
+                SharedPreferences.Editor edit=s_pref.edit();
+                edit.putString("order_count", feesTxt.getText().toString());
+                edit.commit();
+                Toast.makeText(MainActivity.this, "주문갯수가 " + feesTxt.getText() + "로 변경되었습니다.", Toast.LENGTH_LONG).show();
             }
         });
 

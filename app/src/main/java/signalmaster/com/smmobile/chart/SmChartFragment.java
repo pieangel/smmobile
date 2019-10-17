@@ -1943,7 +1943,7 @@ public class SmChartFragment extends Fragment {
 
     public void createOrderAnnotations() {
         SmTotalOrderManager totalOrderManager = SmTotalOrderManager.getInstance();
-        HashMap<Integer, SmOrder> totalOrder = totalOrderManager.getTotalOrderMap();
+        SortedMap<Integer, SmOrder> totalOrder = totalOrderManager.getTotalOrderMap();
 
         for (Map.Entry<Integer, SmOrder> entry : totalOrder.entrySet()) {
             SmOrder order = entry.getValue();
@@ -2153,6 +2153,9 @@ public class SmChartFragment extends Fragment {
 
         try {
             if (existOrder(order))
+                return null;
+            // 이미 청산된 주문은 생성하지 않는다.
+            if (order.orderState == SmOrderState.Settled)
                 return null;
             String filled_date_time = order.filledDate + order.filledTime;
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");

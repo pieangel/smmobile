@@ -1,4 +1,4 @@
-package signalmaster.com.smmobile;
+package signalmaster.com.smmobile.login;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import signalmaster.com.smmobile.R;
 import signalmaster.com.smmobile.network.SmServiceManager;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -91,7 +92,6 @@ public class SignUpActivity extends AppCompatActivity {
     //값 불러올때
     public void loadUserInfo(){
         SharedPreferences sf = getSharedPreferences("loginInfo",MODE_PRIVATE);
-
     }
 
     @Override

@@ -29,4 +29,12 @@ public class SmAccountPositionManager {
 
         return null;
     }
+
+    public double getFee() {
+        double sum = 0.0;
+        for(SmPosition ele : positionHashMap.values()) {
+            sum += ele.fee;
+        }
+        return sum;
+    }
 }

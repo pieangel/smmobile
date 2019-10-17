@@ -10,15 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.scichart.core.model.DoubleValues;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import signalmaster.com.smmobile.ChartListActivity;
 import signalmaster.com.smmobile.ChartSignalActivity;
-import signalmaster.com.smmobile.LoginActivity;
+import signalmaster.com.smmobile.login.LoginActivity;
 import signalmaster.com.smmobile.SmSiseChartActivity;
 import signalmaster.com.smmobile.Util.SmLayoutManager;
 import signalmaster.com.smmobile.popup.PopUpActivity;

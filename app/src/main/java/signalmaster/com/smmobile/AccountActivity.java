@@ -1,5 +1,6 @@
 package signalmaster.com.smmobile;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -71,7 +72,17 @@ public class AccountActivity extends AppCompatActivity {
 
         if (acList.size() > 0) {
             inital_balance.setText(String.format(Locale.getDefault(),"%.0f", acList.get(0).inital_balance));
-            totalPLTxt.setText(String.format(Locale.getDefault(),"%.0f",acList.get(0).total_pl-acList.get(0).total_fee));
+            double pure_profit_loss = acList.get(0).trade_pl - acList.get(0).fee;
+            totalPLTxt.setText(String.format(Locale.getDefault(),"%.0f",pure_profit_loss));
+
+            //순손익
+            if(pure_profit_loss > 0){
+                totalPLTxt.setTextColor(Color.parseColor("#46962B"));
+            }  else if(pure_profit_loss == 0){
+                totalPLTxt.setTextColor(Color.parseColor("#000000"));
+            } else {
+                totalPLTxt.setTextColor(Color.parseColor("#B14333"));
+            }
         }
 
 

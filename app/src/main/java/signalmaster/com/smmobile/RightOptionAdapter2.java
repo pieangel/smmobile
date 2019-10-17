@@ -1,6 +1,7 @@
 package signalmaster.com.smmobile;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,13 +80,25 @@ public class RightOptionAdapter2 extends RecyclerView.Adapter<RightOptionAdapter
         holder.openPLTxt.setText(Double.toString(accountList.get(position).trade_pl+accountList.get(position).open_pl-0));*/
         String symbolCode = positionHashMap.get(position).symbolCode;
         String totalPL = String.format(Locale.getDefault(),"%.2f",positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL);
+        double fee = positionHashMap.get(position).fee;
         //총손익 - 수수료 = 순손익
-        String openPL = String.format(Locale.getDefault(),"%.2f",positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL - 0);
-
+        double pure_profit_loss = positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL - fee;
+        String openPL = String.format(Locale.getDefault(),"%.0f",pure_profit_loss);
+        String symbol_fee = String.format(Locale.getDefault(),"%.0f", fee);
         holder.symbolNameTxt.setText(symbolCode);
         holder.totalPLTxt.setText(totalPL);
-        holder.feeTxt.setText("0");
+        holder.feeTxt.setText(symbol_fee);
         holder.openPLTxt.setText(openPL);
+
+        String purePL = String.format(Locale.getDefault(),"%.0f",pure_profit_loss);
+        //순손익
+        if(pure_profit_loss > 0){
+            holder.openPLTxt.setTextColor(Color.parseColor("#46962B"));
+        }  else if(pure_profit_loss == 0){
+            holder.openPLTxt.setTextColor(Color.parseColor("#000000"));
+        } else {
+            holder.openPLTxt.setTextColor(Color.parseColor("#B14333"));
+        }
 
         //선택항목 강조
         /*if(selectedPosition == position){
