@@ -682,6 +682,9 @@ public class SmProtocolManager implements Serializable {
             int seungsu = object.getInt("seungsu");
             double tick_size = object.getDouble("tick_size");
             double tick_value = object.getDouble("tick_value");
+            int atm = object.getInt("atm");
+            int near_month = object.getInt("near_month");
+            String last_date = object.getString("last_date");
 
             SmMarketManager smMarketManager = SmMarketManager.getInstance();
             SmSymbol symbol = new SmSymbol();
@@ -694,23 +697,15 @@ public class SmProtocolManager implements Serializable {
             symbol.seungsu = seungsu;
             symbol.tickSize = tick_size;
             symbol.tickValue = tick_value;
+            symbol.atm = atm;
+            symbol.nearMonth = near_month;
+            symbol.lastDate = last_date;
             SmCategory curCat = smMarketManager.findCategory(market_name, category_code);
             symbol.set_category(curCat);
             symbol.marketType = curCat.marketType;
             curCat.addSymbol(symbol);
             SmSymbolManager symMgr = SmSymbolManager.getInstance();
             symMgr.addSymbol(symbol);
-
-            if (market_name.compareTo("국내시장") == 0) {
-                symbol.seriesNmKr = name_kr;
-                symbol.seriesNm = name_en;
-                symbol.marketCode = category_code;
-                symbol.decimal = decimal;
-                symbol.contractSize = contract_unit;
-                symbol.seungsu = seungsu;
-                symbol.tickSize = tick_size;
-                symbol.tickValue = tick_value;
-            }
 
             if (symMgr.getSymbolCount() == total_symbol_count) {
                 SmMarketManager marketManager = SmMarketManager.getInstance();
@@ -735,6 +730,8 @@ public class SmProtocolManager implements Serializable {
             SmServiceManager svcMgr = SmServiceManager.getInstance();
             svcMgr.setLoggedIn(true);
             appState = SmGlobal.SmAppState.Loggedin;
+            // 로그인 재진입을 막기 위해 설정함.
+            SmUserManager.getInstance().getDefaultUser().loggedIn = true;
         }
         catch (JSONException e) {
             Log.d("TAG", "OnResLogin Exception:  -> " + e.getMessage());
@@ -878,44 +875,6 @@ public class SmProtocolManager implements Serializable {
             sym.hoga.totSellCnt = tot_sell_cnt;
             sym.hoga.totSellQty = tot_sell_qty;
 
-            /*
-            sym.hoga.hogaItem[0].buyPrice = object.getInt("buy_price1");
-            sym.hoga.hogaItem[0].buyCnt =object.getInt("buy_cnt1");
-            sym.hoga.hogaItem[0].buyQty = object.getInt("buy_qty1");
-            sym.hoga.hogaItem[0].sellPrice = object.getInt("sell_price1");
-            sym.hoga.hogaItem[0].sellCnt = object.getInt("sell_cnt1");
-            sym.hoga.hogaItem[0].sellQty = object.getInt("sell_qty1");
-
-            sym.hoga.hogaItem[1].buyPrice = object.getInt("buy_price2");
-            sym.hoga.hogaItem[1].buyCnt =object.getInt("buy_cnt2");
-            sym.hoga.hogaItem[1].buyQty = object.getInt("buy_qty2");
-            sym.hoga.hogaItem[1].sellPrice = object.getInt("sell_price2");
-            sym.hoga.hogaItem[1].sellCnt = object.getInt("sell_cnt2");
-            sym.hoga.hogaItem[1].sellQty = object.getInt("sell_qty2");
-
-            sym.hoga.hogaItem[2].buyPrice = object.getInt("buy_price3");
-            sym.hoga.hogaItem[2].buyCnt =object.getInt("buy_cnt3");
-            sym.hoga.hogaItem[2].buyQty = object.getInt("buy_qty3");
-            sym.hoga.hogaItem[2].sellPrice = object.getInt("sell_price3");
-            sym.hoga.hogaItem[2].sellCnt = object.getInt("sell_cnt3");
-            sym.hoga.hogaItem[2].sellQty = object.getInt("sell_qty3");
-
-            sym.hoga.hogaItem[3].buyPrice = object.getInt("buy_price4");
-            sym.hoga.hogaItem[3].buyCnt =object.getInt("buy_cnt4");
-            sym.hoga.hogaItem[3].buyQty = object.getInt("buy_qty4");
-            sym.hoga.hogaItem[3].sellPrice = object.getInt("sell_price4");
-            sym.hoga.hogaItem[3].sellCnt = object.getInt("sell_cnt4");
-            sym.hoga.hogaItem[3].sellQty = object.getInt("sell_qty4");
-
-            sym.hoga.hogaItem[4].buyPrice = object.getInt("buy_price5");
-            sym.hoga.hogaItem[4].buyCnt =object.getInt("buy_cnt5");
-            sym.hoga.hogaItem[4].buyQty = object.getInt("buy_qty5");
-            sym.hoga.hogaItem[4].sellPrice = object.getInt("sell_price5");
-            sym.hoga.hogaItem[4].sellCnt = object.getInt("sell_cnt5");
-            sym.hoga.hogaItem[4].sellQty = object.getInt("sell_qty5");
-            */
-
-
             JSONArray hoga_items = (JSONArray) object.get("hoga_items");
             for (int i=0; i < hoga_items.length(); i++) {
                 JSONObject item = hoga_items.getJSONObject(i);
@@ -933,7 +892,7 @@ public class SmProtocolManager implements Serializable {
                 sym.hoga.hogaItem[i].sellQty = sell_qty;
             }
 
-            //Log.d("TAG", "OnResHogaData:  -> " + symbol_code);
+            Log.d("TAG", "OnResHogaData:  -> " + symbol_code);
             SmChartDataService chartDataService = SmChartDataService.getInstance();
             chartDataService.onUpdateHoga(sym);
         }

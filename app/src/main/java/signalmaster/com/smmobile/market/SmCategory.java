@@ -1,6 +1,10 @@
 package signalmaster.com.smmobile.market;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -41,6 +45,24 @@ public class SmCategory {
         return sym;
     }
 
+    public SmSymbol getNextSymbol() {
+        int i = 0;
+        for(Map.Entry<String, SmProductYearMonth> entry : yearMonthSortedMap.entrySet()) {
+            String key = entry.getKey();
+            SmProductYearMonth value = entry.getValue();
+            if (i == 1) {
+                ArrayList<SmSymbol> symbolArrayList = value.symbolList;
+                if (symbolArrayList.size() > 0)
+                    return symbolArrayList.get(0);
+                else
+                    return null;
+            }
+            i++;
+        }
+
+        return null;
+    }
+
     public SmSymbol getRecentSymbol() {
         if (yearMonthSortedMap.size() == 0)
             return null;
@@ -50,8 +72,19 @@ public class SmCategory {
            ArrayList<SmSymbol> symbolArrayList = ym.symbolList;
            if (symbolArrayList.size() == 0)
                return null;
-           else
-               return symbolArrayList.get(0);
+           else {
+               SmSymbol symbol = symbolArrayList.get(0);
+               if (marketCode.compareTo("175") == 0) {
+                   DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+                   Date date = new Date();
+                   String current_date = dateFormat.format(date);
+                   if (current_date.compareTo(symbol.lastDate) >= 0) {
+                       return getNextSymbol();
+                   } else
+                       return symbol;
+               }
+               return symbol;
+           }
         }
     }
 

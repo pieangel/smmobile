@@ -175,12 +175,11 @@ public class SubListAdapter extends RecyclerView.Adapter<SubListAdapter.ViewHold
 
         double close = curSymbol.quote.C;
         close = close / Math.pow(10, curSymbol.decimal);
-        holder.textCloseValue.setText(Double.toString(close));
+        holder.textCloseValue.setText(String.format(curSymbol.getFormat(), close));
         double gap = curSymbol.quote.gapToPreday / Math.pow(10, curSymbol.decimal);
         String ratioText = curSymbol.quote.sign_to_preday;
-        ratioText += Double.toString(gap);
+        ratioText += String.format(curSymbol.getFormat(), gap);
         ratioText += "(";
-        //ratioText += curSymbol.quote.sign_to_preday;
         ratioText += curSymbol.quote.ratioToPrday;
         ratioText += "%)";
         holder.textCloseRatio.setText(ratioText);

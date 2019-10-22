@@ -61,6 +61,7 @@ import signalmaster.com.smmobile.ui.SmChartTypeOption;
 import signalmaster.com.smmobile.ui.SmListenerManger;
 import signalmaster.com.smmobile.userinfo.SmUserManager;
 
+import static com.rayject.table.view.TableView.TAG;
 import static com.scichart.core.utility.Dispatcher.runOnUiThread;
 import static java.lang.Character.isDigit;
 
@@ -116,6 +117,24 @@ public class SmPrChartFragment extends Fragment implements Serializable {
         SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
         SmPosition position = totalPositionManager.findPosition(acno, symbolCode);
         updatePosition(position);
+    }
+
+    public void showHideFragment(final Fragment fragment){
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        if (fragment.isAdded()){
+            if (fragment.isHidden()) {
+                Log.d(TAG,"++++++++++++++++++++ show");
+                ft.show(fragment);
+            } else {
+                Log.d(TAG,"++++++++++++++++++++ hide");
+                fragment.getView().setVisibility(View.GONE);
+                ft.hide(fragment);
+            }
+        }
+        ft.commit();
     }
 
     @Override
@@ -393,6 +412,9 @@ public class SmPrChartFragment extends Fragment implements Serializable {
         });
 
         initPosition();
+
+        showHideFragment(_leftChartFragment);
+        showHideFragment(_rightChartFragment);
 
         return _chartView;
     }

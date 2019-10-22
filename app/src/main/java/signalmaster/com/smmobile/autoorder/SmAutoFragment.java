@@ -42,6 +42,8 @@ import signalmaster.com.smmobile.order.SmTotalOrderManager;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.position.SmPositionType;
 import signalmaster.com.smmobile.position.SmTotalPositionManager;
+import signalmaster.com.smmobile.symbol.SmHoga;
+import signalmaster.com.smmobile.symbol.SmHogaItem;
 import signalmaster.com.smmobile.symbol.SmSymbol;
 import signalmaster.com.smmobile.symbol.SmSymbolManager;
 import signalmaster.com.smmobile.symbol.SmSymbolSelector;
@@ -389,12 +391,6 @@ public class SmAutoFragment extends Fragment {
             sheet.updateData();
             mTableView.invalidate();
         }
-        /*orderTitleValue.set(1, "");
-        orderTitleValue.set(2, "");
-        orderTitleValue.set(3, "");
-        orderTitleValue.set(4, "");
-        orderTitleValue.set(5, "");
-        orderRecyclerViewAdapter.notifyDataSetChanged();*/
     }
 
     private synchronized Action1<SmPosition> onUpdatePosition() {
@@ -441,12 +437,13 @@ public class SmAutoFragment extends Fragment {
         ISheetData sheet = mTableView.getSheet();
         for(int i=0;i<colCount;i++) {
             ICellData cell = sheet.getCellData(1,i);
-            sheet.getCellStyleManager().getCellStyle(0);
-            RichText value = (RichText)cell.getRichTextValue();
-            value.setText("");
-            cell.setCellValue(value);
-            sheet.updateData();
-            mTableView.invalidate();
+            if (cell != null) {
+                RichText value = (RichText) cell.getRichTextValue();
+                value.setText("");
+                cell.setCellValue(value);
+                sheet.updateData();
+                mTableView.invalidate();
+            }
         }
     }
 
@@ -455,7 +452,7 @@ public class SmAutoFragment extends Fragment {
             clearSiseInfo();
             return;
         }
-
+        ISheetData sheet = mTableView.getSheet();
         double vh = 0.0, vl = 0.0, vo = 0.0, vc = 0.0;
         double div = Math.pow(10, symbol.decimal);
         vh = (symbol.quote.H / div);
@@ -463,33 +460,22 @@ public class SmAutoFragment extends Fragment {
         vo = (symbol.quote.O / div);
         vc = (symbol.quote.C / div);
         String[] valList = new String[5];
-        valList[0] = String.format(symbol.getFormat() , vo);
-        valList[1] = String.format(symbol.getFormat() , vh);
-        valList[2] = String.format(symbol.getFormat() , vl);
-        valList[3] = String.format(symbol.getFormat() , vc);
-        valList[4] = "";
-
-        ISheetData sheet = mTableView.getSheet();
-        for(int i=3, j = 0;i<8;i++, j++) {
-            ICellData cell = sheet.getCellData(i, 4);
-            sheet.getCellStyleManager().getCellStyle(0);
-            RichText value = (RichText)cell.getRichTextValue();
-            value.setText(valList[j]);
-            cell.setCellValue(value);
-            sheet.updateData();
-
-        }
+        // 시가
+        setData(sheet, 3, 4, String.format(symbol.getFormat() , vo));
+        // 고가
+        setData(sheet, 4, 4, String.format(symbol.getFormat() , vh));
+        // 저가
+        setData(sheet, 5, 4, String.format(symbol.getFormat() , vl));
+        // 종가
+        setData(sheet, 6, 4, String.format(symbol.getFormat() , vc));
+        // 시세 현재가
+        setData(sheet, 8, 2, String.format(symbol.getFormat() , vc));
 
         ICellData cell = sheet.getCellData(8, 2);
-        sheet.getCellStyleManager().getCellStyle(0);
-        RichText value = (RichText)cell.getRichTextValue();
-        value.setText(valList[3]);
         if (vc < vo)
             cell.setStyleIndex(SheetTemplate1.sellStyleNo);
         else
             cell.setStyleIndex(SheetTemplate1.buyStyleNo);
-        cell.setCellValue(value);
-        sheet.updateData();
 
         mTableView.invalidate();
     }
@@ -500,7 +486,6 @@ public class SmAutoFragment extends Fragment {
         ISheetData sheet = mTableView.getSheet();
         for(int i=3;i<7;i++) {
             ICellData cell = sheet.getCellData(i, 4);
-            sheet.getCellStyleManager().getCellStyle(0);
             RichText value = (RichText)cell.getRichTextValue();
             value.setText("");
             cell.setCellValue(value);
@@ -518,11 +503,7 @@ public class SmAutoFragment extends Fragment {
         if (position.symbolCode.compareTo(this.symbolCode) != 0)
             return;
 
-
-
         String type = null;
-
-
         if (position.positionType.name().equals("None")) {
             type = "";
         } else if (position.positionType.name().equals("Buy")) {
@@ -531,271 +512,86 @@ public class SmAutoFragment extends Fragment {
             type = "매도";
         }
 
-        orderTitleList.clear();
-        orderTitleList.add(type);
-        orderTitleList.add(Integer.toString(position.openQty));
-        orderTitleList.add(String.format("%,.2f", position.avgPrice));
+        ISheetData sheet = mTableView.getSheet();
+        // 타입
+        setData(sheet, 1, 0, type);
+        // 잔고
+        setData(sheet, 1, 1, Integer.toString(position.openQty));
+        // 평균가
+        setData(sheet, 1, 2, String.format("%,.2f", position.avgPrice));
+        //평가손익
+        setData(sheet, 1, 4, String.format("%,.2f", position.openPL));
+
         SmSymbol symbol = SmSymbolManager.getInstance().findSymbol(position.symbolCode);
         if (symbol != null) {
-            orderTitleList.add(String.format(symbol.getFormat(), position.curPrice));
-        } else {
-            orderTitleList.add(String.format("%,.2f", position.curPrice));
+            // 포지션 현재가
+            setData(sheet, 1, 3, String.format(symbol.getFormat(), symbol.quote.C));
         }
 
-        orderTitleList.add(String.format("%,.2f", position.openPL));
-
-        if (mTableView == null)
-            return;
-
-        ISheetData sheet = mTableView.getSheet();
-        for(int i=0;i<colCount;i++) {
-            ICellData cell = sheet.getCellData(1,i);
-            sheet.getCellStyleManager().getCellStyle(0);
-            RichText value = (RichText)cell.getRichTextValue();
-            value.setText(orderTitleList.get(i));
-            cell.setCellValue(value);
-            sheet.updateData();
-            mTableView.invalidate();
-        }
+        mTableView.invalidate();
     }
 
     public void updateHoga(SmSymbol symbol) {
         if (symbol == null || mTableView == null)
             return;
-
-        ArrayList<ArrayList<Object>> buyLineList = new ArrayList<>();
-        ArrayList<ArrayList<Object>> sellLineList = new ArrayList<>();
-        ArrayList<String> resultLineList = new ArrayList<>();
-        HogaList(symbol,buyLineList,sellLineList, resultLineList);
         ISheetData sheet = mTableView.getSheet();
 
-        for (int i = 0; i < rowCount; i++) {
-            if (i == 3) {
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(buyLineList.get(j).get(4).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 4){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(buyLineList.get(j).get(3).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 5){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(buyLineList.get(j).get(2).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 6){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(buyLineList.get(j).get(1).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 7){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(buyLineList.get(j).get(0).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 9){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(sellLineList.get(j).get(0).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 10){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(sellLineList.get(j).get(1).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 11){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(sellLineList.get(j).get(2).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 12){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(sellLineList.get(j).get(3).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            } else if (i == 13){
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(sellLineList.get(j).get(4).toString());
-                    cell.setCellValue(value);
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            }
-            else if(i==14) {
-                for (int j = 0; j < colCount; j++) {
-                    ICellData cell = sheet.getCellData(i,j);
-                    sheet.getCellStyleManager().getCellStyle(0);
-                    RichText value = (RichText)cell.getRichTextValue();
-                    value.setText(resultLineList.get(j));
-                    cell.setCellValue(value);
-                    if (j == 0 || j == 1) {
-                        cell.setStyleIndex(SheetTemplate1.sellStyle);
-                    } else if (j == 3 || j == 4) {
-                        cell.setStyleIndex(SheetTemplate1.buyStyle);
-                    } else {
-                        if (resultLineList.get(j).contains("-"))
-                            cell.setStyleIndex(SheetTemplate1.sellStyleNo);
-                        else
-                            cell.setStyleIndex(SheetTemplate1.buyStyleNo);
-                    }
-                    sheet.updateData();
-                    mTableView.invalidate();
-                }
-            }
+        SmHoga symbol_hoga = symbol.hoga;
+        for(int i = 0; i < 5; ++i) {
+            // 매수가격
+            double div = Math.pow(10, symbol.decimal);
+            double price = (symbol.hoga.hogaItem[i].buyPrice / div);
+            String price_text = String.format(symbol.getFormat() , price);
+            setData(sheet, 9 + i, 2, price_text);
+            // 매수 수량
+            String qty = Integer.toString(symbol.hoga.hogaItem[i].buyQty);
+            setData(sheet, 9 + i, 3, qty);
+            // 매수 건수
+            String count = Integer.toString(symbol.hoga.hogaItem[i].buyCnt);
+            setData(sheet, 9 + i, 4, count);
+            // 매도 가격
+            price = (symbol.hoga.hogaItem[i].sellPrice / div);
+            price_text = String.format(symbol.getFormat() , price);
+            setData(sheet, 7 - i, 2, price_text);
+            // 매도 수량
+            qty = Integer.toString(symbol.hoga.hogaItem[i].sellQty);
+            setData(sheet, 7 - i, 1, qty);
+            // 매도 건수
+            count = Integer.toString(symbol.hoga.hogaItem[i].sellCnt);
+            setData(sheet, 7 - i, 0, count);
         }
+
+        setData(sheet, 14, 0,  Integer.toString(symbol.hoga.totSellCnt));
+        ICellData cell = sheet.getCellData(14,0);
+        cell.setStyleIndex(SheetTemplate1.sellStyle);
+        setData(sheet, 14, 1,  Integer.toString(symbol.hoga.totSellQty));
+        cell = sheet.getCellData(14,1);
+        cell.setStyleIndex(SheetTemplate1.sellStyle);
+        int deltaHoga = symbol.hoga.totBuyQty - symbol.hoga.totSellQty;
+        setData(sheet, 14, 2,  Integer.toString(deltaHoga));
+        cell = sheet.getCellData(14,2);
+        if (deltaHoga < 0)
+            cell.setStyleIndex(SheetTemplate1.sellStyleNo);
+        else
+            cell.setStyleIndex(SheetTemplate1.buyStyleNo);
+        setData(sheet, 14, 3,  Integer.toString(symbol.hoga.totBuyQty));
+        cell = sheet.getCellData(14,3);
+        cell.setStyleIndex(SheetTemplate1.buyStyle);
+        setData(sheet, 14, 4,  Integer.toString(symbol.hoga.totBuyCnt));
+        cell = sheet.getCellData(14,4);
+        cell.setStyleIndex(SheetTemplate1.buyStyle);
+        sheet.updateData();
+
+        mTableView.invalidate();
     }
 
-    public void HogaList (SmSymbol symbol, ArrayList < ArrayList < Object >> buyLineList, ArrayList < ArrayList < Object >> sellLineList, ArrayList<String>  resultLineList ){
-        //매수란
-        String[] buyText = new String[5];
-        buyText[0] = "예체가";
-        buyText[1] = "현재가";
-        buyText[2] = "저가";
-        buyText[3] = "고가";
-        buyText[4] = "시가";
-
-        SmSymbol symbol1 = SmSymbolManager.getInstance().findSymbol(symbol.code);
-
-        //건수란
-        String[] buyGun = new String[5];
-        if (symbol1 == null) {
-            buyGun[0] = "";
-            buyGun[1] = "";
-            buyGun[2] = "";
-            buyGun[3] = "";
-            buyGun[4] = "";
-        }
-        else {
-            double vh = 0.0, vl = 0.0, vo = 0.0, vc = 0.0;
-            double div = Math.pow(10, symbol.decimal);
-            vh = (double)(symbol1.quote.H / div);
-            vl = (double)(symbol1.quote.L / div);
-            vo = (double)(symbol1.quote.O / div);
-            vc = (double)(symbol1.quote.C / div);
-
-            buyGun[0] = "";
-            buyGun[1] = String.format(symbol.getFormat() , vc);
-            buyGun[2] = String.format(symbol.getFormat() , vl);
-            buyGun[3] = String.format(symbol.getFormat() , vh);
-            buyGun[4] = String.format(symbol.getFormat() , vo);
-        }
-
-        String[] sellGun = new String[5];
-        sellGun[4] = "";
-        sellGun[3] = "";
-        sellGun[2] = "";
-        sellGun[1] = "";
-        sellGun[0] = "";
-
-        String[] sellMedo = new String[5];
-        sellMedo[0] = "";
-        sellMedo[1] = "";
-        sellMedo[2] = "";
-        sellMedo[3] = "";
-        sellMedo[4] = "";
-
-        ArrayList<Object> buyCnt = new ArrayList<>();
-        ArrayList<Object> buyQty = new ArrayList<>();
-        ArrayList<Object> buyPrice = new ArrayList<>();
-        ArrayList<Object> buyTextList = new ArrayList<>();
-        ArrayList<Object> buyGunsuList = new ArrayList<>();
-
-        ArrayList<Object> sellCnt = new ArrayList<>();
-        ArrayList<Object> sellQty = new ArrayList<>();
-        ArrayList<Object> sellPrice = new ArrayList<>();
-        ArrayList<Object> sellGunList = new ArrayList<>();
-        ArrayList<Object> sellMedoList = new ArrayList<>();
-
-
-        for (int i = 0; i < 5; i++) {
-            buyCnt.add(symbol.hoga.hogaItem[i].buyCnt);
-            buyQty.add(symbol.hoga.hogaItem[i].buyQty);
-            double div = Math.pow(10, symbol.decimal);
-            double bp = (symbol.hoga.hogaItem[i].buyPrice / div);
-
-            buyPrice.add(String.format(symbol.getFormat() , bp));
-            buyTextList.add(buyText[i]);
-            buyGunsuList.add(buyGun[i]);
-
-            sellCnt.add(symbol.hoga.hogaItem[i].sellCnt);
-            sellQty.add(symbol.hoga.hogaItem[i].sellQty);
-            double sp = (symbol.hoga.hogaItem[i].buyPrice / div);
-            sellPrice.add(String.format(symbol.getFormat() , sp));
-            sellGunList.add(sellGun[i]);
-            sellMedoList.add(sellMedo[i]);
-        }
-
-        //ArrayList<ArrayList<Object>> buyLineList = new ArrayList<>();
-
-        resultLineList.add(Integer.toString(symbol.hoga.totSellCnt));
-        resultLineList.add(Integer.toString(symbol.hoga.totSellQty));
-        resultLineList.add(Integer.toString(symbol.hoga.totBuyQty - symbol.hoga.totSellQty));
-        resultLineList.add(Integer.toString(symbol.hoga.totBuyQty));
-        resultLineList.add(Integer.toString(symbol.hoga.totBuyCnt));
-
-        buyLineList.add(buyCnt);
-        buyLineList.add(buyQty);
-        buyLineList.add(buyPrice);
-        buyLineList.add(buyTextList);
-        buyLineList.add(buyGunsuList);
-
-        //ArrayList<ArrayList<Object>>  sellLineList = new ArrayList<>();
-
-        sellLineList.add(sellGunList);
-        sellLineList.add(sellMedoList);
-        sellLineList.add(sellPrice);
-        sellLineList.add(sellQty);
-        sellLineList.add(sellCnt);
+    private void setData(ISheetData sheet, int row, int col, String text) {
+        if (sheet == null)
+            return;
+        ICellData cell = sheet.getCellData(row, col);
+        RichText value = (RichText) cell.getRichTextValue();
+        value.setText(text);
+        cell.setCellValue(value);
+        cell.update();
     }
-
-
 }

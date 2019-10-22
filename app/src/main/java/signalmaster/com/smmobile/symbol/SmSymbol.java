@@ -109,6 +109,10 @@ public class SmSymbol {
     //전일 거래량량
     public String jnilVolume;
 
+    public int atm;
+    public int nearMonth;
+    public String lastDate;
+
     public int decimal = 2;
     public String[] getSplitName(String compName) {
         String[] result = new String[2];

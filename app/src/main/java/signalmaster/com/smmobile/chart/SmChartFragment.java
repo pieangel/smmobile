@@ -2035,7 +2035,7 @@ public class SmChartFragment extends Fragment {
             double div = Math.pow(10, symbol.decimal);
             double vc = (symbol.quote.C / div);
             SmCurrentValueView currentValueView = currentTextAnnotation.getValueView();
-            currentValueView.setValueText(Double.toString(vc));
+            currentValueView.setValueText(String.format(symbol.getFormat(), vc));
             currentValueView.invalidate();
         }
     }
@@ -2243,7 +2243,7 @@ public class SmChartFragment extends Fragment {
                 SmCurrentValueView currentValueView = annotation.getValueView();
                 double div = Math.pow(10, symbol.decimal);
                 double hogaValue = (symbol.hoga.hogaItem[i].buyPrice / div);
-                currentValueView.setValueText(Double.toString(hogaValue));
+                currentValueView.setValueText(String.format(symbol.getFormat(), hogaValue));
                 currentValueView.invalidate();
             }
         }
@@ -2254,7 +2254,7 @@ public class SmChartFragment extends Fragment {
                 SmCurrentValueView currentValueView = annotation.getValueView();
                 double div = Math.pow(10, symbol.decimal);
                 double hogaValue = (symbol.hoga.hogaItem[i].sellPrice / div);
-                currentValueView.setValueText(Double.toString(hogaValue));
+                currentValueView.setValueText(String.format(symbol.getFormat(), hogaValue));
                 currentValueView.invalidate();
             }
         }

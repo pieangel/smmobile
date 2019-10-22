@@ -1,21 +1,14 @@
 package signalmaster.com.smmobile.sise;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.scichart.core.common.Action1;
 
@@ -23,13 +16,11 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import signalmaster.com.smmobile.CustomLinearLayoutManager;
 import signalmaster.com.smmobile.R;
 import signalmaster.com.smmobile.Util.SmLayoutManager;
 import signalmaster.com.smmobile.data.SmChartDataService;
 import signalmaster.com.smmobile.market.SmMarket;
 import signalmaster.com.smmobile.market.SmMarketManager;
-import signalmaster.com.smmobile.network.SmServiceManager;
 import signalmaster.com.smmobile.symbol.SmSymbol;
 
 import static com.scichart.core.utility.Dispatcher.runOnUiThread;
@@ -164,7 +155,7 @@ public class SmCurrentFragment extends Fragment {
 
         _subListRecyclerView.getItemAnimator().setChangeDuration(0);
         SmChartDataService chartDataService = SmChartDataService.getInstance();
-        chartDataService.subscribeSise(onUpdateSymbol(), this.getClass().getSimpleName());
+        chartDataService.subscribeSise(onUpdateSise(), this.getClass().getSimpleName());
 
         return view;
     }
@@ -189,7 +180,7 @@ public class SmCurrentFragment extends Fragment {
 
 
     @NonNull
-    private synchronized Action1<SmSymbol> onUpdateSymbol() {
+    private synchronized Action1<SmSymbol> onUpdateSise() {
         return new Action1<SmSymbol>() {
             @Override
             public void execute(final SmSymbol symbol) {

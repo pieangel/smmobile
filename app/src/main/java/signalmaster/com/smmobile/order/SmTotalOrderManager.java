@@ -193,4 +193,5 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
     }
 
     public static int defaultOrderAmount = 1;
+    public static boolean LoggedIn = false;
 }
