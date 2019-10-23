@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -513,20 +514,28 @@ public class SmAutoFragment extends Fragment {
         }
 
         ISheetData sheet = mTableView.getSheet();
-        // 타입
-        setData(sheet, 1, 0, type);
-        // 잔고
-        setData(sheet, 1, 1, Integer.toString(position.openQty));
-        // 평균가
-        setData(sheet, 1, 2, String.format("%,.2f", position.avgPrice));
-        //평가손익
-        setData(sheet, 1, 4, String.format("%,.2f", position.openPL));
+        try {
+            // 타입
+            setData(sheet, 1, 0, type);
+            // 잔고
+            setData(sheet, 1, 1, Integer.toString(position.openQty));
+            // 평균가
+            setData(sheet, 1, 2, String.format("%,.2f", position.avgPrice));
+            //평가손익
+            setData(sheet, 1, 4, String.format("%,.2f", position.openPL));
 
-        SmSymbol symbol = SmSymbolManager.getInstance().findSymbol(position.symbolCode);
-        if (symbol != null) {
-            // 포지션 현재가
-            setData(sheet, 1, 3, String.format(symbol.getFormat(), symbol.quote.C));
+            SmSymbol symbol = SmSymbolManager.getInstance().findSymbol(position.symbolCode);
+            if (symbol != null) {
+                double div = Math.pow(10, symbol.decimal);
+                double vc = (symbol.quote.C / div);
+                // 포지션 현재가
+                setData(sheet, 1, 3, String.format(symbol.getFormat(), vc));
+            }
+        } catch (Exception e) {
+            String error = e.getMessage();
+            Log.d("TAG", "updatePosition" + "  code" + symbolCode);
         }
+
 
         mTableView.invalidate();
     }
@@ -589,9 +598,12 @@ public class SmAutoFragment extends Fragment {
         if (sheet == null)
             return;
         ICellData cell = sheet.getCellData(row, col);
-        RichText value = (RichText) cell.getRichTextValue();
-        value.setText(text);
-        cell.setCellValue(value);
-        cell.update();
+        if (cell != null) {
+            RichText value = (RichText) cell.getRichTextValue();
+            value.setText(text);
+            cell.setCellValue(value);
+            cell.update();
+            sheet.updateData();
+        }
     }
 }

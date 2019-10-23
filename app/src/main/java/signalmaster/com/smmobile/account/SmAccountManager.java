@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Character.isDigit;
+
 public class SmAccountManager implements Serializable {
     private static volatile SmAccountManager sSoleInstance;
     //private constructor.
@@ -94,5 +96,14 @@ public class SmAccountManager implements Serializable {
             return accountNoList.get(0);
         else
             return null;
+    }
+
+    public SmAccount getDefaultAccount(String symbolCode) {
+        char second = symbolCode.charAt(1);
+        if (isDigit(second)) {
+            return  defaultAccount;
+        } else {
+            return  defaultAccount;
+        }
     }
 }

@@ -2285,14 +2285,21 @@ public class SmChartFragment extends Fragment {
     private void updateHoga(final  SmSymbol symbol) {
         if (symbol == null)
             return;
+        try {
+            if (getActivity() == null)
+                return;
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                updateHogaView(symbol);
-            }
-        });
-        updateHogaAnnotation(symbol);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    updateHogaView(symbol);
+                }
+            });
+            updateHogaAnnotation(symbol);
+        } catch (Exception e) {
+            String error = e.getMessage();
+            Log.d("TAG", "updateHoga" + "  code" + symbolCode);
+        }
     }
 
     public void onUpdateSymbol(final SmSymbol symbol) {

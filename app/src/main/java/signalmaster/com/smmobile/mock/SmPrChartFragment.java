@@ -653,9 +653,12 @@ public class SmPrChartFragment extends Fragment implements Serializable {
     }
 
     private void clearPositionInfo() {
-        open_qty.setText("");
-        average_text.setText("");
-        position_profit.setText("");
+        if (open_qty != null)
+            open_qty.setText("");
+        if (average_text != null)
+            average_text.setText("");
+        if (position_profit != null)
+            position_profit.setText("");
     }
 
     private void updatePosition(SmPosition position) {
@@ -663,31 +666,37 @@ public class SmPrChartFragment extends Fragment implements Serializable {
             clearPositionInfo();
             return;
         }
-        if (position.openQty < 0)
-            open_qty.setTextColor(Color.BLUE);
-        else if (position.openQty > 0)
-            open_qty.setTextColor(Color.RED);
-        else
-            open_qty.setTextColor(Color.WHITE);
-        open_qty.setText(Integer.toString(position.openQty));
-        average_text.setText(String.format("%,.2f",position.avgPrice));
-        double total_profit = position.openPL + position.tradePL;
-        if (0 > total_profit)
-            position_profit.setTextColor(Color.BLUE);
-        else if (0 < total_profit)
-            position_profit.setTextColor(Color.RED);
-        else
-            position_profit.setTextColor(Color.WHITE);
-        String symbol_code = position.symbolCode;
-        char second = symbol_code.charAt(1);
-        String  sign;
-        if (isDigit(second)) {
-            sign = Currency.getInstance(Locale.KOREA).getSymbol();
-        } else {
-            sign = Currency.getInstance(Locale.US).getSymbol();
+        if (open_qty != null) {
+            if (position.openQty < 0)
+                open_qty.setTextColor(Color.BLUE);
+            else if (position.openQty > 0)
+                open_qty.setTextColor(Color.RED);
+            else
+                open_qty.setTextColor(Color.WHITE);
+            open_qty.setText(Integer.toString(position.openQty));
         }
-        String format = sign + "%,.0f";
-        position_profit.setText(String.format(format, total_profit));
+        if (average_text != null) {
+            average_text.setText(String.format("%,.2f", position.avgPrice));
+        }
+        if (position_profit != null) {
+            double total_profit = position.openPL + position.tradePL;
+            if (0 > total_profit)
+                position_profit.setTextColor(Color.BLUE);
+            else if (0 < total_profit)
+                position_profit.setTextColor(Color.RED);
+            else
+                position_profit.setTextColor(Color.WHITE);
+            String symbol_code = position.symbolCode;
+            char second = symbol_code.charAt(1);
+            String sign;
+            if (isDigit(second)) {
+                sign = Currency.getInstance(Locale.KOREA).getSymbol();
+            } else {
+                sign = Currency.getInstance(Locale.US).getSymbol();
+            }
+            String format = sign + "%,.0f";
+            position_profit.setText(String.format(format, total_profit));
+        }
     }
 
     @NonNull

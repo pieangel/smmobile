@@ -120,6 +120,7 @@ public class SmGlobal implements Serializable {
         SymbolListDownloaded,
         ReceivedMainchartData,
         ReceivedRecentSise,
+        ReceivedRecentHoga,
         MainScreenLoaded,
         LoadingComplete
     }

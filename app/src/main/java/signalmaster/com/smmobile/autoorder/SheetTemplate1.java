@@ -2,6 +2,7 @@ package signalmaster.com.smmobile.autoorder;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.rayject.table.model.DefaultCellData;
@@ -23,8 +24,12 @@ import java.util.ArrayList;
 
 import signalmaster.com.smmobile.R;
 import signalmaster.com.smmobile.RecyclerViewList;
+import signalmaster.com.smmobile.account.SmAccount;
+import signalmaster.com.smmobile.account.SmAccountManager;
 import signalmaster.com.smmobile.market.SmMarketManager;
 import signalmaster.com.smmobile.order.SmTotalOrderManager;
+import signalmaster.com.smmobile.position.SmPosition;
+import signalmaster.com.smmobile.position.SmTotalPositionManager;
 import signalmaster.com.smmobile.symbol.SmHoga;
 import signalmaster.com.smmobile.symbol.SmSymbol;
 import signalmaster.com.smmobile.symbol.SmSymbolManager;
@@ -59,7 +64,7 @@ public class SheetTemplate1 {
         firstRowStyle.setVerticalAlignment(TableConst.VERTICAL_ALIGNMENT_CENTRE);
 
         Font firstRowFont = Font.createDefault(context);
-        firstRowFont.setColor(0xffffff00);
+        firstRowFont.setColor(0xffffffff);
         int frIndex = sheet.getFontManager().addFont(firstRowFont);
         firstRowStyle.setFontIndex(frIndex);
         frStyleIndex = sheet.getCellStyleManager().addCellStyle(firstRowStyle);
@@ -197,10 +202,57 @@ public class SheetTemplate1 {
             cell.setCellValue(richText);
             sheet.setCellData(cell, j, 3);
         }
-
+        updatePosition(sheet, symbol);
         updateSise(sheet, symbol);
         updateHoga(sheet, symbol);
         return sheet;
+    }
+
+    private static void initPositionArea(DefaultSheetData sheet) {
+        for(int i = 0; i < 5; ++i) {
+            setData(sheet, 1, i, "");
+        }
+    }
+
+    public static void updatePosition(DefaultSheetData sheet, SmSymbol symbol) {
+        SmAccount account = SmAccountManager.getInstance().getDefaultAccount(symbol.code);
+        if (sheet == null || symbol == null || account == null) {
+            initPositionArea(sheet);
+            return;
+        }
+        SmPosition position = SmTotalPositionManager.getInstance().findPosition(account.accountNo, symbol.code);
+        if (position == null) {
+            initPositionArea(sheet);
+        }
+        String type = null;
+        if (position.positionType.name().equals("None")) {
+            type = "";
+        } else if (position.positionType.name().equals("Buy")) {
+            type = "매수";
+        } else if (position.positionType.name().equals("Sell")) {
+            type = "매도";
+        }
+
+        try {
+            // 타입
+            setData(sheet, 1, 0, type);
+            // 잔고
+            setData(sheet, 1, 1, Integer.toString(position.openQty));
+            // 평균가
+            setData(sheet, 1, 2, String.format("%,.2f", position.avgPrice));
+            //평가손익
+            setData(sheet, 1, 4, String.format("%,.2f", position.openPL));
+
+            if (symbol != null) {
+                double div = Math.pow(10, symbol.decimal);
+                double vc = (symbol.quote.C / div);
+                // 포지션 현재가
+                setData(sheet, 1, 3, String.format(symbol.getFormat(), vc));
+            }
+        } catch (Exception e) {
+            String error = e.getMessage();
+            Log.d("TAG", "updatePosition" + "  code" + symbol.code);
+        }
     }
 
     public static void updateSise(DefaultSheetData sheet, SmSymbol symbol) {
@@ -223,8 +275,7 @@ public class SheetTemplate1 {
         setData(sheet, 5, 4, String.format(symbol.getFormat() , vl));
         // 종가
         setData(sheet, 6, 4, String.format(symbol.getFormat() , vc));
-        // 포지션 현재가
-        setData(sheet, 1, 3, String.format(symbol.getFormat() , vc));
+
         DefaultCellData cell_data =  setData(sheet, 8, 2, String.format(symbol.getFormat() , vc));
         //cell_data.setStyleIndex(frStyleIndex);
         ICellData cell = sheet.getCellData(8, 2);

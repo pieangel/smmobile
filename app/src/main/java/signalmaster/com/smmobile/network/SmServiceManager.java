@@ -239,6 +239,24 @@ public class SmServiceManager implements Serializable {
         }
     }
 
+    public void requestAllRecentMonthHoga() {
+        try {
+            SmUser user = SmUserManager.getInstance().getDefaultUser();
+
+            JSONObject reqSiseData = new JSONObject();
+            reqSiseData.put("req_id", SmProtocol.req_recent_hoga_data_all.ordinal());
+            reqSiseData.put("user_id",user.id);
+
+            String msg = reqSiseData.toString();
+
+            SmSocketHandler socketHandler = SmSocketHandler.getInstance();
+            socketHandler.sendMessage(msg);
+        }
+        catch(JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void requestAllSise() {
         try {
             SmUser user = SmUserManager.getInstance().getDefaultUser();

@@ -18,10 +18,14 @@ public class SmSymbol {
     }
 
     public String getFormat() {
-        String format;
-        format = "%.";
-        format += Integer.toString(decimal);
-        format += "f";
+        String format = "";
+        try {
+            format = "%.";
+            format += Integer.toString(decimal);
+            format += "f";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return format;
     }
 

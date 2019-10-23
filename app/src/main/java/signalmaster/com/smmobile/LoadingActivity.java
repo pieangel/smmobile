@@ -102,6 +102,9 @@ public class LoadingActivity extends Activity {
                             progressTxt.setText("시세 정보를 내려받고 있습니다.");
                             requestAllRecentSise();
                         }else if (protocolManager.getAppState() == SmGlobal.SmAppState.ReceivedRecentSise) {
+                            progressTxt.setText("호가 정보를 내려받고 있습니다.");
+                            requestAllRecentHoga();
+                        }else if (protocolManager.getAppState() == SmGlobal.SmAppState.ReceivedRecentHoga) {
                             registerRealtimeSymbol();
                             SmMarketManager marketManager = SmMarketManager.getInstance();
                             marketManager.getFavoriteList();
@@ -279,6 +282,13 @@ public class LoadingActivity extends Activity {
         serviceManager.requestAllRecentMonthSise();
         SmProtocolManager protocolManager = SmProtocolManager.getInstance();
         protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentSise);
+    }
+
+    public void requestAllRecentHoga() {
+        SmServiceManager serviceManager = SmServiceManager.getInstance();
+        serviceManager.requestAllRecentMonthHoga();
+        SmProtocolManager protocolManager = SmProtocolManager.getInstance();
+        protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentHoga);
     }
 
     public void registerRealtimeSymbol() {
