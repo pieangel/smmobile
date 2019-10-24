@@ -276,6 +276,9 @@ public class SheetTemplate1 {
         // 종가
         setData(sheet, 6, 4, String.format(symbol.getFormat() , vc));
 
+        // 시간
+        //setData(sheet, 2, 2, symbol.quote.time);
+
         DefaultCellData cell_data =  setData(sheet, 8, 2, String.format(symbol.getFormat() , vc));
         //cell_data.setStyleIndex(frStyleIndex);
         ICellData cell = sheet.getCellData(8, 2);
@@ -319,6 +322,13 @@ public class SheetTemplate1 {
             cell.setStyleIndex(sell_style_list[i]);
         }
 
+        // 호가 시간
+        String hoga_time = symbol.hoga.time.substring(0, 2);
+        hoga_time += ":";
+        hoga_time += symbol.hoga.time.substring(2, 4);
+        hoga_time += ":";
+        hoga_time += symbol.hoga.time.substring(4, 6);
+        setData(sheet, 2, 2, hoga_time);
         setData(sheet, 14, 0,  Integer.toString(symbol.hoga.totSellCnt));
         ICellData cell = sheet.getCellData(14,0);
         cell.setStyleIndex(SheetTemplate1.sellStyle);

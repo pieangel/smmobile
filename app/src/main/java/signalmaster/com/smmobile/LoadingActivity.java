@@ -281,14 +281,14 @@ public class LoadingActivity extends Activity {
         SmServiceManager serviceManager = SmServiceManager.getInstance();
         serviceManager.requestAllRecentMonthSise();
         SmProtocolManager protocolManager = SmProtocolManager.getInstance();
-        protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentSise);
+        //protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentSise);
     }
 
     public void requestAllRecentHoga() {
         SmServiceManager serviceManager = SmServiceManager.getInstance();
         serviceManager.requestAllRecentMonthHoga();
         SmProtocolManager protocolManager = SmProtocolManager.getInstance();
-        protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentHoga);
+        //protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentHoga);
     }
 
     public void registerRealtimeSymbol() {

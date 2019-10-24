@@ -472,6 +472,9 @@ public class SmAutoFragment extends Fragment {
         // 시세 현재가
         setData(sheet, 8, 2, String.format(symbol.getFormat() , vc));
 
+        // 시세 시간
+        //setData(sheet, 2, 2, symbol.quote.time);
+
         ICellData cell = sheet.getCellData(8, 2);
         if (vc < vo)
             cell.setStyleIndex(SheetTemplate1.sellStyleNo);
@@ -569,7 +572,12 @@ public class SmAutoFragment extends Fragment {
             count = Integer.toString(symbol.hoga.hogaItem[i].sellCnt);
             setData(sheet, 7 - i, 0, count);
         }
-
+        String hoga_time = symbol.hoga.time.substring(0, 2);
+        hoga_time += ":";
+        hoga_time += symbol.hoga.time.substring(2, 4);
+        hoga_time += ":";
+        hoga_time += symbol.hoga.time.substring(4, 6);
+        setData(sheet, 2, 2, hoga_time);
         setData(sheet, 14, 0,  Integer.toString(symbol.hoga.totSellCnt));
         ICellData cell = sheet.getCellData(14,0);
         cell.setStyleIndex(SheetTemplate1.sellStyle);

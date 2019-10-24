@@ -1,7 +1,7 @@
 package signalmaster.com.smmobile.symbol;
 
 public class SmQuote {
-    public String DateTime;
+    public String time;
     public int H = 0;
     public int L = 0;
     public int O = 0;

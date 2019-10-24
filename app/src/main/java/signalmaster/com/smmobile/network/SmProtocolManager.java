@@ -241,12 +241,16 @@ public class SmProtocolManager implements Serializable {
                     OnResChartData(jsonObj);
                     break;
                 case res_sise_data: // 시세 데이터 요청에 대한 응답
+                    OnResSiseData(jsonObj);
+                    break;
                 case res_realtime_sise: // 실시간 시세 데이터 도착
                     OnResRealtimeSise(jsonObj);
                     break;
                 case res_hoga_data: // 호가 데이터 요청에 대한 응답
-                case res_realtime_hoga: // 실시간 호가 데이터 도착
                     OnResHogaData(jsonObj);
+                    break;
+                case res_realtime_hoga: // 실시간 호가 데이터 도착
+                    OnResRealtimeHoga(jsonObj);
                     break;
                 case res_chart_cycle_data: // 정기 차트 데이터 도착
                     OnResChartCycleData(jsonObj);
@@ -759,7 +763,7 @@ public class SmProtocolManager implements Serializable {
         }
     }
 
-    private void OnResSiseData(JSONObject object) {
+    private void OnResRealtimeSise(JSONObject object) {
         if (object == null)
             return;
         try {
@@ -771,9 +775,17 @@ public class SmProtocolManager implements Serializable {
             int high = object.getInt("high");
             int low = object.getInt("low");
             int close = object.getInt("close");
+            int acc_volume = object.getInt("acc_volume");
+            String time = object.getString("time");
+            if (close == 0.0)
+                return;
+            if (symbol_code.compareTo("105PA000") == 0) {
+                high = 40;
+            }
             SmSymbolManager symMgr = SmSymbolManager.getInstance();
             SmSymbol sym = symMgr.findSymbol(symbol_code);
             if (sym != null) {
+                sym.quote.time = time;
                 sym.quote.O = open;
                 sym.quote.H = high;
                 sym.quote.L = low;
@@ -781,12 +793,103 @@ public class SmProtocolManager implements Serializable {
                 sym.quote.gapToPreday = gap_from_preday;
                 sym.quote.ratioToPrday = ratio_to_preday;
                 sym.quote.sign_to_preday = sign_to_preday;
+                sym.quote.accVolume = acc_volume;
+                double vc = 0.0;
+                double div = Math.pow(10, sym.decimal);
+                vc = (close / div);
+
+                Log.d("TAG", "OnResRealtimeSise" + "  code" + symbol_code + " : " + vc);
+
+                SmChartDataService chartDataService = SmChartDataService.getInstance();
                 // 여기서 이 심볼과 관련된 모든 차트데이터를 업데이트 해줘야 한다.
+                HashMap<String, SmChartData> chartDataHashMap = sym.getChartDataMap();
+                for (Map.Entry<String, SmChartData> entry : chartDataHashMap.entrySet()) {
+                    SmChartData chartData = entry.getValue();
+                    // 관련된 차트를 하나씩 업데이트 해준다.
+                    chartData.updateLastValue(vc);
+                }
+                // 시세 업데이트 콜백 호출
+                chartDataService.onUpdateSise(sym);
+                // 여기서 포지션에 따른 수익을 계산해 준다.
+                SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
+                // 포지션의 평가 손익을 갱신해 준다.
+                totalPositionManager.onUpdateSise(sym);
+
+                //Log.d("TAG", "OnResRealtimeSise:  -> " + symbol_code + " o: " + open + " h: "  + high + " l: " + low + " c: " + close);
             }
-            //Log.d("TAG", "OnResSiseData:  -> " + symbol_code );
+            //Log.d("TAG", "OnResRealtimeSise:  -> " + symbol_code );
+            //Log.d("TAG", "OnResRealtimeSise:  -> " + symbol_code + " o: " + open + " h: "  + high + " l: " + low + " c: " + close);
         }
         catch (JSONException e) {
-            Log.d("TAG", "OnResSiseData Exception:  -> " + e.getMessage());
+            Log.d("TAG", "OnResRealtimeSise Exception:  -> " + e.getMessage());
+        }
+    }
+
+    private void OnResSiseData(JSONObject object) {
+        if (object == null)
+            return;
+        try {
+            int total_count = object.getInt("total_count");
+            int current_count = object.getInt("current_count");
+            String symbol_code = object.getString("symbol_code");
+            int gap_from_preday = object.getInt("gap_from_preday");
+            String sign_to_preday = object.getString("sign_to_preday");
+            String ratio_to_preday = object.getString("ratio_to_preday");
+            int open = object.getInt("open");
+            int high = object.getInt("high");
+            int low = object.getInt("low");
+            int close = object.getInt("close");
+            int acc_volume = object.getInt("acc_volume");
+            String time = object.getString("time");
+
+            Log.d("TAG", "OnResSiseData :: " + symbol_code + " : " + "tc = " + total_count + " cc = " + current_count);
+            if (current_count == total_count) {
+                appState = SmGlobal.SmAppState.ReceivedRecentSise;
+            }
+
+            if (close == 0.0)
+                return;
+            if (symbol_code.compareTo("105PA000") == 0) {
+                high = 40;
+            }
+            SmSymbolManager symMgr = SmSymbolManager.getInstance();
+            SmSymbol sym = symMgr.findSymbol(symbol_code);
+            if (sym != null) {
+                sym.quote.time = time;
+                sym.quote.O = open;
+                sym.quote.H = high;
+                sym.quote.L = low;
+                sym.quote.C = close;
+                sym.quote.gapToPreday = gap_from_preday;
+                sym.quote.ratioToPrday = ratio_to_preday;
+                sym.quote.sign_to_preday = sign_to_preday;
+                sym.quote.accVolume = acc_volume;
+                double vc = 0.0;
+                double div = Math.pow(10, sym.decimal);
+                vc = (close / div);
+
+
+
+                SmChartDataService chartDataService = SmChartDataService.getInstance();
+                // 여기서 이 심볼과 관련된 모든 차트데이터를 업데이트 해줘야 한다.
+                HashMap<String, SmChartData> chartDataHashMap = sym.getChartDataMap();
+                for (Map.Entry<String, SmChartData> entry : chartDataHashMap.entrySet()) {
+                    SmChartData chartData = entry.getValue();
+                    // 관련된 차트를 하나씩 업데이트 해준다.
+                    chartData.updateLastValue(vc);
+                }
+                // 시세 업데이트 콜백 호출
+                chartDataService.onUpdateSise(sym);
+                // 여기서 포지션에 따른 수익을 계산해 준다.
+                SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
+                // 포지션의 평가 손익을 갱신해 준다.
+                totalPositionManager.onUpdateSise(sym);
+
+                //Log.d("TAG", "OnResRealtimeSise:  -> " + symbol_code + " o: " + open + " h: "  + high + " l: " + low + " c: " + close);
+            }
+        }
+        catch (JSONException e) {
+            Log.d("TAG", "OnResRealtimeSise Exception:  -> " + e.getMessage());
         }
     }
 
@@ -861,6 +964,68 @@ public class SmProtocolManager implements Serializable {
         if (object == null)
             return;
         try {
+            int total_count = object.getInt("total_count");
+            int current_count = object.getInt("current_count");
+            String symbol_code = object.getString("symbol_code");
+            SmSymbolManager symMgr = SmSymbolManager.getInstance();
+            SmSymbol sym = symMgr.findSymbol(symbol_code);
+            if (sym == null)
+                return;
+
+            String time = object.getString("time");
+
+            String domestic_date = object.getString("domestic_date");
+            String domestic_time = object.getString("domestic_time");
+            int tot_buy_qty = object.getInt("tot_buy_qty");
+            int tot_sell_qty = object.getInt("tot_sell_qty");
+            int tot_buy_cnt = object.getInt("tot_buy_cnt");
+            int tot_sell_cnt = object.getInt("tot_sell_cnt");
+            sym.hoga.time = time;
+            sym.hoga.domesticDate = domestic_date;
+            sym.hoga.domesticTime = domestic_time;
+            sym.hoga.totBuyCnt = tot_buy_cnt;
+            sym.hoga.totBuyQty = tot_buy_qty;
+            sym.hoga.totSellCnt = tot_sell_cnt;
+            sym.hoga.totSellQty = tot_sell_qty;
+
+            JSONArray hoga_items = (JSONArray) object.get("hoga_items");
+            for (int i=0; i < hoga_items.length(); i++) {
+                JSONObject item = hoga_items.getJSONObject(i);
+                int buy_price = item.getInt("buy_price");
+                int buy_cnt = item.getInt("buy_cnt");
+                int buy_qty = item.getInt("buy_qty");
+                int sell_price = item.getInt("sell_price");
+                int sell_cnt = item.getInt("sell_cnt");
+                int sell_qty = item.getInt("sell_qty");
+                sym.hoga.hogaItem[i].buyPrice = buy_price;
+                sym.hoga.hogaItem[i].buyCnt = buy_cnt;
+                sym.hoga.hogaItem[i].buyQty = buy_qty;
+                sym.hoga.hogaItem[i].sellPrice = sell_price;
+                sym.hoga.hogaItem[i].sellCnt = sell_cnt;
+                sym.hoga.hogaItem[i].sellQty = sell_qty;
+            }
+
+            if (total_count == current_count) {
+                SmMarketManager marketManager = SmMarketManager.getInstance();
+                Log.d("TAG", "Received all hoga" );
+                appState = SmGlobal.SmAppState.ReceivedRecentHoga;
+            }
+
+            Log.d("TAG", "OnResHogaData:  -> " + symbol_code);
+            SmChartDataService chartDataService = SmChartDataService.getInstance();
+            chartDataService.onUpdateHoga(sym);
+        }
+        catch (JSONException e) {
+            Log.d("TAG", "OnResHogaData Exception:  -> " + e.getMessage());
+        }
+    }
+
+
+
+    private void OnResRealtimeHoga(JSONObject object) {
+        if (object == null)
+            return;
+        try {
             String symbol_code = object.getString("symbol_code");
             SmSymbolManager symMgr = SmSymbolManager.getInstance();
             SmSymbol sym = symMgr.findSymbol(symbol_code);
@@ -906,115 +1071,6 @@ public class SmProtocolManager implements Serializable {
         }
         catch (JSONException e) {
             Log.d("TAG", "OnResHogaData Exception:  -> " + e.getMessage());
-        }
-    }
-
-    private void OnResRealtimeSise(JSONObject object) {
-        if (object == null)
-            return;
-        try {
-            String symbol_code = object.getString("symbol_code");
-            int gap_from_preday = object.getInt("gap_from_preday");
-            String sign_to_preday = object.getString("sign_to_preday");
-            String ratio_to_preday = object.getString("ratio_to_preday");
-            int open = object.getInt("open");
-            int high = object.getInt("high");
-            int low = object.getInt("low");
-            int close = object.getInt("close");
-            int acc_volume = object.getInt("acc_volume");
-            if (close == 0.0)
-                return;
-            if (symbol_code.compareTo("105PA000") == 0) {
-                high = 40;
-            }
-            SmSymbolManager symMgr = SmSymbolManager.getInstance();
-            SmSymbol sym = symMgr.findSymbol(symbol_code);
-            if (sym != null) {
-                sym.quote.O = open;
-                sym.quote.H = high;
-                sym.quote.L = low;
-                sym.quote.C = close;
-                sym.quote.gapToPreday = gap_from_preday;
-                sym.quote.ratioToPrday = ratio_to_preday;
-                sym.quote.sign_to_preday = sign_to_preday;
-                sym.quote.accVolume = acc_volume;
-                double vc = 0.0;
-                double div = Math.pow(10, sym.decimal);
-                vc = (close / div);
-
-                Log.d("TAG", "OnResRealtimeSise" + "  code" + symbol_code + " : " + vc);
-
-                SmChartDataService chartDataService = SmChartDataService.getInstance();
-                // 여기서 이 심볼과 관련된 모든 차트데이터를 업데이트 해줘야 한다.
-                HashMap<String, SmChartData> chartDataHashMap = sym.getChartDataMap();
-                for (Map.Entry<String, SmChartData> entry : chartDataHashMap.entrySet()) {
-                    SmChartData chartData = entry.getValue();
-                    // 관련된 차트를 하나씩 업데이트 해준다.
-                    chartData.updateLastValue(vc);
-                }
-                // 시세 업데이트 콜백 호출
-                chartDataService.onUpdateSise(sym);
-                // 여기서 포지션에 따른 수익을 계산해 준다.
-                SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
-                // 포지션의 평가 손익을 갱신해 준다.
-                totalPositionManager.onUpdateSise(sym);
-
-                //Log.d("TAG", "OnResRealtimeSise:  -> " + symbol_code + " o: " + open + " h: "  + high + " l: " + low + " c: " + close);
-            }
-            //Log.d("TAG", "OnResRealtimeSise:  -> " + symbol_code );
-            //Log.d("TAG", "OnResRealtimeSise:  -> " + symbol_code + " o: " + open + " h: "  + high + " l: " + low + " c: " + close);
-        }
-        catch (JSONException e) {
-            Log.d("TAG", "OnResRealtimeSise Exception:  -> " + e.getMessage());
-        }
-    }
-
-    private void OnResRealtimeHoga(JSONObject object) {
-        if (object == null)
-            return;
-        try {
-            String symbol_code = object.getString("symbol_code");
-            SmSymbolManager symMgr = SmSymbolManager.getInstance();
-            SmSymbol sym = symMgr.findSymbol(symbol_code);
-            if (sym == null)
-                return;
-
-            String time = object.getString("time");
-
-            String domestic_date = object.getString("domestic_date");
-            String domestic_time = object.getString("domestic_time");
-            int tot_buy_qty = object.getInt("tot_buy_qty");
-            int tot_sell_qty = object.getInt("tot_sell_qty");
-            int tot_buy_cnt = object.getInt("tot_buy_cnt");
-            int tot_sell_cnt = object.getInt("tot_sell_cnt");
-            sym.hoga.time = time;
-            sym.hoga.domesticDate = domestic_date;
-            sym.hoga.domesticTime = domestic_time;
-            sym.hoga.totBuyCnt = tot_buy_cnt;
-            sym.hoga.totBuyQty = tot_buy_qty;
-            sym.hoga.totSellCnt = tot_sell_cnt;
-            sym.hoga.totSellQty = tot_sell_qty;
-
-            JSONArray hoga_items = (JSONArray) object.get("hoga_items");
-            for (int i=0; i < hoga_items.length(); i++) {
-                JSONObject item = hoga_items.getJSONObject(i);
-                int buy_price = item.getInt("buy_price");
-                int buy_cnt = item.getInt("buy_cnt");
-                int buy_qty = item.getInt("buy_qty");
-                int sell_price = item.getInt("sell_price");
-                int sell_cnt = item.getInt("sell_cnt");
-                int sell_qty = item.getInt("sell_qty");
-                sym.hoga.hogaItem[i].buyPrice = buy_price;
-                sym.hoga.hogaItem[i].buyCnt = buy_cnt;
-                sym.hoga.hogaItem[i].buyQty = buy_qty;
-                sym.hoga.hogaItem[i].sellPrice = sell_price;
-                sym.hoga.hogaItem[i].sellCnt = sell_cnt;
-                sym.hoga.hogaItem[i].sellQty = sell_qty;
-            }
-            Log.d("TAG", "OnResRealtimeHoga:  -> " + symbol_code + time);
-        }
-        catch (JSONException e) {
-            Log.d("TAG", "OnResRealtimeHoga Exception:  -> " + e.getMessage());
         }
     }
 
