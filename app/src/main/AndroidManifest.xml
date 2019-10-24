@@ -28,7 +28,7 @@
         <activity android:name="signalmaster.com.smmobile.SmSiseChartActivity"  android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.mock.SmMockPopup" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.index.IndexSettingPopup" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name="signalmaster.com.smmobile.AccountActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="signalmaster.com.smmobile.account.AccountActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.OrderUI.TradeRecordActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.IncomeChartActivity" android:theme="@style/Theme.MyDialog" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name="signalmaster.com.smmobile.login.LoginActivity"  android:configChanges="keyboardHidden|orientation|screenSize"/>

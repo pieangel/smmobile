@@ -21,8 +21,8 @@ public class RightOptionAdapter2 extends RecyclerView.Adapter<RightOptionAdapter
     public RightOptionAdapter2() {
     }
 
-    SmTotalPositionManager smTotalPositionManager = SmTotalPositionManager.getInstance();
-    ArrayList<SmPosition> positionHashMap = smTotalPositionManager.getPositionList();
+    //SmTotalPositionManager smTotalPositionManager = SmTotalPositionManager.getInstance();
+    ArrayList<SmPosition> positionHashMap = new ArrayList<>();
 
     //아이템 뷰를 저장하는 뷰홀더 클래스
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,6 +53,10 @@ public class RightOptionAdapter2 extends RecyclerView.Adapter<RightOptionAdapter
     //생성자에서 데이터 리스트 객체를 전달받음.
     RightOptionAdapter2(ArrayList<SmPosition> positionList) {
         positionHashMap = positionList;
+    }
+
+    public void setPositionHashMap(ArrayList<SmPosition> positionArrayList) {
+        positionHashMap = positionArrayList;
     }
 
     //onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴

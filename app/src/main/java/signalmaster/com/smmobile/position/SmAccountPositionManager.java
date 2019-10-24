@@ -1,5 +1,6 @@
 package signalmaster.com.smmobile.position;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SmAccountPositionManager {
@@ -8,6 +9,15 @@ public class SmAccountPositionManager {
 
     public String getAccountNo() {
         return accountNo;
+    }
+    // 계좌에 속한 포지션 목록을 반환한다.
+    public ArrayList<SmPosition> getPositionList() {
+        ArrayList<SmPosition> positions = new ArrayList<>();
+        for(SmPosition ele : positionHashMap.values()) {
+            if (ele.openQty != 0)
+                positions.add(ele);
+        }
+        return positions;
     }
 
     public void setAccountNo(String accountNo) {

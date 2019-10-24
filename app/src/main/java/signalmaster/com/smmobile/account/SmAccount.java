@@ -27,4 +27,6 @@ public class SmAccount {
     public String password;
     public double fee;
     public double total_trade_pl;
+    // 계좌 타입
+    public int acccountType;
 }

@@ -50,6 +50,7 @@ import signalmaster.com.smmobile.Adapter.MainbarAdapter;
 import signalmaster.com.smmobile.OrderUI.PositionListActivity;
 import signalmaster.com.smmobile.OrderUI.TradeRecordActivity;
 import signalmaster.com.smmobile.Util.SmArgManager;
+import signalmaster.com.smmobile.account.AccountActivity;
 import signalmaster.com.smmobile.crobo.SmCroboFragment;
 import signalmaster.com.smmobile.crobo.SmCroboLevelFragment;
 import signalmaster.com.smmobile.crobo.SmCroboQuestionFragment;
@@ -401,9 +402,11 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         recentAdapter = new RecentAdapter();
         recentRecyclerView.setAdapter(recentAdapter);
         recentAdapter.setOnItemClickListener(new RecentAdapter.OnItemClickListener() {
+            // 거래 기록을 눌렀을 때 이벤트 처리
             @Override
             public void onItemClick(View v, int position) {
-
+                int i = 0;
+                i = i + 1;
             }
         });
 

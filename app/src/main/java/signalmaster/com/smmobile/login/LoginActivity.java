@@ -226,8 +226,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         req_accepted_list = true;
         String user_id = SmUserManager.getInstance().getDefaultUser().id;
-        String account_no = SmAccountManager.getInstance().getDefaultAccountNo();
-        SmServiceManager.getInstance().requestAcceptedOrderList(user_id, account_no);
+        ArrayList<String> account_no_list = SmAccountManager.getInstance().getAccountNoList();
+        SmServiceManager.getInstance().requestAcceptedOrderList(user_id, account_no_list);
     }
 
     private boolean req_filled_list = false;
@@ -236,8 +236,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         req_filled_list = true;
         String user_id = SmUserManager.getInstance().getDefaultUser().id;
-        String account_no = SmAccountManager.getInstance().getDefaultAccountNo();
-        SmServiceManager.getInstance().requestFilledOrderList(user_id, account_no);
+        ArrayList<String> account_no_list = SmAccountManager.getInstance().getAccountNoList();
+        SmServiceManager.getInstance().requestFilledOrderList(user_id, account_no_list);
     }
 
     private boolean req_position_list = false;
@@ -246,8 +246,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         req_position_list = true;
         String user_id = SmUserManager.getInstance().getDefaultUser().id;
-        String account_no = SmAccountManager.getInstance().getDefaultAccountNo();
-        SmServiceManager.getInstance().requestPositionList(user_id, account_no);
+        ArrayList<String> account_no_list = SmAccountManager.getInstance().getAccountNoList();
+        SmServiceManager.getInstance().requestPositionList(user_id, account_no_list);
     }
 
     @Override

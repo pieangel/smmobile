@@ -339,6 +339,7 @@ public class SmProtocolManager implements Serializable {
             JSONArray data_array = (JSONArray) object.get("account");
             for (int i=0; i < data_array.length(); i++) {
                 JSONObject item = data_array.getJSONObject(i);
+                int account_type = item.getInt("account_type");
                 String account_no = item.getString("account_no");
                 String account_name = item.getString("account_name");
                 String password = item.getString("password");
@@ -349,6 +350,7 @@ public class SmProtocolManager implements Serializable {
                 double total_trade_pl = item.getDouble("total_trade_pl");
                 Log.d("TAG", "account_no:  -> " + account_no);
                 SmAccount account = SmAccountManager.getInstance().findAddAccount(account_no);
+                account.acccountType = account_type;
                 account.accountNo = account_no;
                 account.accountName = account_name;
                 account.password = password;

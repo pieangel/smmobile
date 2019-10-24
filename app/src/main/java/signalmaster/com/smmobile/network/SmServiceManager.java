@@ -3,6 +3,7 @@ package signalmaster.com.smmobile.network;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -414,12 +415,50 @@ public class SmServiceManager implements Serializable {
         }
     }
 
+    public void requestAcceptedOrderList(String user_id, ArrayList<String> account_no_list) {
+        try {
+            JSONObject json_object = new JSONObject();
+            json_object.put("req_id", SmProtocol.req_accepted_order_list.ordinal());
+            json_object.put("user_id",user_id);
+            JSONArray account_list = new JSONArray();
+            for(int i = 0; i < account_no_list.size(); ++i) {
+                account_list.put(account_no_list.get(i));
+            }
+            json_object.put("account_no_list", account_list);
+            String msg = json_object.toString();
+            SmSocketHandler socketHandler = SmSocketHandler.getInstance();
+            socketHandler.sendMessage(msg);
+        }
+        catch(JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void requestFilledOrderList(String user_id, String account_no) {
         try {
             JSONObject json_object = new JSONObject();
             json_object.put("req_id", SmProtocol.req_filled_order_list.ordinal());
             json_object.put("user_id",user_id);
             json_object.put("account_no", account_no);
+            String msg = json_object.toString();
+            SmSocketHandler socketHandler = SmSocketHandler.getInstance();
+            socketHandler.sendMessage(msg);
+        }
+        catch(JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void requestFilledOrderList(String user_id, ArrayList<String> account_no_list) {
+        try {
+            JSONObject json_object = new JSONObject();
+            json_object.put("req_id", SmProtocol.req_filled_order_list.ordinal());
+            json_object.put("user_id",user_id);
+            JSONArray account_list = new JSONArray();
+            for(int i = 0; i < account_no_list.size(); ++i) {
+                account_list.put(account_no_list.get(i));
+            }
+            json_object.put("account_no_list", account_list);
             String msg = json_object.toString();
             SmSocketHandler socketHandler = SmSocketHandler.getInstance();
             socketHandler.sendMessage(msg);
@@ -467,6 +506,25 @@ public class SmServiceManager implements Serializable {
             json_object.put("req_id", SmProtocol.req_position_list.ordinal());
             json_object.put("user_id",user_id);
             json_object.put("account_no", account_no);
+            String msg = json_object.toString();
+            SmSocketHandler socketHandler = SmSocketHandler.getInstance();
+            socketHandler.sendMessage(msg);
+        }
+        catch(JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void requestPositionList(String user_id, ArrayList<String> account_no_list) {
+        try {
+            JSONObject json_object = new JSONObject();
+            json_object.put("req_id", SmProtocol.req_position_list.ordinal());
+            json_object.put("user_id",user_id);
+            JSONArray account_list = new JSONArray();
+            for(int i = 0; i < account_no_list.size(); ++i) {
+                account_list.put(account_no_list.get(i));
+            }
+            json_object.put("account_no_list", account_list);
             String msg = json_object.toString();
             SmSocketHandler socketHandler = SmSocketHandler.getInstance();
             socketHandler.sendMessage(msg);
