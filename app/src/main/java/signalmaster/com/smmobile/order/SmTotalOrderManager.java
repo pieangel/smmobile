@@ -164,11 +164,9 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
         SmUser user = SmUserManager.getInstance().getDefaultUser();
         if (user == null)
             return;
-        SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
-        if (account == null)
-            return;
+        ArrayList<String> accountArrayList = SmAccountManager.getInstance().getAccountNoList();
 
-        SmServiceManager.getInstance().requestPositionList(user.id, account.accountNo);
+        SmServiceManager.getInstance().requestPositionList(user.id, accountArrayList);
     }
 
     public void requestOrderList() {
@@ -178,10 +176,8 @@ public class SmTotalOrderManager extends  SmOrderManager implements Serializable
         SmUser user = SmUserManager.getInstance().getDefaultUser();
         if (user == null)
             return;
-        SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
-        if (account == null)
-            return;
-        SmServiceManager.getInstance().requestOrderList(formattedDate, user.id, account.accountNo);
+        ArrayList<String> accountArrayList = SmAccountManager.getInstance().getAccountNoList();
+        SmServiceManager.getInstance().requestOrderList(formattedDate, user.id, accountArrayList);
     }
 
     public ArrayList<SmOrder> getOrderList() {

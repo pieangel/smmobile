@@ -241,7 +241,7 @@ public class SheetTemplate1 {
             // 평균가
             setData(sheet, 1, 2, String.format("%,.2f", position.avgPrice));
             //평가손익
-            setData(sheet, 1, 4, String.format("%,.2f", position.openPL));
+            setData(sheet, 1, 4, String.format("%,.0f", position.openPL));
 
             if (symbol != null) {
                 double div = Math.pow(10, symbol.decimal);

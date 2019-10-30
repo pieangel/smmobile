@@ -16,7 +16,7 @@ public class SmPosition {
     // 잔고
     public int openQty;
     // 수수료
-    public double fee;
+    public double feeCount;
     // 매매손익
     public double tradePL;
     // 평가손익

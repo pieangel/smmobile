@@ -11,35 +11,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.scichart.charting.ClipMode;
 import com.scichart.charting.Direction2D;
 import com.scichart.charting.model.AnnotationCollection;
 import com.scichart.charting.model.RenderableSeriesCollection;
-import com.scichart.charting.model.dataSeries.IDataSeries;
 import com.scichart.charting.model.dataSeries.IOhlcDataSeries;
-import com.scichart.charting.model.dataSeries.IXyDataSeries;
 import com.scichart.charting.model.dataSeries.OhlcDataSeries;
 import com.scichart.charting.model.dataSeries.XyDataSeries;
 import com.scichart.charting.model.dataSeries.XyyDataSeries;
-import com.scichart.charting.modifiers.AnnotationCreationModifier;
 import com.scichart.charting.modifiers.AxisDragModifierBase;
-import com.scichart.charting.modifiers.DefaultAnnotationFactory;
 import com.scichart.charting.modifiers.ExecuteOn;
-import com.scichart.charting.modifiers.IAnnotationFactory;
 import com.scichart.charting.modifiers.ZoomExtentsModifier;
 import com.scichart.charting.numerics.labelProviders.ICategoryLabelProvider;
 import com.scichart.charting.numerics.labelProviders.NumericLabelProvider;
-import com.scichart.charting.visuals.ISciChartSurface;
 import com.scichart.charting.visuals.SciChartSurface;
 import com.scichart.charting.visuals.annotations.AnnotationCoordinateMode;
 import com.scichart.charting.visuals.annotations.AxisMarkerAnnotation;
 import com.scichart.charting.visuals.annotations.CustomAnnotation;
 import com.scichart.charting.visuals.annotations.HorizontalAnchorPoint;
 import com.scichart.charting.visuals.annotations.HorizontalLineAnnotation;
-import com.scichart.charting.visuals.annotations.IAnnotation;
 import com.scichart.charting.visuals.annotations.LabelPlacement;
 import com.scichart.charting.visuals.annotations.TextAnnotation;
 import com.scichart.charting.visuals.annotations.VerticalAnchorPoint;
@@ -53,12 +45,10 @@ import com.scichart.charting.visuals.renderableSeries.FastCandlestickRenderableS
 import com.scichart.charting.visuals.renderableSeries.FastLineRenderableSeries;
 import com.scichart.charting.visuals.renderableSeries.FastMountainRenderableSeries;
 import com.scichart.charting.visuals.renderableSeries.FastOhlcRenderableSeries;
-import com.scichart.charting.visuals.renderableSeries.IRenderableSeries;
 import com.scichart.charting.visuals.synchronization.SciChartVerticalGroup;
 import com.scichart.core.common.Action1;
 import com.scichart.core.framework.UpdateSuspender;
 import com.scichart.data.model.DoubleRange;
-import com.scichart.data.model.IRange;
 import com.scichart.data.numerics.SearchMode;
 import com.scichart.drawing.common.BrushStyle;
 import com.scichart.drawing.common.PenStyle;
@@ -67,11 +57,9 @@ import com.scichart.drawing.common.SolidPenStyle;
 import com.scichart.drawing.utility.ColorUtil;
 import com.scichart.extensions.builders.SciChartBuilder;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -81,35 +69,24 @@ import java.util.SortedMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import signalmaster.com.smmobile.R;
-import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.account.SmAccount;
 import signalmaster.com.smmobile.account.SmAccountManager;
 import signalmaster.com.smmobile.annotation.SmCurrentValueView;
 import signalmaster.com.smmobile.annotation.SmOrderView;
 import signalmaster.com.smmobile.annotation.SmValueAnnotation;
 import signalmaster.com.smmobile.data.MovingAverage;
-import signalmaster.com.smmobile.data.PriceBar;
 import signalmaster.com.smmobile.data.SmChartData;
 import signalmaster.com.smmobile.data.SmChartDataItem;
 import signalmaster.com.smmobile.data.SmChartDataManager;
 import signalmaster.com.smmobile.data.SmChartDataService;
 import signalmaster.com.smmobile.global.SmConst;
-import signalmaster.com.smmobile.index.SmIndex;
 import signalmaster.com.smmobile.market.SmMarketManager;
-import signalmaster.com.smmobile.network.SmServiceManager;
 import signalmaster.com.smmobile.order.SmOrder;
 import signalmaster.com.smmobile.order.SmOrderState;
 import signalmaster.com.smmobile.order.SmTotalOrderManager;
 import signalmaster.com.smmobile.position.SmPositionType;
 import signalmaster.com.smmobile.symbol.SmSymbol;
 import signalmaster.com.smmobile.symbol.SmSymbolManager;
-import signalmaster.com.smmobile.system.SmSystem;
-import signalmaster.com.smmobile.annotation.ChartSetting;
-import signalmaster.com.smmobile.annotation.ChartTouchModifier;
-import signalmaster.com.smmobile.annotation.SmCreateTouch;
-import signalmaster.com.smmobile.annotation.SmDeleteTouch;
-import signalmaster.com.smmobile.annotation.SmJeepyoTouch;
-import signalmaster.com.smmobile.data.PriceSeries;
 
 import static com.scichart.core.utility.Dispatcher.runOnUiThread;
 import static java.lang.Math.min;
@@ -814,8 +791,8 @@ public class SmChartFragment extends Fragment {
         initChartStyle();
         // 차트 배경을 설정한다.
         setBackground();
-        // 차트 데이터를 설정한다.
-        initChartData();
+        // 차트 정보를 설정한다.
+        initChartInfo();
         // 차트 타이틀을 설정한다.
         createChartTitle();
         // 시리즈 타입을 설정한다.
@@ -835,12 +812,11 @@ public class SmChartFragment extends Fragment {
         // 차트 콜백 이벤트를 등록해 준다.
         registerChartDataCallback();
         // 차트 데이터를 설정한다.
-        setChartData();
+        checkChartData();
     }
 
     private boolean chartDataInit = false;
-
-    private void setChartData() {
+    private void checkChartData() {
         SmChartDataManager chartDataManager = SmChartDataManager.getInstance();
         // 차트데이터를 만든다.
         this.chartData = chartDataManager.createChartData(this.symbolCode , this.chartType, this.chartCycle);
@@ -855,7 +831,6 @@ public class SmChartFragment extends Fragment {
         else {
             // 차트데이터를 설정한다.
             setChartData(this.chartData);
-            // 주문을 설정한다.
             loadOrders();
         }
     }
@@ -866,24 +841,6 @@ public class SmChartFragment extends Fragment {
         zoomExtentsModifier.setDirection(Direction2D.XyDirection);
         zoomExtentsModifier.setExecuteOn(ExecuteOn.LongPress);
         zoomExtentsModifier.setIsAnimated(true);
-    }
-
-    // 차트 데이터를 요청한다.
-    public void requestChartData() {
-        SmChartDataManager chartDataManager = SmChartDataManager.getInstance();
-        // 차트데이터를 만든다.
-        this.chartData = chartDataManager.createChartData(this.symbolCode , this.chartType, this.chartCycle);
-        // 최신 데이터가 아니면 차트데이터를 요청한다.
-        if (!this.chartData.isUptodate()) {
-            // 서버에 차트 데이터를 요청한다.
-            chartDataManager.requestChartData(this.chartData);
-        }
-        else {
-            setChartData(this.chartData);
-            createChartTitle();
-            setChartTitle();
-            loadOrders();
-        }
     }
 
     // 차트 콜백은 데이터 키로 한다. 같은 데이터 키를 가진 프레임은 모두 전달해 준다.
@@ -902,7 +859,7 @@ public class SmChartFragment extends Fragment {
 
     // 차트 데이터를 초기화 한다.
     // 차트 종목, 차트 타입, 주기를 설정한다.
-    public void initChartData() {
+    public void initChartInfo() {
         Intent i = getActivity().getIntent();
         // 여기서 저장된 차트 데이터 정보를 가져온다.
         // 액티비티에서 건네준 종목 명을 받는다.
@@ -1551,19 +1508,6 @@ public class SmChartFragment extends Fragment {
         try {
             if (chart_data == null)
                 return;
-            /*
-            SortedMap<String, SmChartDataItem> dataMap = chart_data.getDataMap();
-            int total_count = dataMap.size();
-            int index = 0;
-            for(SmChartDataItem item : dataMap.values()) {
-                index++;
-                if (index == total_count)
-                    item.isLast = true;
-                else
-                    item.isLast = false;
-                addChartData(item);
-            }
-            */
 
             // 봉데이터 추가
             if (ohlcDataSeries != null) {
@@ -1581,7 +1525,6 @@ public class SmChartFragment extends Fragment {
             // 주기 데이터가 아닐때만 줌을 맞춰 준다.
             surface.zoomExtents();
 
-            loadOrders();
             SmSymbol symbol = SmSymbolManager.getInstance().findSymbol(chartData.symbolCode);
             if (symbol != null) {
                 updateSise(symbol);
@@ -1757,7 +1700,7 @@ public class SmChartFragment extends Fragment {
         this.chartType = chartType;
         this.chartCycle = cycle;
         // 차트데이터를 설정한다.
-        setChartData();
+        checkChartData();
     }
 
     public void onSymbolChanged(String newSymbolCode) {
@@ -1786,7 +1729,7 @@ public class SmChartFragment extends Fragment {
     public void loadOrders(String symbolCode) {
         if (symbolCode == null)
             return;
-        SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
+        SmAccount account = SmAccountManager.getInstance().getDefaultAccount(symbolCode);
         if (account == null)
             return;
 
@@ -1797,9 +1740,11 @@ public class SmChartFragment extends Fragment {
     }
 
     private void loadOrders() {
+        if (this.style != "mock_main")
+            return;
         if (this.symbolCode == null)
             return;
-        SmAccount account = SmAccountManager.getInstance().getDefaultAccount();
+        SmAccount account = SmAccountManager.getInstance().getDefaultAccount(symbolCode);
         if (account == null)
             return;
 
@@ -1920,6 +1865,9 @@ public class SmChartFragment extends Fragment {
                     return;
                 if (symbol.code.compareTo(symbolCode) != 0)
                     return;
+                if (symbol.code.compareTo(lastDataItem.symbolCode) != 0)
+                    return;
+
                 double div = Math.pow(10, symbol.decimal);
                 double vc = (symbol.quote.C / div);
                 lastDataItem.close = vc;
@@ -2152,6 +2100,7 @@ public class SmChartFragment extends Fragment {
             return null;
 
         try {
+            // 이미 주문이 있는지 검사한다.
             if (existOrder(order))
                 return null;
             // 이미 청산된 주문은 생성하지 않는다.

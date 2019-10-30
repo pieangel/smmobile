@@ -16,6 +16,8 @@ import java.util.Locale;
 
 import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.autoorder.SmAutoFragment;
+import signalmaster.com.smmobile.global.SmConst;
+import signalmaster.com.smmobile.global.SmGlobal;
 import signalmaster.com.smmobile.mock.SmPrChartFragment;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.position.SmTotalPositionManager;
@@ -118,7 +120,7 @@ public class RightOptionAdapter extends RecyclerView.Adapter<RightOptionAdapter.
         String avgPrice = String.format(Locale.getDefault(),"%.2f",positionHashMap.get(position).avgPrice);
         String openQty = Integer.toString(positionHashMap.get(position).openQty);
         String openPL = String.format(Locale.getDefault(),"%.0f",positionHashMap.get(position).openPL);
-        double pure_profit_loss = positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL - positionHashMap.get(position).fee;
+        double pure_profit_loss = positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL - positionHashMap.get(position).feeCount* SmConst.getFee(symbolCode);
         String purePL = String.format(Locale.getDefault(),"%.0f",pure_profit_loss);
 
         //수량

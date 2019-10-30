@@ -102,6 +102,8 @@ public class SmSymSelectAdapter extends RecyclerView.Adapter<SmSymSelectAdapter.
     private SmSymbol selectSymbol = null;
 
     public SmSymbol getSelectSymbol() {
+        if (selectedPosition < 0 || selectedPosition >= _symList.size())
+            return null;
         selectSymbol = _symList.get(selectedPosition);
         return selectSymbol;
     }

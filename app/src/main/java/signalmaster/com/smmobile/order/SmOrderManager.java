@@ -64,6 +64,13 @@ public class SmOrderManager {
             acceptedOrderMap.remove(order.orderNo);
         }
 
+        // 청산된 주문일 경우 먼저 체결 목록에서 제거해 준다.
+        if (order.orderState == SmOrderState.Settled) {
+            if (filledOrderMap.containsKey(order.orderNo)) {
+                filledOrderMap.remove(order.orderNo);
+            }
+        }
+
         if (order.orderState == SmOrderState.Filled) {
             // 체결된 주문에 추가한다.
             filledOrderMap.put(order.orderNo, order);

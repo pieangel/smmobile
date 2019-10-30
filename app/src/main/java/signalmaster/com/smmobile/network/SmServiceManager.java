@@ -500,6 +500,24 @@ public class SmServiceManager implements Serializable {
         }
     }
 
+    public void requestOrderList(String date_time, String user_id, ArrayList<String> account_no_list) {
+        try {
+            for(int i = 0; i < account_no_list.size(); ++i) {
+                JSONObject json_object = new JSONObject();
+                json_object.put("req_id", SmProtocol.req_order_list.ordinal());
+                json_object.put("user_id", user_id);
+                json_object.put("account_no", account_no_list.get(i));
+                json_object.put("request_date", date_time);
+                String msg = json_object.toString();
+                SmSocketHandler socketHandler = SmSocketHandler.getInstance();
+                socketHandler.sendMessage(msg);
+            }
+        }
+        catch(JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void requestPositionList(String user_id, String account_no) {
         try {
             JSONObject json_object = new JSONObject();

@@ -150,7 +150,7 @@ public class SmAutoFragment extends Fragment {
                     return;
                 }
                 SmAccountManager accountManager = SmAccountManager.getInstance();
-                SmAccount account = accountManager.getDefaultAccount();
+                SmAccount account = accountManager.getDefaultAccount(symbolCode);
                 if (account == null)
                     return;
                 SmSymbol symbol1 = SmSymbolManager.getInstance().findSymbol(symbolCode);
@@ -187,7 +187,7 @@ public class SmAutoFragment extends Fragment {
                     return;
                 }
                 SmAccountManager accountManager = SmAccountManager.getInstance();
-                SmAccount account = accountManager.getDefaultAccount();
+                SmAccount account = accountManager.getDefaultAccount(symbolCode);
                 if (account == null)
                     return;
                 SmSymbol symbol1 = SmSymbolManager.getInstance().findSymbol(symbolCode);
@@ -247,7 +247,7 @@ public class SmAutoFragment extends Fragment {
 
     private void initPosition() {
         SmAccountManager accountManager = SmAccountManager.getInstance();
-        String acno = accountManager.getDefaultAccountNo();
+        String acno = accountManager.getDefaultAccountNo(symbolCode);
         if (acno == null)
             return;
         SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
@@ -499,6 +499,9 @@ public class SmAutoFragment extends Fragment {
     }
 
     public void updatePosition(SmPosition position) {
+        if (mTableView == null)
+            return;
+
         if (position == null || position.openQty == 0) {
             clearPositionInfo();
             return;
@@ -525,7 +528,7 @@ public class SmAutoFragment extends Fragment {
             // 평균가
             setData(sheet, 1, 2, String.format("%,.2f", position.avgPrice));
             //평가손익
-            setData(sheet, 1, 4, String.format("%,.2f", position.openPL));
+            setData(sheet, 1, 4, String.format("%,.0f", position.openPL));
 
             SmSymbol symbol = SmSymbolManager.getInstance().findSymbol(position.symbolCode);
             if (symbol != null) {

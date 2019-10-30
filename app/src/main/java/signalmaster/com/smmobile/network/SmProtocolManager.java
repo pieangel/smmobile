@@ -346,10 +346,10 @@ public class SmProtocolManager implements Serializable {
                 double initial_balance = item.getDouble("initial_balance");
                 double trade_profit_loss = item.getDouble("trade_profit_loss");
                 double open_profit_loss = item.getDouble("open_profit_loss");
-                double fee = item.getDouble("fee");
+                double fee_count = item.getDouble("fee_count");
                 double total_trade_pl = item.getDouble("total_trade_pl");
                 Log.d("TAG", "account_no:  -> " + account_no);
-                SmAccount account = SmAccountManager.getInstance().findAddAccount(account_no);
+                SmAccount account = new SmAccount();
                 account.acccountType = account_type;
                 account.accountNo = account_no;
                 account.accountName = account_name;
@@ -357,8 +357,9 @@ public class SmProtocolManager implements Serializable {
                 account.inital_balance = initial_balance;
                 account.trade_pl = trade_profit_loss;
                 account.open_pl = open_profit_loss;
-                account.fee = fee;
+                account.feeCount = fee_count;
                 account.total_trade_pl = total_trade_pl;
+                SmAccountManager.getInstance().AddAccount(account);
                 account_count++;
                 if (account_count == total_account_count) {
                     appState = SmGlobal.SmAppState.AccountListDownloaded;
@@ -454,6 +455,10 @@ public class SmProtocolManager implements Serializable {
                 order.systemName = item.getString("system_name");
                 order.fundName = item.getString("fund_name");
                 SmTotalOrderManager.getInstance().addFilledOrder(order);
+
+                SmChartDataService chartDataService = SmChartDataService.getInstance();
+                chartDataService.onOrder(order);
+
                 order_count++;
                 if (order_count == total_order_count) {
                     appState = SmGlobal.SmAppState.FilledListDownloaded;
@@ -529,7 +534,7 @@ public class SmProtocolManager implements Serializable {
                 String account_no = item.getString("account_no");
                 int position_type = item.getInt("position_type");
                 int open_qty = item.getInt("open_qty");
-                double fee = item.getDouble("fee");
+                double fee_count = item.getDouble("fee_count");
                 double trade_pl = item.getDouble("trade_profitloss");
                 double avg_price = item.getDouble("average_price");
                 double current_price = item.getDouble("current_price");
@@ -539,7 +544,7 @@ public class SmProtocolManager implements Serializable {
                 position.createTime = created_time;
                 position.positionType = SmPositionType.valueOf(position_type);
                 position.openQty = open_qty;
-                position.fee = fee;
+                position.feeCount = fee_count;
                 position.tradePL = trade_pl;
                 position.avgPrice = avg_price;
                 position.curPrice = current_price;
@@ -1402,12 +1407,12 @@ public class SmProtocolManager implements Serializable {
             String account_no = object.getString("account_no");
             int position_type = object.getInt("position_type");
             int open_qty = object.getInt("open_qty");
-            double fee = object.getDouble("fee");
+            double symbol_fee_count = object.getDouble("symbol_fee_count");
             double trade_pl = object.getDouble("trade_pl");
             double avg_price = object.getDouble("avg_price");
             double cur_price = object.getDouble("cur_price");
             double open_pl = object.getDouble("open_pl");
-            double account_fee = object.getDouble("account_fee");
+            double account_fee_count = object.getDouble("account_fee_count");
             double account_trade_pl = object.getDouble("account_trade_pl");
             double account_total_trade_pl = object.getDouble("account_total_trade_pl");
 
@@ -1416,7 +1421,7 @@ public class SmProtocolManager implements Serializable {
             position.fundName = fund_name;
             position.positionType = SmPositionType.valueOf(position_type);
             position.openQty = open_qty;
-            position.fee = fee;
+            position.feeCount = symbol_fee_count;
             position.tradePL = trade_pl;
             position.avgPrice = avg_price;
             position.curPrice = cur_price;
@@ -1424,7 +1429,7 @@ public class SmProtocolManager implements Serializable {
 
             SmAccount account = SmAccountManager.getInstance().findAccount(account_no);
             if (account != null) {
-                account.fee = account_fee;
+                account.feeCount = account_fee_count;
                 account.trade_pl = account_trade_pl;
                 account.total_trade_pl = account_total_trade_pl;
             }

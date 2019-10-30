@@ -24,6 +24,15 @@ public class SmAccountPositionManager {
         this.accountNo = accountNo;
     }
 
+    public double getOpenPL() {
+        double openPL = 0.0;
+        for(SmPosition ele : positionHashMap.values()) {
+            openPL += ele.openPL;
+        }
+
+        return openPL;
+    }
+
     public void addPosition(SmPosition position) {
         if (position == null)
             return;
@@ -38,13 +47,5 @@ public class SmAccountPositionManager {
         }
 
         return null;
-    }
-
-    public double getFee() {
-        double sum = 0.0;
-        for(SmPosition ele : positionHashMap.values()) {
-            sum += ele.fee;
-        }
-        return sum;
     }
 }

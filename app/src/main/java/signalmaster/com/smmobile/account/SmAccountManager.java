@@ -61,49 +61,38 @@ public class SmAccountManager implements Serializable {
         return accountNoList;
     }
 
+    private SmAccount domesticAccount = null;
+    private SmAccount abroadAccount = null;
+
     public void clearAccountList() {
         accountHashMap.clear();
     }
 
-    public void addAccount(SmAccount account) {
+    public void AddAccount(SmAccount account) {
         if (account == null)
             return;
-        defaultAccount = account;
+        if (account.acccountType == 0)
+            abroadAccount = account;
+        else
+            domesticAccount = account;
         accountHashMap.put(account.accountNo, account);
     }
 
-    public SmAccount findAddAccount(String account_no) {
-        if (accountHashMap.containsKey(account_no)) {
-            return accountHashMap.get(account_no);
+    public String getDefaultAccountNo(String symbolCode) {
+        char second = symbolCode.charAt(1);
+        if (isDigit(second)) {
+            return  domesticAccount != null ? domesticAccount.accountNo : null;
+        } else {
+            return  abroadAccount != null ? abroadAccount.accountNo : null;
         }
-
-        SmAccount account = new SmAccount();
-        account.accountNo = account_no;
-        defaultAccount = account;
-        accountHashMap.put(account_no, account);
-        return account;
-    }
-
-    private SmAccount defaultAccount = null;
-
-    public SmAccount getDefaultAccount() {
-        return defaultAccount;
-    }
-
-    public String getDefaultAccountNo() {
-        ArrayList<String> accountNoList = getAccountNoList();
-        if (accountNoList.size() > 0)
-            return accountNoList.get(0);
-        else
-            return null;
     }
 
     public SmAccount getDefaultAccount(String symbolCode) {
         char second = symbolCode.charAt(1);
         if (isDigit(second)) {
-            return  defaultAccount;
+            return  domesticAccount;
         } else {
-            return  defaultAccount;
+            return  abroadAccount;
         }
     }
 }

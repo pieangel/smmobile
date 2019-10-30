@@ -57,6 +57,7 @@ import signalmaster.com.smmobile.crobo.SmCroboQuestionFragment;
 import signalmaster.com.smmobile.expert.SmExpertFragment;
 import signalmaster.com.smmobile.favorite.SmFavoriteFragment;
 import signalmaster.com.smmobile.fund.SmFundFragment;
+import signalmaster.com.smmobile.global.SmConst;
 import signalmaster.com.smmobile.global.SmGlobal;
 import signalmaster.com.smmobile.login.LoginActivity;
 import signalmaster.com.smmobile.market.SmCategory;
@@ -80,6 +81,7 @@ import signalmaster.com.smmobile.symbol.SmSymbol;
 public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
     TextView feesTxt, pushTxt, orderSymSelectTxt;
+    TextView input_order_amount_text, push_order_amount_text, input_abroad_fee_text, push_abroad_fee_text, input_domestic_fee_text, push_domestic_fee_text;
     Button symSelectBtn, addFavoriteBtn, loginBtn, symExpertSelectBtn;
     ImageView indexSelectImg, chartSelectImg, lineSelectImg, mockMenuImg, recentImg, recentBackImg, optionListImg;
 
@@ -1200,27 +1202,26 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
             }
         });
 
-        feesTxt = (TextView) findViewById(R.id.feesTxt);
+        input_order_amount_text = (TextView) findViewById(R.id.input_order_amount_text);
 
         SharedPreferences s_pref= context.getSharedPreferences("order_info", Context.MODE_PRIVATE);
-        String  order_count = s_pref.getString("order_count", "");
+        String  order_count = s_pref.getString("order_amount", "");
         // 주문 갯수를 로드한다.
         if (order_count != null && order_count.length() > 0) {
             SmTotalOrderManager.defaultOrderAmount = Integer.parseInt(order_count);
         } else {
             order_count = "1";
         }
-        feesTxt.setText(order_count);
-
-        feesTxt.setOnClickListener(new View.OnClickListener() {
+        input_order_amount_text.setText(order_count);
+        input_order_amount_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NumberInputActivity.class);
                 startActivity(intent);
                 SmArgManager argManager = SmArgManager.getInstance();
                 //argManager.registerToMap("fees", "MainActivity", MainActivity.this);
-                argManager.registerToMap("input", "feesTxt", feesTxt);
-                argManager.registerToMap("input", "fees_value", feesTxt.getText().toString());
+                argManager.registerToMap("input", "input_order_amount_text", input_order_amount_text);
+                argManager.registerToMap("input", "order_amount_value", input_order_amount_text.getText().toString());
 
                 /*Intent intent = new Intent(MainActivity.this,NumberInputActivity.class);
                 intent.putExtra("fees_value",feesTxt.getText().toString());
@@ -1228,17 +1229,97 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
             }
         });
 
-        pushTxt = (TextView) findViewById(R.id.pushTxt);
-        pushTxt.setOnClickListener(new View.OnClickListener() {
+        push_order_amount_text = (TextView) findViewById(R.id.push_order_amount_text);
+        push_order_amount_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int order_count = Integer.parseInt(feesTxt.getText().toString());
+                int order_count = Integer.parseInt(input_order_amount_text.getText().toString());
                 SmTotalOrderManager.getInstance().defaultOrderAmount = order_count;
                 SharedPreferences s_pref= getSharedPreferences("order_info", MODE_PRIVATE);
                 SharedPreferences.Editor edit=s_pref.edit();
-                edit.putString("order_count", feesTxt.getText().toString());
+                edit.putString("order_amount", input_order_amount_text.getText().toString());
                 edit.commit();
-                Toast.makeText(MainActivity.this, "주문갯수가 " + feesTxt.getText() + "로 변경되었습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "주문갯수가 " + input_order_amount_text.getText() + "로 변경되었습니다.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        String  abroad_fee = s_pref.getString("abroad_fee", "4");
+        // 주문 갯수를 로드한다.
+        if (abroad_fee != null && abroad_fee.length() > 0) {
+            SmConst.AbroadFee = Integer.parseInt(abroad_fee);
+        } else {
+            abroad_fee = "4";
+        }
+
+        input_abroad_fee_text = (TextView) findViewById(R.id.input_abroad_fee_text);
+        input_abroad_fee_text.setText(abroad_fee);
+        input_abroad_fee_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NumberInputActivity.class);
+                startActivity(intent);
+                SmArgManager argManager = SmArgManager.getInstance();
+                //argManager.registerToMap("fees", "MainActivity", MainActivity.this);
+                argManager.registerToMap("input", "input_abroad_fee_text", input_abroad_fee_text);
+                argManager.registerToMap("input", "abroad_fee_value", input_abroad_fee_text.getText().toString());
+
+                /*Intent intent = new Intent(MainActivity.this,NumberInputActivity.class);
+                intent.putExtra("fees_value",feesTxt.getText().toString());
+                startActivity(intent);*/
+            }
+        });
+
+        push_abroad_fee_text = (TextView) findViewById(R.id.push_abroad_fee_text);
+        push_abroad_fee_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int order_count = Integer.parseInt(input_abroad_fee_text.getText().toString());
+                SmConst.AbroadFee = order_count;
+                SharedPreferences s_pref= getSharedPreferences("order_info", MODE_PRIVATE);
+                SharedPreferences.Editor edit=s_pref.edit();
+                edit.putString("abroad_fee", input_abroad_fee_text.getText().toString());
+                edit.commit();
+                Toast.makeText(MainActivity.this, "해외선물수수료가 " + input_abroad_fee_text.getText() + "로 변경되었습니다.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        String  domestic_fee = s_pref.getString("domestic_fee", "1000");
+        // 주문 갯수를 로드한다.
+        if (domestic_fee != null && domestic_fee.length() > 0) {
+            SmConst.DomesticFee = Integer.parseInt(domestic_fee);
+        } else {
+            domestic_fee = "1000";
+        }
+
+        input_domestic_fee_text = (TextView) findViewById(R.id.input_domestic_fee_text);
+        input_domestic_fee_text.setText(domestic_fee);
+        input_domestic_fee_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NumberInputActivity.class);
+                startActivity(intent);
+                SmArgManager argManager = SmArgManager.getInstance();
+                //argManager.registerToMap("fees", "MainActivity", MainActivity.this);
+                argManager.registerToMap("input", "input_domestic_fee_text", input_domestic_fee_text);
+                argManager.registerToMap("input", "domestic_fee_value", input_domestic_fee_text.getText().toString());
+
+                /*Intent intent = new Intent(MainActivity.this,NumberInputActivity.class);
+                intent.putExtra("fees_value",feesTxt.getText().toString());
+                startActivity(intent);*/
+            }
+        });
+
+        push_domestic_fee_text = (TextView) findViewById(R.id.push_abroad_fee_text);
+        push_domestic_fee_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int order_count = Integer.parseInt(input_domestic_fee_text.getText().toString());
+                SmConst.DomesticFee = order_count;
+                SharedPreferences s_pref= getSharedPreferences("order_info", MODE_PRIVATE);
+                SharedPreferences.Editor edit=s_pref.edit();
+                edit.putString("domestic_fee", input_domestic_fee_text.getText().toString());
+                edit.commit();
+                Toast.makeText(MainActivity.this, "국내선물수수료가 " + input_domestic_fee_text.getText() + "로 변경되었습니다.", Toast.LENGTH_LONG).show();
             }
         });
 

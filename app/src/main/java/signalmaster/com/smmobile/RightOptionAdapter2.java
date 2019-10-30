@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import signalmaster.com.smmobile.account.SmAccount;
 import signalmaster.com.smmobile.account.SmAccountManager;
+import signalmaster.com.smmobile.global.SmConst;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.position.SmTotalPositionManager;
 
@@ -84,7 +85,7 @@ public class RightOptionAdapter2 extends RecyclerView.Adapter<RightOptionAdapter
         holder.openPLTxt.setText(Double.toString(accountList.get(position).trade_pl+accountList.get(position).open_pl-0));*/
         String symbolCode = positionHashMap.get(position).symbolCode;
         String totalPL = String.format(Locale.getDefault(),"%.2f",positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL);
-        double fee = positionHashMap.get(position).fee;
+        double fee = positionHashMap.get(position).feeCount * SmConst.getFee(symbolCode);
         //총손익 - 수수료 = 순손익
         double pure_profit_loss = positionHashMap.get(position).tradePL + positionHashMap.get(position).openPL - fee;
         String openPL = String.format(Locale.getDefault(),"%.0f",pure_profit_loss);
@@ -96,7 +97,7 @@ public class RightOptionAdapter2 extends RecyclerView.Adapter<RightOptionAdapter
 
         String purePL = String.format(Locale.getDefault(),"%.0f",pure_profit_loss);
         //순손익
-        if(pure_profit_loss > 0){
+        if(pure_profit_loss < 0){
             holder.openPLTxt.setTextColor(Color.parseColor("#46962B"));
         }  else if(pure_profit_loss == 0){
             holder.openPLTxt.setTextColor(Color.parseColor("#000000"));

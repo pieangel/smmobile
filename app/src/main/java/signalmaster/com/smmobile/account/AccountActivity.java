@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import signalmaster.com.smmobile.R;
 import signalmaster.com.smmobile.RightOptionAdapter2;
+import signalmaster.com.smmobile.global.SmConst;
 import signalmaster.com.smmobile.position.SmPosition;
 import signalmaster.com.smmobile.position.SmTotalPositionManager;
 
@@ -57,29 +58,13 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
+        showAccountPL(0);
+
         //총손익
         profitRecyclerView = findViewById(R.id.profitRecyclerView);
         profitRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         positionListAdapter = new RightOptionAdapter2();
         profitRecyclerView.setAdapter(positionListAdapter);
-
-
-
-        if (acList.size() > 0) {
-            inital_balance.setText(String.format(Locale.getDefault(),"%.0f", acList.get(0).inital_balance));
-            double pure_profit_loss = acList.get(0).trade_pl - acList.get(0).fee;
-            totalPLTxt.setText(String.format(Locale.getDefault(),"%.0f",pure_profit_loss));
-
-            //순손익
-            if(pure_profit_loss > 0){
-                totalPLTxt.setTextColor(Color.parseColor("#46962B"));
-            }  else if(pure_profit_loss == 0){
-                totalPLTxt.setTextColor(Color.parseColor("#000000"));
-            } else {
-                totalPLTxt.setTextColor(Color.parseColor("#B14333"));
-            }
-        }
-
 
         accountSpinner = (Spinner)findViewById(R.id.accountSpinner);
         accountSpinner.setOnItemSelectedListener(
@@ -94,6 +79,7 @@ public class AccountActivity extends AppCompatActivity {
                         positionListAdapter.setPositionHashMap(positions);
                         // 데이터가 바뀌었음을 알린다.
                         positionListAdapter.notifyDataSetChanged();
+                        showAccountPL(pos);
                     }
                     public void onNothingSelected(AdapterView<?> parent) {
                     }
@@ -102,5 +88,32 @@ public class AccountActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.account_selector_item);
         accountSpinner.setAdapter(adapter);
 
+    }
+
+    public void showAccountPL(int pos) {
+        SmAccountManager smAccountManager = SmAccountManager.getInstance();
+        ArrayList<SmAccount> accountList = smAccountManager.getAccountList();
+        if (accountList.size() > 0) {
+            SmAccount account = accountList.get(pos);
+            double account_pl = SmTotalPositionManager.getInstance().getOpenPL(account.accountNo);
+            double pure_profit_loss = account_pl + account.trade_pl /* - account.feeCount * SmConst.getFee(account.acccountType) */;
+            if (account.acccountType == 1) {
+                totalPLTxt.setText(String.format(Locale.getDefault(), "%.0f", pure_profit_loss));
+                inital_balance.setText(String.format(Locale.getDefault(),"%.0f", account.inital_balance));
+            }
+            else {
+                totalPLTxt.setText(String.format(Locale.getDefault(), "%.2f", pure_profit_loss));
+                inital_balance.setText(String.format(Locale.getDefault(),"%.2f", account.inital_balance));
+            }
+
+            //순손익
+            if(pure_profit_loss < 0){
+                totalPLTxt.setTextColor(Color.parseColor("#46962B"));
+            }  else if(pure_profit_loss == 0){
+                totalPLTxt.setTextColor(Color.parseColor("#000000"));
+            } else {
+                totalPLTxt.setTextColor(Color.parseColor("#B14333"));
+            }
+        }
     }
 }

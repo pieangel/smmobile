@@ -2,6 +2,7 @@ package signalmaster.com.smmobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import signalmaster.com.smmobile.Util.SmArgManager;
+import signalmaster.com.smmobile.global.SmConst;
+import signalmaster.com.smmobile.order.SmTotalOrderManager;
 
 public class NumberInputActivity extends AppCompatActivity {
 
     TextView one, two, three, four, five, six, seven, eight, nine, zero;
-    TextView feesTxt,indicatorPeriod;
+    TextView display_text,indicatorPeriod;
     EditText inputNumberTxt;
     ImageView backSpaceImg, checkImg;
 
@@ -46,7 +49,17 @@ public class NumberInputActivity extends AppCompatActivity {
 
         //수수료 설정
         SmArgManager argManager = SmArgManager.getInstance();
-        fees_value = (String)argManager.getVal("input","fees_value");
+        fees_value = (String)argManager.getVal("input","order_amount_value");
+        if(fees_value != null) {
+            inputNumberTxt.setText(fees_value);
+        }
+
+        fees_value = (String)argManager.getVal("input","abroad_fee_value");
+        if(fees_value != null) {
+            inputNumberTxt.setText(fees_value);
+        }
+
+        fees_value = (String)argManager.getVal("input","domestic_fee_value");
         if(fees_value != null) {
             inputNumberTxt.setText(fees_value);
         }
@@ -135,15 +148,51 @@ public class NumberInputActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SmArgManager argManager = SmArgManager.getInstance();
                 //수수료 설정
-                feesTxt = (TextView)argManager.getVal("input","feesTxt");
-                if(feesTxt != null) {
-                    feesTxt.setText(inputNumberTxt.getText());
+                display_text = (TextView)argManager.getVal("input","input_order_amount_text");
+                if(display_text != null) {
+                    display_text.setText(inputNumberTxt.getText());
+                    int order_count = Integer.parseInt(inputNumberTxt.getText().toString());
+                    SmTotalOrderManager.getInstance().defaultOrderAmount = order_count;
+                    SharedPreferences s_pref= getSharedPreferences("order_info", MODE_PRIVATE);
+                    SharedPreferences.Editor edit=s_pref.edit();
+                    edit.putString("order_amount", inputNumberTxt.getText().toString());
+                    edit.commit();
+                    argManager.unregisterFromMap("input");
+                }
+
+                display_text = (TextView)argManager.getVal("input","input_abroad_fee_text");
+                if(display_text != null) {
+                    display_text.setText(inputNumberTxt.getText());
+
+                    int order_count = Integer.parseInt(inputNumberTxt.getText().toString());
+                    SmConst.AbroadFee = order_count;
+                    SharedPreferences s_pref= getSharedPreferences("order_info", MODE_PRIVATE);
+                    SharedPreferences.Editor edit=s_pref.edit();
+                    edit.putString("abroad_fee", inputNumberTxt.getText().toString());
+                    edit.commit();
+
+                    argManager.unregisterFromMap("input");
+                }
+
+                display_text = (TextView)argManager.getVal("input","input_domestic_fee_text");
+                if(display_text != null) {
+                    display_text.setText(inputNumberTxt.getText());
+
+                    int order_count = Integer.parseInt(inputNumberTxt.getText().toString());
+                    SmConst.DomesticFee = order_count;
+                    SharedPreferences s_pref= getSharedPreferences("order_info", MODE_PRIVATE);
+                    SharedPreferences.Editor edit=s_pref.edit();
+                    edit.putString("domestic_fee", inputNumberTxt.getText().toString());
+                    edit.commit();
+
+                    argManager.unregisterFromMap("input");
                 }
 
                 //지표 기간 설정
                 indicatorPeriod = (TextView)argManager.getVal("input","periodTxt");
                 if(indicatorPeriod != null){
                     indicatorPeriod.setText(inputNumberTxt.getText());
+                    argManager.unregisterFromMap("input");
                 }
                 finish();
             }

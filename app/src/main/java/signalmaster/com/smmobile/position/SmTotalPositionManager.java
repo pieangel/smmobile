@@ -129,6 +129,12 @@ public class SmTotalPositionManager implements Serializable {
         return accountPositionManager;
     }
 
+    public double getOpenPL(String account_no) {
+        if (accountPositionManagerHashMap.containsKey(account_no))
+            return accountPositionManagerHashMap.get(account_no).getOpenPL();
+        return 0.0;
+    }
+
     public static double getOpenProfit(SmPosition position) {
         if (position == null)
             return 0.0;

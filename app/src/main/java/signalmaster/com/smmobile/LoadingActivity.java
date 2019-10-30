@@ -160,36 +160,6 @@ public class LoadingActivity extends Activity {
         };
     }
 
-    private boolean req_accepted_list = false;
-    private void requestAcceptedList() {
-        if (req_accepted_list)
-            return;
-        req_accepted_list = true;
-        String user_id = SmUserManager.getInstance().getDefaultUser().id;
-        String account_no = SmAccountManager.getInstance().getDefaultAccountNo();
-        SmServiceManager.getInstance().requestAcceptedOrderList(user_id, account_no);
-    }
-
-    private boolean req_filled_list = false;
-    private void requestFilledList() {
-        if (req_filled_list)
-            return;
-        req_filled_list = true;
-        String user_id = SmUserManager.getInstance().getDefaultUser().id;
-        String account_no = SmAccountManager.getInstance().getDefaultAccountNo();
-        SmServiceManager.getInstance().requestFilledOrderList(user_id, account_no);
-    }
-
-    private boolean req_position_list = false;
-    private void requestPositionList() {
-        if (req_position_list)
-            return;
-        req_position_list = true;
-        String user_id = SmUserManager.getInstance().getDefaultUser().id;
-        String account_no = SmAccountManager.getInstance().getDefaultAccountNo();
-        SmServiceManager.getInstance().requestPositionList(user_id, account_no);
-    }
-
     private void loadMainActivity(){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
@@ -280,15 +250,11 @@ public class LoadingActivity extends Activity {
     public void requestAllRecentSise() {
         SmServiceManager serviceManager = SmServiceManager.getInstance();
         serviceManager.requestAllRecentMonthSise();
-        SmProtocolManager protocolManager = SmProtocolManager.getInstance();
-        //protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentSise);
     }
 
     public void requestAllRecentHoga() {
         SmServiceManager serviceManager = SmServiceManager.getInstance();
         serviceManager.requestAllRecentMonthHoga();
-        SmProtocolManager protocolManager = SmProtocolManager.getInstance();
-        //protocolManager.setAppState(SmGlobal.SmAppState.ReceivedRecentHoga);
     }
 
     public void registerRealtimeSymbol() {

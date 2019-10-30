@@ -22,10 +22,8 @@ public class SmAccount {
     public double open_pl;
     //총손익
     public double total_pl;
-    //수수료
-    public double total_fee;
     public String password;
-    public double fee;
+    public double feeCount;
     public double total_trade_pl;
     // 계좌 타입
     public int acccountType;

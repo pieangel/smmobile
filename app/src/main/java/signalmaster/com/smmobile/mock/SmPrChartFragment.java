@@ -61,6 +61,7 @@ import signalmaster.com.smmobile.ui.SmChartTypeOption;
 import signalmaster.com.smmobile.ui.SmListenerManger;
 import signalmaster.com.smmobile.userinfo.SmUserManager;
 
+import static android.view.Gravity.CENTER;
 import static com.rayject.table.view.TableView.TAG;
 import static com.scichart.core.utility.Dispatcher.runOnUiThread;
 import static java.lang.Character.isDigit;
@@ -111,7 +112,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
 
     private void initPosition() {
         SmAccountManager accountManager = SmAccountManager.getInstance();
-        String acno = accountManager.getDefaultAccountNo();
+        String acno = accountManager.getDefaultAccountNo(symbolCode);
         if (acno == null)
             return;
         SmTotalPositionManager totalPositionManager = SmTotalPositionManager.getInstance();
@@ -149,8 +150,6 @@ public class SmPrChartFragment extends Fragment implements Serializable {
 
             getActivity().getIntent().putExtra("symbolCode", symbol.code);
             symbolCode = symbol.code;
-
-
         }
 
 
@@ -189,8 +188,11 @@ public class SmPrChartFragment extends Fragment implements Serializable {
         final View _chartView = inflater.inflate(R.layout.pr_port_chart, container, false);
 
         open_qty = (TextView)_chartView.findViewById(R.id.open_qty);
+        open_qty.setTextAlignment(_chartView.TEXT_ALIGNMENT_CENTER);
         position_profit = (TextView)_chartView.findViewById(R.id.position_profit);
+        position_profit.setTextAlignment(_chartView.TEXT_ALIGNMENT_CENTER);
         average_text = _chartView.findViewById(R.id.avg);
+        average_text.setTextAlignment(_chartView.TEXT_ALIGNMENT_CENTER);
 
         //View view = inflater.inflate(R.layout.pr_port_chart, container, false);
         FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -352,7 +354,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
                 if (symbol == null)
                     return;
                 SmAccountManager accountManager = SmAccountManager.getInstance();
-                SmAccount account = accountManager.getDefaultAccount();
+                SmAccount account = accountManager.getDefaultAccount(symbolCode);
                 if (account == null)
                     return;
                 SmOrderRequest request = new SmOrderRequest();
@@ -388,7 +390,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
                 if (symbol == null)
                     return;
                 SmAccountManager accountManager = SmAccountManager.getInstance();
-                SmAccount account = accountManager.getDefaultAccount();
+                SmAccount account = accountManager.getDefaultAccount(symbolCode);
                 if (account == null)
                     return;
                 SmOrderRequest request = new SmOrderRequest();
@@ -679,7 +681,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
             average_text.setText(String.format("%,.2f", position.avgPrice));
         }
         if (position_profit != null) {
-            double total_profit = position.openPL + position.tradePL;
+            double total_profit = position.openPL;
             if (0 > total_profit)
                 position_profit.setTextColor(Color.BLUE);
             else if (0 < total_profit)
