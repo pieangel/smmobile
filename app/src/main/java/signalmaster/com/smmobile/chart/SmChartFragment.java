@@ -813,6 +813,14 @@ public class SmChartFragment extends Fragment {
         registerChartDataCallback();
         // 차트 데이터를 설정한다.
         checkChartData();
+        // 시세를 설정한다.
+        updateSise();
+    }
+
+    private void updateSise() {
+        SmSymbolManager symbolManager = SmSymbolManager.getInstance();
+        SmSymbol symbol = symbolManager.findSymbol(symbolCode);
+        updateSise(symbol);
     }
 
     private boolean chartDataInit = false;
@@ -1974,12 +1982,10 @@ public class SmChartFragment extends Fragment {
     }
 
     private void updateCurrentAnnotaionView(final SmSymbol symbol) {
-        if (symbol == null || lastDataItem == null)
-            return;
-
-        if (currentValueAnnotation != null)
-            currentValueAnnotation.setBackgroundColor(lastDataItem.close >= lastDataItem.open ? STOKE_UP_COLOR : STROKE_DOWN_COLOR);
-        if (currentTextAnnotation != null) {
+        if (lastDataItem != null && currentValueAnnotation != null) {
+             currentValueAnnotation.setBackgroundColor(lastDataItem.close >= lastDataItem.open ? STOKE_UP_COLOR : STROKE_DOWN_COLOR);
+        }
+        if (symbol != null && currentTextAnnotation != null) {
             double div = Math.pow(10, symbol.decimal);
             double vc = (symbol.quote.C / div);
             SmCurrentValueView currentValueView = currentTextAnnotation.getValueView();
