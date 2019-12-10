@@ -12,11 +12,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import signalmaster.com.smmobile.Adapter.OptionAdapter;
-import signalmaster.com.smmobile.chart.SmChartFragment;
-import signalmaster.com.smmobile.chart.SmChartType;
-import signalmaster.com.smmobile.data.SmChartData;
-import signalmaster.com.smmobile.data.SmChartDataManager;
 import signalmaster.com.smmobile.mock.SmPrChartFragment;
+import signalmaster.com.smmobile.sise.SmSiseChartActivity;
 import signalmaster.com.smmobile.ui.SmChartTypeOption;
 
 import static android.content.ContentValues.TAG;
@@ -115,21 +112,24 @@ public class SmOptionFragment extends Fragment {
         SmChartTypeOption option = SmChartTypeOption.M1;
         switch (position) {
             case 0:
-                option = SmChartTypeOption.M5;
+                option = SmChartTypeOption.M1;
                 break;
             case 1:
-                option = SmChartTypeOption.M15;
+                option = SmChartTypeOption.M5;
                 break;
             case 2:
-                option = SmChartTypeOption.M30;
+                option = SmChartTypeOption.M15;
                 break;
             case 3:
-                option = SmChartTypeOption.M60;
+                option = SmChartTypeOption.M30;
                 break;
             case 4:
-                option = SmChartTypeOption.D1;
+                option = SmChartTypeOption.M60;
                 break;
             case 5:
+                option = SmChartTypeOption.D1;
+                break;
+            case 6:
                 option = SmChartTypeOption.W1;
                 break;
             default:

@@ -1,4 +1,4 @@
-package signalmaster.com.smmobile;
+package signalmaster.com.smmobile.sise;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,14 +21,25 @@ import com.scichart.core.common.Action1;
 
 import java.util.ArrayList;
 
+import signalmaster.com.smmobile.ChangeJipyoType;
+import signalmaster.com.smmobile.CustomItemClickListener;
+import signalmaster.com.smmobile.FlikerProgressBar;
+import signalmaster.com.smmobile.R;
+import signalmaster.com.smmobile.RecyclerViewList;
+import signalmaster.com.smmobile.SChartFragment;
+import signalmaster.com.smmobile.SiseListAdapter;
+import signalmaster.com.smmobile.SiseShowAdapter;
+import signalmaster.com.smmobile.SmOptionFragment;
 import signalmaster.com.smmobile.Util.SmLayoutManager;
 import signalmaster.com.smmobile.chart.SmChartFragment;
 import signalmaster.com.smmobile.chart.SmChartType;
 import signalmaster.com.smmobile.chart.SmSeriesType;
+import signalmaster.com.smmobile.chart.SmSimpleChart;
 import signalmaster.com.smmobile.data.PriceBar;
 import signalmaster.com.smmobile.data.SmChartData;
 import signalmaster.com.smmobile.data.SmChartDataManager;
 import signalmaster.com.smmobile.data.SmChartDataService;
+import signalmaster.com.smmobile.global.SmConst;
 import signalmaster.com.smmobile.symbol.SmSymbol;
 import signalmaster.com.smmobile.ui.SmChartTypeOption;
 
@@ -36,7 +47,8 @@ public class SmSiseChartActivity extends AppCompatActivity implements View.OnCli
     SmChartFragment _prChartFragment = null;
     SmOptionFragment _optionFragment = null;
     SmChartFragment smChartFragment = null;
-    SmChartFragment smHistoryFragment = null;
+    //SmChartFragment smHistoryFragment = null;
+    SmSimpleChart smHistoryFragment = null;
     RecyclerView _recyclerView,_recyclerView2 = null;
     RecyclerView.Adapter _siseShowAdapter = null;
     SiseListAdapter _siseListAdapter = null;
@@ -87,11 +99,12 @@ public class SmSiseChartActivity extends AppCompatActivity implements View.OnCli
 
         smChartFragment = SmChartFragment.newInstance("sise_main");
         _prChartFragment = SmChartFragment.newInstance("sise_sub");
-        smHistoryFragment = SmChartFragment.newInstance("sise_history");
-        SmLayoutManager smLayoutManager = SmLayoutManager.getInstance();
-        smLayoutManager.register("sise_main",smChartFragment);
-        smLayoutManager.register("sise_sub",_prChartFragment);
-        smLayoutManager.register("sise_history",smHistoryFragment);
+        //smHistoryFragment = SmChartFragment.newInstance("sise_history");
+        smHistoryFragment = new SmSimpleChart();
+        //SmLayoutManager smLayoutManager = SmLayoutManager.getInstance();
+        //smLayoutManager.register("sise_main",smChartFragment);
+        //smLayoutManager.register("sise_sub",_prChartFragment);
+       // smLayoutManager.register("sise_history",smHistoryFragment);
 
         //_prChartFragment = new SmChartFragment();
         _optionFragment = new SmOptionFragment();
@@ -103,6 +116,9 @@ public class SmSiseChartActivity extends AppCompatActivity implements View.OnCli
         fragmentTransaction.replace(R.id.techContainer, _prChartFragment);
         fragmentTransaction.replace(R.id.historyContainer,smHistoryFragment);
         fragmentTransaction.commit();
+
+        // 역사적 변동성 차트를 변경해 준다.
+        //smHistoryFragment.setChartType(SmChartType.DAY);
 
         /*_recyclerView2 = findViewById(R.id.siseRecyclerView);
         _siseListAdapter = new SiseListAdapter();
@@ -190,9 +206,13 @@ public class SmSiseChartActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+
+
         //프로그레스바
         flikerProgressBar = (FlikerProgressBar) findViewById(R.id.flikerbar);
         flikerProgressBar.setOnClickListener(this);
+
+        smHistoryFragment.setSymbolCode(symbolCode);
         downLoad();
     }
 
@@ -339,6 +359,15 @@ public class SmSiseChartActivity extends AppCompatActivity implements View.OnCli
         _siseShowAdapter.notifyDataSetChanged();
         //_recyclerView.setAdapter(_siseShowAdapter);
 
+        SmChartDataManager chartDataManager = SmChartDataManager.getInstance();
+        // 차트데이터를 만든다.
+        SmChartData smChartData = chartDataManager.createChartData(this.symbolCode , SmChartType.DAY, 1);
+
+        // 최신 데이터가 아니면 차트데이터를 요청한다.
+        if (smChartData.getCount() < SmConst.TempDataSize) {
+            // 서버에 차트 데이터를 요청한다.
+            chartDataManager.requestChartData(smChartData);
+        }
 
     }
 

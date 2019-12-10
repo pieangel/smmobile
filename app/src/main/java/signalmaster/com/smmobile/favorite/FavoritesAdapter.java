@@ -11,12 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import signalmaster.com.smmobile.ChartListActivity;
 import signalmaster.com.smmobile.ChartSignalActivity;
 import signalmaster.com.smmobile.R;
-import signalmaster.com.smmobile.SmSiseChartActivity;
+import signalmaster.com.smmobile.sise.SmSiseChartActivity;
 import signalmaster.com.smmobile.Util.SmArgManager;
 import signalmaster.com.smmobile.Util.SmArgument;
 import signalmaster.com.smmobile.market.SmMarketManager;

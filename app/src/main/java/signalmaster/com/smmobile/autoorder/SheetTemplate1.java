@@ -225,7 +225,7 @@ public class SheetTemplate1 {
             initPositionArea(sheet);
         }
         String type = null;
-        if (position.positionType.name().equals("None")) {
+        if (position == null || position.positionType.name().equals("None")) {
             type = "";
         } else if (position.positionType.name().equals("Buy")) {
             type = "매수";

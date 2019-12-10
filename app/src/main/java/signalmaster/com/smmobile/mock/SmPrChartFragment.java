@@ -1,5 +1,6 @@
 package signalmaster.com.smmobile.mock;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +16,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 
 import com.scichart.core.common.Action1;
 
@@ -64,6 +69,7 @@ import signalmaster.com.smmobile.userinfo.SmUserManager;
 import static android.view.Gravity.CENTER;
 import static com.rayject.table.view.TableView.TAG;
 import static com.scichart.core.utility.Dispatcher.runOnUiThread;
+import static java.lang.Character.getNumericValue;
 import static java.lang.Character.isDigit;
 
 public class SmPrChartFragment extends Fragment implements Serializable {
@@ -122,7 +128,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
 
     public void showHideFragment(final Fragment fragment){
 
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getChildFragmentManager();
         FragmentTransaction ft = fm.beginTransaction()
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         if (fragment.isAdded()){
@@ -181,6 +187,45 @@ public class SmPrChartFragment extends Fragment implements Serializable {
     LinearLayout slidingPanel;
     Animation translateRightAnim,translateLeftAnim;
     boolean isPageOpen = false;
+
+
+
+    private void resizeFragment(Fragment f, int newWidth, int newHeight) {
+
+        try {
+            if (f != null) {
+                View view = f.getView();
+                FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(newWidth, newHeight);
+                view.setLayoutParams(p);
+                view.requestLayout();
+            }
+        } catch (Exception e) {
+            // This will catch any exception, because they are all descended from Exception
+            System.out.println("Error " + e.getMessage());
+        }
+    }
+
+    /**
+     * This method converts dp unit to equivalent pixels, depending on device density.
+     *
+     * @param dp A value in dp (density independent pixels) unit. Which we need to convert into pixels
+     * @param context Context to get resources and device specific display metrics
+     * @return A float value to represent px equivalent to dp depending on device density
+     */
+    public static float convertDpToPixel(float dp, Context context){
+        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
+    /**
+     * This method converts device specific pixels to density independent pixels.
+     *
+     * @param px A value in px (pixels) unit. Which we need to convert into db
+     * @param context Context to get resources and device specific display metrics
+     * @return A float value to represent dp equivalent to px value
+     */
+    public static float convertPixelsToDp(float px, Context context){
+        return px / ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -316,6 +361,7 @@ public class SmPrChartFragment extends Fragment implements Serializable {
                     smChartFragment.changeSeriesType(selectedPosition);
                     argMgr.unregisterFromMap("seriesType");
                 }*/
+                /*
                 if(selectedPosition == SmSeriesType.CandleStick ) {
                     selectedPosition = SmSeriesType.MountainView;
                     smChartFragment.changeSeriesType(selectedPosition);
@@ -324,6 +370,53 @@ public class SmPrChartFragment extends Fragment implements Serializable {
                     selectedPosition = SmSeriesType.CandleStick;
                     smChartFragment.changeSeriesType(selectedPosition);
                 }
+                */
+
+                //showHideFragment(_leftChartFragment);
+                //showHideFragment(_rightChartFragment);
+                //showHideFragment(_optionFragment);
+
+                int left_height = _leftChartFragment.getView().getMeasuredHeight();
+                int opt_height = _optionFragment.getView().getMeasuredHeight();
+
+                int main_height = smChartFragment.getView().getMeasuredHeight();
+                main_height =  main_height + left_height + opt_height;
+
+
+                //getView().findViewById(R.id.layout_option).setVisibility(View.INVISIBLE);
+                //getView().findViewById(R.id.layout_subchart).setVisibility(View.INVISIBLE);
+
+                //resizeFragment(smChartFragment, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                android.widget.LinearLayout layout1 = (android.widget.LinearLayout) getView().findViewById(R.id.layout_mainchart);
+
+                android.widget.LinearLayout layout_parent = (android.widget.LinearLayout) getView().findViewById(R.id.chart_order_upper);
+
+                //android.widget.LinearLayout.LayoutParams  params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+                //par.height = LinearLayout.LayoutParams.MATCH_PARENT;
+                //smChartFragment.getView().setLayoutParams(params);
+                //layout1.getLayoutParams().height = main_height + 400;
+                //resizeFragment(smChartFragment, main_width, main_height + 400);
+
+                // Gets linearlayout
+
+// Gets the layout params that will allow you to resize the layout
+                LayoutParams params = (LinearLayout.LayoutParams)layout1.getLayoutParams();
+// Changes the height and width to the specified *pixels*
+                int height = layout_parent.getHeight();
+                params.height = LayoutParams.MATCH_PARENT;
+                //params.weight = 10.0f;
+                layout1.setLayoutParams(params);
+
+                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams)getView().findViewById(R.id.layout_option).getLayoutParams();
+                params1.height = 0;
+                getView().findViewById(R.id.layout_option).setLayoutParams(params1);
+
+                LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams)getView().findViewById(R.id.layout_subchart).getLayoutParams();
+                params2.height = 0;
+                getView().findViewById(R.id.layout_subchart).setLayoutParams(params2);
+
+                layout_parent.requestLayout();
+                //layout1.setVisibility(View.INVISIBLE);
 
                 smChartFragment.refreshOrderAnnotation();
 
@@ -415,9 +508,6 @@ public class SmPrChartFragment extends Fragment implements Serializable {
 
         initPosition();
 
-        showHideFragment(_leftChartFragment);
-        showHideFragment(_rightChartFragment);
-
         return _chartView;
     }
 
@@ -464,6 +554,8 @@ public class SmPrChartFragment extends Fragment implements Serializable {
         transaction.replace(R.id.rightChartContainer, _rightChartFragment);
         transaction.replace(R.id.option_container, _optionFragment);
         transaction.commit();
+
+
 
         /*FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();

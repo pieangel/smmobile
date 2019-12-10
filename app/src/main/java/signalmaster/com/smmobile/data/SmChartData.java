@@ -41,9 +41,16 @@ public  class SmChartData {
 
     public SmChartDataItem add(String date_time, double o, double h, double l, double c, long v) {
         try {
+            // 공백이 있으면 없앤다.
+            date_time = date_time.trim();
             String format = "yyyyMMddHHmmss";
-            if (chartType != SmChartType.MIN)
+            if (chartType != SmChartType.MIN) {
                 format = "yyyyMMdd";
+                // 자릿수 초과할 때 초과하는 문자열은 없애 준다.
+                if (date_time.length() > 8) {
+                    date_time = date_time.substring(0, 8);
+                }
+            }
             SimpleDateFormat fmt = new SimpleDateFormat(format);
             Date date = fmt.parse(date_time);
             if (dataMap.containsKey(date_time)) {
@@ -175,9 +182,14 @@ public  class SmChartData {
 
     public SmChartDataItem updateData(String date_time, double o, double h, double l, double c, long v) {
         try {
-            SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
-            Date date = fmt.parse(date_time);
+            if (date_time.length() < 14)
+                return null;
+
+
             if (dataMap.containsKey(date_time)) {
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
+                Date date = fmt.parse(date_time);
+
                 SmChartDataItem oldData = dataMap.get(date_time);
                 oldData.date = date;
                 oldData.open = o;

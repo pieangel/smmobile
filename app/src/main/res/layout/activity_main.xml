@@ -450,7 +450,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="해외수수료"
+                                android:text="해외수수료(＄)"
                                 android:textColor="#FFFFFF"/>
                         </LinearLayout>
 
@@ -476,7 +476,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="국내수수료"
+                                android:text="국내수수료(￦)"
                                 android:textColor="#FFFFFF"/>
                         </LinearLayout>
 

@@ -22,7 +22,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>-->
     <color name="bg_line">#E7E7E7</color>
-    <color name="bg_color">#FF99DCD7</color>
+    <color name="bg_color">#FF0000FF</color>
 
 
     <color name="cell_background_color">#ffffff</color>

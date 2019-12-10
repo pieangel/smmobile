@@ -115,7 +115,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         //String content = nonData.get(position);
         SmSymbolManager symbolManager = SmSymbolManager.getInstance();
         final SmSymbol symbol = symbolManager.findSymbol(orderArrayList.get(position).symbolCode);
-
+        if (symbol == null)
+            return;
 
         String symbolCode = orderArrayList.get(position).symbolCode;
         String positionType = orderArrayList.get(position).positionType.toString();

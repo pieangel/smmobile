@@ -15,6 +15,8 @@ public class SmOptionList {
 
     private void getOptionbar(){
 
+        _optionList.add("1분");
+
         _optionList.add("5분");
 
         _optionList.add("15분");
@@ -24,8 +26,6 @@ public class SmOptionList {
         _optionList.add("60분");
 
         _optionList.add("1일");
-
-        _optionList.add("1주");
 
         /*_optionList.add("1시간");
 

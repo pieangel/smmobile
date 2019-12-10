@@ -17,7 +17,6 @@ import java.util.HashMap;
 import signalmaster.com.smmobile.ChartListActivity;
 import signalmaster.com.smmobile.ChartSignalActivity;
 import signalmaster.com.smmobile.login.LoginActivity;
-import signalmaster.com.smmobile.SmSiseChartActivity;
 import signalmaster.com.smmobile.Util.SmLayoutManager;
 import signalmaster.com.smmobile.popup.PopUpActivity;
 import signalmaster.com.smmobile.R;

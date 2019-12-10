@@ -84,8 +84,8 @@ public class SmSocketHandler
                 //SSLContext context = NaiveSSLContext.getInstance("TLS");
                 WebSocketFactory wsf = new WebSocketFactory();
                 wsf.setConnectionTimeout(TIMEOUT);
-                ws = wsf.createSocket("ws://signalmaster.iptime.org:9991");
-                //ws = wsf.createSocket("ws://angelpie.tplinkdns.com:9991");
+                //ws = wsf.createSocket("ws://signalmaster.iptime.org:9991");
+                ws = wsf.createSocket("ws://angelpie.tplinkdns.com:9991");
                 ws.addListener(new WSListener());
                 ws.addExtension(WebSocketExtension.parse(WebSocketExtension.PERMESSAGE_DEFLATE));
                 ws.connect();

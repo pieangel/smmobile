@@ -580,8 +580,8 @@ public class SmProtocolManager implements Serializable {
             // 현재 데이터 갯수
             int current_count = object.getInt("current_count");
             int cycle = object.getInt("cycle");
-            int chart_type = object.getInt("chart_type");
-            SmChartType chartType = SmChartType.fromInt(chart_type);
+            final int chart_type = object.getInt("chart_type");
+            final SmChartType chartType = SmChartType.fromInt(chart_type);
             if (chartType == null)
                 return;
             // 최신데이터가 가정 먼저들어온다.
@@ -608,7 +608,7 @@ public class SmProtocolManager implements Serializable {
 
             // 여기서 종가를 업데이트 해준다.
             sym.quote.C = c;
-
+            date_time.trim();
             Log.d("TAG", "OnResChartData" + "  code" + symbol_code + " : " + date_time + " : " + h + " : " + l + " : " + o + " : " + c);
             boolean included = chart_data.isIncluded(date_time);
             if (included) {
@@ -632,7 +632,9 @@ public class SmProtocolManager implements Serializable {
                 price.chartType = chart_data.chartType;
                 if (current_count == total_count) {
                     price.isLast = true;
-                    Log.d("TAG", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    // 차트 데이터 도착 이벤트를 발생시킨다.
+                    SmChartDataService.getInstance().onChartData(chart_data);
+                    Log.d("TAG", chart_data.symbolCode + ":" + chart_data.chartType + ":" + chart_data.cycle + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 }
                 SmChartDataService chartDataService = SmChartDataService.getInstance();
                 chartDataService.onNewData(price);
@@ -678,7 +680,7 @@ public class SmProtocolManager implements Serializable {
                     appState = SmGlobal.SmAppState.CategoryListDownloaded;
                 }
             }
-            Log.d("TAG", "OnResMarketList:  -> " + market_name);
+            //Log.d("TAG", "OnResMarketList:  -> " + market_name);
         }
         catch (JSONException e) {
             Log.d("TAG", "OnResMarketList Exception:  -> " + e.getMessage());
@@ -728,10 +730,10 @@ public class SmProtocolManager implements Serializable {
 
             if (symMgr.getSymbolCount() == total_symbol_count) {
                 SmMarketManager marketManager = SmMarketManager.getInstance();
-                Log.d("TAG", "Received all symbols:  -> " + name_kr + market_name);
+                //Log.d("TAG", "Received all symbols:  -> " + name_kr + market_name);
                 appState = SmGlobal.SmAppState.SymbolListDownloaded;
             }
-            Log.d("TAG", "OnResSymbolMaster:  -> " + name_kr + market_name);
+            //Log.d("TAG", "OnResSymbolMaster:  -> " + name_kr + market_name);
         }
         catch (JSONException e) {
             Log.d("TAG", "OnResSymbolMaster Exception:  -> " + e.getMessage());
@@ -805,7 +807,7 @@ public class SmProtocolManager implements Serializable {
                 double div = Math.pow(10, sym.decimal);
                 vc = (close / div);
 
-                Log.d("TAG", "OnResRealtimeSise" + "  code" + symbol_code + " : " + vc);
+                //Log.d("TAG", "OnResRealtimeSise" + "  code" + symbol_code + " : " + vc);
 
                 SmChartDataService chartDataService = SmChartDataService.getInstance();
                 // 여기서 이 심볼과 관련된 모든 차트데이터를 업데이트 해줘야 한다.
@@ -849,7 +851,7 @@ public class SmProtocolManager implements Serializable {
             int acc_volume = object.getInt("acc_volume");
             String time = object.getString("time");
 
-            Log.d("TAG", "OnResSiseData :: " + symbol_code + " : " + "tc = " + total_count + " cc = " + current_count);
+            //Log.d("TAG", "OnResSiseData :: " + symbol_code + " : " + "tc = " + total_count + " cc = " + current_count);
             if (current_count == total_count) {
                 appState = SmGlobal.SmAppState.ReceivedRecentSise;
             }
@@ -956,6 +958,8 @@ public class SmProtocolManager implements Serializable {
                     price.chartType = chart_data.chartType;
                     if (end_index + 1 == total_count) {
                         price.isLast = true;
+                        // 차트 데이터 도착 이벤트를 발생시킨다.
+                        SmChartDataService.getInstance().onChartData(chart_data);
                     }
                     SmChartDataService chartDataService = SmChartDataService.getInstance();
                     chartDataService.onNewData(price);
@@ -1018,7 +1022,7 @@ public class SmProtocolManager implements Serializable {
                 appState = SmGlobal.SmAppState.ReceivedRecentHoga;
             }
 
-            Log.d("TAG", "OnResHogaData:  -> " + symbol_code);
+            //Log.d("TAG", "OnResHogaData:  -> " + symbol_code);
             SmChartDataService chartDataService = SmChartDataService.getInstance();
             chartDataService.onUpdateHoga(sym);
         }
@@ -1072,7 +1076,7 @@ public class SmProtocolManager implements Serializable {
                 sym.hoga.hogaItem[i].sellQty = sell_qty;
             }
 
-            Log.d("TAG", "OnResHogaData:  -> " + symbol_code);
+            //Log.d("TAG", "OnResHogaData:  -> " + symbol_code);
             SmChartDataService chartDataService = SmChartDataService.getInstance();
             chartDataService.onUpdateHoga(sym);
         }
@@ -1115,7 +1119,7 @@ public class SmProtocolManager implements Serializable {
             vo = (o / div);
             vc = (c / div);
 
-            Log.d("TAG", "OnResChartCycleData" + "  code" + symbol_code + " : " + date_time + " : " + h + " : " + l + " : " + o + " : " + c);
+            //Log.d("TAG", "OnResChartCycleData" + "  code" + symbol_code + " : " + date_time + " : " + h + " : " + l + " : " + o + " : " + c);
 
             boolean included = chart_data.isIncluded(date_time);
             if (included) {
@@ -1139,7 +1143,7 @@ public class SmProtocolManager implements Serializable {
                 SmChartDataService chartDataService = SmChartDataService.getInstance();
                 chartDataService.onNewData(price);
             }
-            Log.d("TAG", "OnResChartCycleData:  -> " + symbol_code + date_time);
+            //Log.d("TAG", "OnResChartCycleData:  -> " + symbol_code + date_time);
 
         }
         catch (JSONException e) {
@@ -1204,7 +1208,7 @@ public class SmProtocolManager implements Serializable {
             SmChartDataService chartDataService = SmChartDataService.getInstance();
             chartDataService.onOrder(order);
 
-            Log.d("TAG", "onResOrder:  -> " + symbol_code + account_no + order_state);
+            //Log.d("TAG", "onResOrder:  -> " + symbol_code + account_no + order_state);
         }
         catch (JSONException e) {
             Log.d("TAG", "onResOrder Exception:  -> " + e.getMessage());

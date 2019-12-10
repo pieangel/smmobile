@@ -47,7 +47,8 @@ public class SmChartDataService implements  ISmChartDataService {
 
     private HashMap<String, IOrderObserver> orderObserverHashMap = new HashMap<>();
 
-    private HashMap<String, IDataObserver> dataObserverHashMap = new HashMap<>();
+    // 인터페이스 인스턴스 해쉬맵 작성
+    private HashMap<String, IChartDataObserver> dataObserverHashMap = new HashMap<>();
     private HashMap<String, ISiseObserver> siseObserverHashMap = new HashMap<>();
     private HashMap<String, IHogaObserver> hogaObserverHashMap = new HashMap<>();
 
@@ -61,7 +62,7 @@ public class SmChartDataService implements  ISmChartDataService {
         void onUpdateData(PriceBar data);
     }
 
-    // 차트 데이터 인터페이스
+    // 차트 데이터 인터페이스 - 차트 데이터가 도착했을때 알림을 받는 인터페이스다.
     public interface IChartDataObserver {
         void onChartData(SmChartData data);
     }
@@ -95,6 +96,34 @@ public class SmChartDataService implements  ISmChartDataService {
     // 주문 도착 인터페이스
     public interface IOrderObserver {
         void onOrder(SmOrder order);
+    }
+
+    // 인터페이스 인스턴스를 키와 함께 등록해 준다.
+    // 인테페이스 인스턴스는 이벤트를 받기 원하는 클래스에서 생성해서 등록해 줘야 한다.
+    public void subscribeChartData(final  Action1<SmChartData> callback, final  String key) {
+        // 먼저 같은 키로 등록된 키가 있는지 조사해 본다.
+        // 있다면 제거해 준다.
+        if (dataObserverHashMap.containsKey(key)) {
+            dataObserverHashMap.remove(key);
+        }
+        // 차트 데이터 인터페이스를 생성한다.
+        IChartDataObserver chartObserver = new IChartDataObserver() {
+            // 인터페이스 오버라이딩을 한다.
+            @Override
+            public void onChartData(SmChartData chartData) {
+                callback.execute(chartData);
+            }
+        };
+
+        // 인터페이스 맵에 등록해 준다.
+        dataObserverHashMap.put(key, chartObserver);
+    }
+
+    // 차트 데이터 수신시 호출되는 콜백함수를 해제한다. 키는 차트데이터 식별 키이다.
+    public  void unsubscribeChartData(String dataKey) {
+        if (chartDataObserverHashMap.containsKey(dataKey)) {
+            chartDataObserverHashMap.remove(dataKey);
+        }
     }
 
     public void subscribeSise(final  Action1<SmSymbol> callback, final  String key) {
@@ -216,12 +245,7 @@ public class SmChartDataService implements  ISmChartDataService {
         // 업데이트 데이터 맵에 넣어 준다.
         newDataObserverHashMap.put(id, newDataObserver);
     }
-    // 차트 데이터 수신시 호출되는 콜백함수를 해제한다. 키는 차트데이터 식별 키이다.
-    public  void unsubscribeChartData(String dataKey) {
-        if (chartDataObserverHashMap.containsKey(dataKey)) {
-            chartDataObserverHashMap.remove(dataKey);
-        }
-    }
+
     // 차트 데이터 업데이트 될때 호출되는 콜백함수를 해제한다. 키는 심볼 코드이다.
     public  void unsubscribePriceUpdate(String id) {
         if (updateDataObserverHashMap.containsKey(id)) {
@@ -272,6 +296,12 @@ public class SmChartDataService implements  ISmChartDataService {
     synchronized public void onOrder(SmOrder order) {
         for(IOrderObserver orderObserver : orderObserverHashMap.values()) {
             orderObserver.onOrder(order);
+        }
+    }
+
+    synchronized public void onChartData(SmChartData chartData) {
+        for(IChartDataObserver chartDataObserver : dataObserverHashMap.values()) {
+            chartDataObserver.onChartData(chartData);
         }
     }
 }
